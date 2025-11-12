@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pagina web</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background: #34495e;
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background-color: #1abc9c;
+    }
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      border-bottom: 2px solid #1abc9c;
+      padding-bottom: 0.5rem;
+    }
+    form {
+      display: grid;
+      gap: 1rem;
+      max-width: 400px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"], input[type="number"], select {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+    }
+    button {
+      padding: 0.7rem;
+      background-color: #1abc9c;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #16a085;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Panel de Administración de Servidor Web</h1>
+  </header>
+
+  <nav>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#configuracion-dhcp">Configuración DHCP</a>
+    <a href="#sdwan">SD-WAN</a>
+  </nav>
+
+  <main>
+    <section id="dashboard">
+      <h2>Estado del Servidor</h2>
+      <p>Servidor web: <strong>Activo</strong></p>
+      <p>Clientes DHCP conectados: <strong>12</strong></p>
+      <p>Conexión SD-WAN: <strong>Establecida</strong></p>
+    </section>
+
+    <section id="configuracion-dhcp" style="margin-top: 2rem;">
+      <h2>Configuración DHCP</h2>
+      <form>
+        <label for="ip-range-start">Rango IP inicio:</label>
+        <input type="text" id="ip-range-start" name="ip-range-start" placeholder="192.168.1.100" />
+
+        <label for="ip-range-end">Rango IP fin:</label>
+        <input type="text" id="ip-range-end" name="ip-range-end" placeholder="192.168.1.150" />
+
+        <label for="lease-time">Tiempo de concesión (minutos):</label>
+        <input type="number" id="lease-time" name="lease-time" value="1440" />
+
+        <button type="submit">Guardar configuración</button>
+      </form>
+    </section>
+
+    <section id="sdwan" style="margin-top: 2rem;">
+      <h2>Configuración SD-WAN</h2>
+      <form>
+        <label for="gateway-primary">Gateway Principal:</label>
+        <input type="text" id="gateway-primary" name="gateway-primary" placeholder="10.0.0.1" />
+
+        <label for="gateway-secondary">Gateway Secundario:</label>
+        <input type="text" id="gateway-secondary" name="gateway-secondary" placeholder="10.0.0.2" />
+
+        <label for="metric">Métrica de ruta preferida:</label>
+        <select id="metric" name="metric">
+          <option value="10">10 - Alta prioridad</option>
+          <option value="20" selected>20 - Prioridad media</option>
+          <option value="30">30 - Baja prioridad</option>
+        </select>
+
+        <button type="submit">Aplicar configuración</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Administración de Redes
+  </footer>
+</body>
+</html>
