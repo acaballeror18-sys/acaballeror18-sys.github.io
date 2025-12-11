@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de JavaScript</title>
+    <meta name="Author" content="Alvaro">
+    <meta name="description" content="JavaScript">
+    <meta name="Keyworks" content="javascript">
+    
+</head>
+<style>
+   
+    *{
+        margin:0px;
+        padding:0px;
+        
+    }
+    .clase-coleccion{
+        color: red;
+        background-color: pink;
+        font-size: 30px;
+    }
+</style>
+<body>
+
+    <h1>JavaScript</h1>
+
+    <p id="saludo">Buenos días</p>
+
+    <!-- Cambiar saludo -->
+    <button type="button" onclick="
+                document.getElementById('saludo').innerHTML = 'Hoy vamos a hacer ejercicio de JavaScript';
+    ">
+        Cambiar saludo
+    </button>
+
+    <!-- Botones para cambiar la cara -->
+    <button onclick="document.getElementById('myImage').src='imagenes/cara normal.jpg'">
+        Cara neutral
+    </button>
+
+    <img id="myImage" src="imagenes/cara normal.jpg" style="width: 100px;">
+
+    <button onclick="document.getElementById('myImage').src='imagenes/cara triste.jpg'">
+        Cara triste
+    </button>
+    <button onclick="document.getElementById('myImage').src='imagenes/cara sonriente.jpg'">
+        Cara sonriente
+    </button>
+
+    <!-- Imagen del árbol -->
+    <img id="arbol" src="imagenes/arbol.jpg" style="display:block; width:200px; margin-top:20px;">
+
+    <!-- Botón para quitar árbol -->
+    <button id="btnQuitar" onclick="
+        document.getElementById('arbol').style.display = 'none';
+        this.style.display = 'none';
+        document.getElementById('btnMostrar').style.display = 'inline-block';
+    ">
+        Quitar árbol
+    </button>
+
+    <!-- Botón para mostrar árbol -->
+    <button id="btnMostrar" style="display:none;" onclick="
+        document.getElementById('arbol').style.display = 'block';
+        this.style.display = 'none';
+        document.getElementById('btnQuitar').style.display = 'inline-block';
+    ">
+        Mostrar árbol
+    </button>
+
+<p>
+
+El DOM (siglas de Document Object Model, o Modelo de Objetos del Documento) es una interfaz de programación para documentos HTML y XML. Representa la estructura de una página web como un árbol de objetos, permitiendo a los lenguajes de programación, como JavaScript, acceder a los elementos del documento y manipular su contenido, estructura y estilo de forma dinámica.
+¿Cómo funciona el DOM?
+Cuando un navegador web carga una página HTML, crea internamente una representación en memoria de esa página. Esta representación es el DOM y sigue una estructura jerárquica de árbol.
+Documento: Es el nodo raíz del árbol, que representa toda la página web.
+Elementos: Cada etiqueta HTML (como &lt;body &gt;, &lt;h1 &gt;, &lt;div &gt;, &lt;p &gt;) se convierte en un objeto, o nodo, dentro del árbol.
+Atributos: Los atributos de las etiquetas (id, class, src, etc.) también se representan como nodos.
+Contenido de texto: El texto dentro de las etiquetas también es un nodo.
+¿Para qué sirve?
+El DOM actúa como un puente entre la página web estática y el código de programación, permitiendo que los desarrolladores:
+Modifiquen el contenido: Actualicen textos o imágenes sin recargar la página.
+Cambien la estructura: Añadan, eliminen o reordenen elementos HTML.
+Alteran el estilo: Cambien las propiedades CSS para modificar la apariencia de los elementos.
+Manejen eventos: Reaccionen a las interacciones del usuario, como clics en botones o entradas de texto.
+Ejemplo de manipulación del DOM </p>
+Imagina un documento HTML simple:
+html <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html &gt;
+&lt;body &gt;
+&lt;h1 id="titulo"&gt;Hola, mundo&lt;/h1&gt;
+&lt;/body &gt;
+&lt;/html &gt;
+</pre>
+Usa el código con precaución.
+
+Con JavaScript, podrías manipular este documento a través del DOM de la siguiente manera:
+javascript
+// Acceder al elemento con el id "titulo"
+const tituloElemento = document.getElementById('titulo');
+
+// Modificar el contenido del elemento
+tituloElemento.textContent = '¡Hola, desde JavaScript!';
+
+// Crear un nuevo párrafo
+const nuevoParrafo = document.createElement('p');
+nuevoParrafo.textContent = 'Este párrafo ha sido añadido con JavaScript.';
+
+// Añadir el nuevo párrafo al cuerpo del documento
+document.body.appendChild(nuevoParrafo);
+Usa el código con precaución.
+
+Este código permite modificar el contenido del &lt;h1 &gt; y añadir un nuevo &lt;p &gt; sin necesidad de recargar la página, haciendo que el sitio web sea interactivo y dinámico.
+</p>
+<p id="parrafo-a-cambiar">Este es el párrafo cuyo aspecto cambiará.</p>
+
+<!--getElementsByTagName: accede a una colecciíon de elementos, accedera a cada elemento en función de su posición--->
+<button onclick="
+
+/*
+document.getElementsByTagName('p')[0].style.color = 'green';
+document.getElementsByTagName('p')[0].style.fontSize = '15px';
+document.getElementsByTagName('p')[0].style.fontWeight = 'bold'; // negrita, CSS: font-weight: bold;
+document.getElementsByTagName('p')[0].style.fontStyle = 'italic'; // cursiva, CSS: font-style: italic;
+const parrafo0 = document.getElementsByTagName('p')[0];
+*/
+    parrofo0.style.fontSize= 'green';
+    parrofo0.style.fontWeight= '20px';
+    parrofo0.style.fontStyle= 'italic';
+    /*Aplica estilos con una clase elimenamdo el siguente
+    document.getElementsByTagName('p')[1].className='clase-coleccion'*/
+
+    document.getElementsByTagName('p')[1].classList.add ('clase-coleccion');
+
+"> Cambia el primer del párrafo </button>
+<button onclick="cambiarEstilosGlobales()">Cambia el aspecto de todos los párrafos</button>
+
+<script>
+function cambiarEstilosGlobales() {
+    // Selecciona TODOS los elementos <p> y los guarda en una lista (NodeList)
+    const parrafos = document.querySelectorAll('p');
+
+    // Itera sobre cada elemento individualmente para aplicar los estilos
+    parrafos.forEach(parrafo => {
+        parrafo.style.color = 'blue';
+        parrafo.style.fontSize = '15px';
+        parrafo.style.fontWeight = 'bold';
+        parrafo.style.fontStyle = 'italic';
+    });
+}
+</script>
+</body>
+</html>
+</button>
+</body>
+</html>
