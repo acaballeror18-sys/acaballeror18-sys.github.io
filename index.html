@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Índice del proyecto SMR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #b2dfdb);
+            margin: 0;
+            color: #004d40;
+        }
+
+        header {
+            background-color: #26a69a;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        main {
+            padding: 40px 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        li {
+            background-color: #ffffffcc;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        a {
+            text-decoration: none;
+            color: #004d40;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        a:hover {
+            color: #00796b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #00796b;
+            color: white;
+            margin-top: 40px;
+            box-shadow: inset 0 0 15px #004d40;
+        }
+
+        @media (max-width: 600px) {
+            li {
+                width: 90%;
+                text-align: center;
+            }
+        }
+
+        .mapa-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .mapa-container img {
+            max-width: 100%;
+            height: auto;
+            border: 3px solid #004d40;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Índice del proyecto SMR</h1>
+</header>
+
+<main>
+    <h2>Enlaces a todas las páginas</h2>
+    <ul>
+        <li><a href="page/lista.html" target="_blank">Listas</a></li>
+        <li><a href="page/formato_texto.html" target="_blank">Formato de texto</a></li>
+        <li><a href="page/pagina_web.html" target="_blank">Página Web</a></li>
+        <li><a href="page/pagina_web_alternativa.html" target="_blank">Página Web Alternativa</a></li>
+        <li><a href="page/prueba.html" target="_blank">Prueba</a></li>
+        <li><a href="page/resumen_servidor_dhcp.html" target="_blank">Resumen servidor DHCP</a></li>
+        <li><a href="page/div.html" target="_blank">Ejercicio Div</a></li>
+        <li><a href="page/anclas.html" target="_blank">Anclas</a></li>
+        <li><a href="page/mi_primera_web.html" target="_blank">Mi Primera Web</a></li>
+        <li><a href="page/javascript.html" target="_blank">JavaScript</a></li>
+        <li><a href="page/formulario.html" target="_blank">Formulario</a></li>
+    </ul>
+
+    <h2>Mapa sensible interactivo</h2>
+    <div class="mapa-container">
+        <img src="multimedia/mapa.webp" alt="Mapa interactivo" usemap="#map">
+        <map name="map">
+            <area shape="rect" coords="242,266,462,308" href="https://es.wikipedia.org/wiki/Espa%C3%B1a" alt="España" target="_blank">
+            <area shape="rect" coords="111,167,140,456" href="https://es.wikipedia.org/wiki/Portugal" alt="Portugal" target="_blank">
+            <area shape="rect" coords="512,20,666,86" href="https://es.wikipedia.org/wiki/Francia" alt="Francia" target="_blank">
+        </map>
+    </div>
+
+</main>
+
+<footer>
+    SMR - Sistemas Microinformáticos y Redes | Proyecto de Formación Profesional
+</footer>
+
+</body>
+</html>

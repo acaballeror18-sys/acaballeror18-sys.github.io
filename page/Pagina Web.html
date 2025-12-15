@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Educativo DHCP | Clase de Redes</title>
+  <style>
+    /* ======== ESTILOS GENERALES ======== */
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* ======== MENÚ LATERAL ======== */
+    .sidebar {
+      width: 250px;
+      background-color: #2f4050;
+      color: #fff;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      color: #4fa3ff;
+      margin-bottom: 25px;
+    }
+
+    .sidebar a {
+      color: #ddd;
+      text-decoration: none;
+      padding: 12px 20px;
+      display: block;
+      transition: background 0.2s;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #4fa3ff;
+      color: #fff;
+    }
+
+    /* ======== CONTENIDO PRINCIPAL ======== */
+    .main-content {
+      flex-grow: 1;
+      padding: 20px 40px;
+      overflow-y: auto;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #4fa3ff;
+      margin-bottom: 20px;
+    }
+
+    .main-header h1 {
+      color: #2f4050;
+    }
+
+    /* ======== TARJETAS ======== */
+    .card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      color: #4fa3ff;
+      margin-bottom: 10px;
+    }
+
+    .explanation {
+      background-color: #e3f2fd;
+      padding: 15px;
+      border-left: 4px solid #4fa3ff;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    /* ======== TABLA DE LEASES ======== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4fa3ff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #eaf4ff;
+    }
+
+    /* ======== FORMULARIO ======== */
+    form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #4fa3ff;
+      border: none;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3a8be0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      color: #555;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <!-- BARRA LATERAL -->
+  <div class="sidebar">
+    <h2>DHCP EDU</h2>
+    <a href="#" class="active">Panel DHCP</a>
+    <a href="#">Configuración</a>
+    <a href="#">Estadísticas</a>
+    <a href="#">Ayuda</a>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <div class="main-header">
+      <h1>Servidor DHCP - Panel Educativo</h1>
+      <button onclick="generateLease()">Generar Lease</button>
+    </div>
+
+    <div class="explanation">
+      <strong>¿Qué es DHCP?</strong><br>
+      El <b>Protocolo de Configuración Dinámica de Host (DHCP)</b> asigna direcciones IP automáticamente a los dispositivos de una red.
+      En este panel educativo puedes visualizar y simular los arrendamientos (leases) activos que el servidor entrega a los clientes.
+    </div>
+
+    <div class="card">
+      <h3>Arrendamientos Activos (Leases)</h3>
+      <table id="leaseTable">
+        <thead>
+          <tr>
+            <th>Dirección IP</th>
+            <th>MAC del Cliente</th>
+            <th>Tiempo Restante (min)</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>192.168.1.10</td>
+            <td>AA:BB:CC:11:22:33</td>
+            <td>58</td>
+            <td><button onclick="removeRow(this)">🗑 Eliminar</button></td>
+          </tr>
+          <tr>
+            <td>192.168.1.11</td>
+            <td>DD:EE:FF:44:55:66</td>
+            <td>42</td>
+            <td><button onclick="removeRow(this)">🗑 Eliminar</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <form id="addLeaseForm">
+        <input type="text" id="ip" placeholder="Dirección IP (ej. 192.168.1.20)" required>
+        <input type="text" id="mac" placeholder="MAC (ej. AA:BB:CC:77:88:99)" required>
+        <input type="number" id="time" placeholder="Tiempo (min)" required>
+        <button type="submit">Agregar Lease</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Explicación para estudiantes</h3>
+      <p>
+        Cada fila representa un "lease" activo: una IP que el servidor ha asignado a un dispositivo cliente.
+        El <b>tiempo restante</b> indica cuánto durará la asignación antes de expirar.
+        En un entorno real, el servidor renueva los leases automáticamente o los libera cuando el cliente se desconecta.
+      </p>
+    </div>
+
+    <footer>© 2025 - Simulación Educativa DHCP | Proyecto para clases de redes</footer>
+  </div>
+
+  <script>
+    // ======== FUNCIONES DE SIMULACIÓN ========
+
+    // Agregar lease desde el formulario
+    document.getElementById("addLeaseForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const ip = document.getElementById("ip").value;
+      const mac = document.getElementById("mac").value;
+      const time = document.getElementById("time").value;
+      addLease(ip, mac, time);
+      this.reset();
+    });
+
+    // Crear una nueva fila en la tabla
+    function addLease(ip, mac, time) {
+      const table = document.getElementById("leaseTable").querySelector("tbody");
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${ip}</td>
+        <td>${mac}</td>
+        <td>${time}</td>
+        <td><button onclick="removeRow(this)">🗑 Eliminar</button></td>
+      `;
+      table.appendChild(row);
+    }
+
+    // Eliminar fila
+    function removeRow(btn) {
+      btn.parentElement.parentElement.remove();
+    }
+
+    // Generar lease aleatorio (para simular tráfico DHCP)
+    function generateLease() {
+      const randomIP = `192.168.1.${Math.floor(Math.random() * 50 + 100)}`;
+      const randomMAC = Array(6).fill(0).map(() =>
+        Math.floor(Math.random() * 256).toString(16).padStart(2, '0').toUpperCase()
+      ).join(':');
+      const randomTime = Math.floor(Math.random() * 60 + 10);
+      addLease(randomIP, randomMAC, randomTime);
+    }
+  </script>
+</body>
+</html>
+

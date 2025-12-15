@@ -1,0 +1,875 @@
+<section id="como-empezar">
+  <h2>Cómo empezar en HTML</h2>
+  <p>
+    HTML (<strong>HyperText Markup Language</strong>) es el lenguaje que usamos para
+    crear la estructura de una página web. Con él podemos definir títulos, párrafos,
+    imágenes, enlaces ¡y mucho más!
+  </p>
+
+  <h3>1. Lo que necesitas</h3>
+  <ul>
+    <li><strong>Un editor de texto</strong>: VS Code, Sublime Text, Atom o incluso el bloc de notas.</li>
+    <li><strong>Un navegador web</strong>: Chrome, Firefox, Edge o el que prefieras.</li>
+  </ul>
+
+  <h3>2. Crear tu primer archivo</h3>
+  <ol>
+    <li>Abre tu editor de texto.</li>
+    <li>Crea un archivo nuevo y guárdalo como <code>index.html</code>.</li>
+  </ol>
+
+  <h3>3. Estructura básica de HTML</h3>
+  <p>Copia este código en tu archivo:</p>
+
+  <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Mi primera página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;¡Hola, mundo!&lt;/h1&gt;
+  &lt;p&gt;Esta es mi primera página en HTML.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+
+
+  <h3>4. Ver tu página</h3>
+  <p>
+    Guarda el archivo, haz doble clic sobre <code>index.html</code> y se abrirá en tu
+    navegador. ¡Ya creaste tu primera página web!
+  </p>
+
+  <h3>5. Próximos pasos</h3>
+  <ul>
+    <li>Añadir imágenes con <code>&lt;img&gt;</code>.</li>
+    <li>Crear enlaces con <code>&lt;a&gt;</code>.</li>
+    <li>Hacer listas con <code>&lt;ul&gt;</code> y <code>&lt;ol&gt;</code>.</li>
+    <li>Dar estilos básicos con CSS.</li>
+  </ul>
+</section>
+
+<section id="fieldset">
+  <h3>Grupo de campos <code>&lt;fieldset&gt;</code></h3>
+  <pre><code>&lt;fieldset&gt;&lt;legend&gt;Datos&lt;/legend&gt;&lt;input type="text"&gt;&lt;/fieldset&gt;</code></pre>
+  <p>Agrupa campos relacionados en un formulario.</p>
+    <div class="ejemplo-visual" style="background:#f3f4f6;padding:1em;border-radius:8px;border:1px solid #e5e7eb;"><fieldset><legend>Datos</legend><input type="text"></fieldset></div>
+</section>
+
+<section id="legend">
+  <h3>Etiqueta de grupo <code>&lt;legend&gt;</code></h3>
+  <pre><code>&lt;legend&gt;Datos personales&lt;/legend&gt;</code></pre>
+  <p>Define el título de un grupo de campos en un formulario.</p>
+  <div class="ejemplo-visual"><fieldset><legend>Datos personales</legend></fieldset></div>
+</section>
+
+<section id="optgroup">
+  <h3>Grupo de opciones <code>&lt;optgroup&gt;</code></h3>
+  <pre><code>&lt;select&gt;&lt;optgroup label="Grupo"&gt;&lt;option&gt;Opción&lt;/option&gt;&lt;/optgroup&gt;&lt;/select&gt;</code></pre>
+  <p>Agrupa opciones dentro de un desplegable.</p>
+  <div class="ejemplo-visual"><select><optgroup label="Grupo"><option>Opción</option></optgroup></select></div>
+</section>
+
+<section id="textarea">
+  <h3>Área de texto <code>&lt;textarea&gt;</code></h3>
+  <pre><code>&lt;textarea&gt;Texto largo&lt;/textarea&gt;</code></pre>
+  <p>Permite al usuario escribir varias líneas de texto.</p>
+  <div class="ejemplo-visual"><textarea rows="2" cols="20">Texto largo</textarea></div>
+</section>
+
+<section id="input-radio">
+  <h3>Radio <code>&lt;input type="radio"&gt;</code></h3>
+  <pre><code>&lt;input type="radio" name="opcion" checked&gt; Opción</code></pre>
+  <p>Permite seleccionar una opción entre varias.</p>
+  <div class="ejemplo-visual"><input type="radio" name="opcion" checked> Opción</div>
+</section>
+
+<section id="input-checkbox">
+  <h3>Checkbox <code>&lt;input type="checkbox"&gt;</code></h3>
+  <pre><code>&lt;input type="checkbox" checked&gt; Acepto</code></pre>
+  <p>Permite seleccionar o deseleccionar una opción.</p>
+  <div class="ejemplo-visual"><input type="checkbox" checked> Acepto</div>
+</section>
+
+<section id="input-password">
+  <h3>Contraseña <code>&lt;input type="password"&gt;</code></h3>
+  <pre><code>&lt;input type="password" placeholder="Contraseña"&gt;</code></pre>
+  <p>Campo para ingresar contraseñas ocultas.</p>
+  <div class="ejemplo-visual"><input type="password" placeholder="Contraseña"></div>
+</section>
+
+<section id="input-email">
+  <h3>Email <code>&lt;input type="email"&gt;</code></h3>
+  <pre><code>&lt;input type="email" placeholder="correo@ejemplo.com"&gt;</code></pre>
+  <p>Campo para ingresar direcciones de correo electrónico.</p>
+  <div class="ejemplo-visual"><input type="email" placeholder="correo@ejemplo.com"></div>
+</section>
+
+<section id="input-date">
+  <h3>Fecha <code>&lt;input type="date"&gt;</code></h3>
+  <pre><code>&lt;input type="date"&gt;</code></pre>
+  <p>Permite seleccionar una fecha.</p>
+  <div class="ejemplo-visual"><input type="date"></div>
+</section>
+
+<section id="input-range">
+  <h3>Rango <code>&lt;input type="range"&gt;</code></h3>
+  <pre><code>&lt;input type="range" min="0" max="100" value="50"&gt;</code></pre>
+  <p>Permite seleccionar un valor dentro de un rango.</p>
+  <div class="ejemplo-visual"><input type="range" min="0" max="100" value="50"></div>
+</section>
+
+<section id="input-color">
+  <h3>Color <code>&lt;input type="color"&gt;</code></h3>
+  <pre><code>&lt;input type="color" value="#2563eb"&gt;</code></pre>
+<section id="meta">
+  <h3>Metadatos <code>&lt;meta&gt;</code></h3>
+  <pre><code>&lt;meta charset="UTF-8"&gt;</code></pre>
+  <p>Define metadatos como la codificación de caracteres, autor, descripción, etc. No se muestra en la página.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong> No se muestra, pero afecta el funcionamiento y SEO.
+  </div>
+</section>
+
+<section id="title">
+  <h3>Título de la página <code>&lt;title&gt;</code></h3>
+  <pre><code>&lt;title&gt;Mi página web&lt;/title&gt;</code></pre>
+  <p>Define el título que aparece en la pestaña del navegador.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong> Se muestra en la pestaña, no en la página.
+  </div>
+</section>
+
+<section id="link">
+  <h3>Enlace a recursos <code>&lt;link&gt;</code></h3>
+  <pre><code>&lt;link rel="stylesheet" href="estilos.css"&gt;</code></pre>
+  <p>Vincula hojas de estilo, iconos, etc. No se muestra en la página.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong> No se muestra, pero aplica estilos o recursos.
+  </div>
+</section>
+
+<section id="script">
+  <h3>Script <code>&lt;script&gt;</code></h3>
+  <pre><code>&lt;script&gt;alert('Hola')&lt;/script&gt;</code></pre>
+  <p>Permite añadir código JavaScript a la página.</p>
+  <div class="ejemplo-visual">
+    <button onclick="alert('Hola')">Ejecutar script</button>
+  </div>
+</section>
+
+<section id="noscript">
+  <h3>Sin JavaScript <code>&lt;noscript&gt;</code></h3>
+  <pre><code>&lt;noscript&gt;Activa JavaScript&lt;/noscript&gt;</code></pre>
+  <p>Contenido alternativo si el navegador no soporta JavaScript.</p>
+  <div class="ejemplo-visual">
+    <noscript>Activa JavaScript</noscript>
+  </div>
+</section>
+
+<section id="base">
+  <h3>URL base <code>&lt;base&gt;</code></h3>
+  <pre><code>&lt;base href="https://ejemplo.com/"&gt;</code></pre>
+  <p>Establece la URL base para los enlaces relativos.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong> No se muestra, pero afecta los enlaces.
+  </div>
+</section>
+
+<section id="bdo">
+  <h3>Dirección del texto <code>&lt;bdo&gt;</code></h3>
+  <pre><code>&lt;bdo dir="rtl"&gt;Texto&lt;/bdo&gt;</code></pre>
+  <p>Establece la dirección del texto (de derecha a izquierda o viceversa).</p>
+  <div class="ejemplo-visual"><bdo dir="rtl">Texto</bdo></div>
+</section>
+
+<section id="wbr">
+  <h3>Salto de línea opcional <code>&lt;wbr&gt;</code></h3>
+  <pre><code>&lt;wbr&gt;</code></pre>
+  <p>Indica un posible punto de salto de línea en el texto.</p>
+  <div class="ejemplo-visual">Palabra<wbr>Muy<wbr>Larga</div>
+</section>
+
+<section id="map">
+  <h3>Mapa de imagen <code>&lt;map&gt;</code></h3>
+  <pre><code>&lt;map name="mapa"&gt;...&lt;/map&gt;</code></pre>
+  <p>Define áreas clicables en una imagen.</p>
+  <div class="ejemplo-visual">
+    <img src="https://via.placeholder.com/120x60?text=Mapa" usemap="#mapa">
+    <map name="mapa">
+      <area shape="rect" coords="10,10,50,50" href="#" alt="Zona">
+    </map>
+  </div>
+</section>
+
+<section id="area">
+  <h3>Área de mapa <code>&lt;area&gt;</code></h3>
+  <pre><code>&lt;area shape="rect" coords="10,10,50,50" href="#" alt="Zona"&gt;</code></pre>
+  <p>Define una zona clicable dentro de un mapa de imagen.</p>
+  <div class="ejemplo-visual">
+    <img src="https://via.placeholder.com/120x60?text=Mapa" usemap="#mapa2">
+    <map name="mapa2">
+      <area shape="rect" coords="10,10,50,50" href="#" alt="Zona">
+    </map>
+  </div>
+</section>
+
+<section id="canvas">
+  <h3>Gráficos <code>&lt;canvas&gt;</code></h3>
+  <pre><code>&lt;canvas width="120" height="60"&gt;&lt;/canvas&gt;</code></pre>
+  <p>Permite dibujar gráficos y animaciones con JavaScript.</p>
+  <div class="ejemplo-visual">
+    <canvas id="demo-canvas" width="120" height="60" style="border:1px solid #2563eb;"></canvas>
+    <script>var c=document.getElementById('demo-canvas');if(c){var ctx=c.getContext('2d');ctx.fillStyle='#2563eb';ctx.fillRect(10,10,100,40);}</script>
+  </div>
+</section>
+
+<section id="svg">
+  <h3>Gráficos vectoriales <code>&lt;svg&gt;</code></h3>
+  <pre><code>&lt;svg width="60" height="60"&gt;&lt;circle cx="30" cy="30" r="20" fill="#2563eb" /&gt;&lt;/svg&gt;</code></pre>
+  <p>Permite crear gráficos vectoriales escalables.</p>
+  <div class="ejemplo-visual">
+    <svg width="60" height="60"><circle cx="30" cy="30" r="20" fill="#2563eb" /></svg>
+  </div>
+</section>
+
+<section id="object">
+  <h3>Objeto externo <code>&lt;object&gt;</code></h3>
+  <pre><code>&lt;object data="archivo.pdf" type="application/pdf" width="120" height="60"&gt;&lt;/object&gt;</code></pre>
+  <p>Incrusta archivos externos como PDF, imágenes, etc.</p>
+  <div class="ejemplo-visual">
+    <object data="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" type="application/pdf" width="120" height="60"></object>
+  </div>
+</section>
+
+<section id="embed">
+  <h3>Contenido embebido <code>&lt;embed&gt;</code></h3>
+  <pre><code>&lt;embed src="archivo.pdf" width="120" height="60"&gt;</code></pre>
+  <p>Incrusta contenido multimedia o interactivo.</p>
+  <div class="ejemplo-visual">
+    <embed src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" width="120" height="60">
+  </div>
+</section>
+
+<section id="picture">
+  <h3>Imágenes adaptativas <code>&lt;picture&gt;</code></h3>
+  <pre><code>&lt;picture&gt;&lt;source srcset="img.webp" type="image/webp"&gt;&lt;img src="img.jpg" alt="Imagen"&gt;&lt;/picture&gt;</code></pre>
+  <p>Permite mostrar diferentes imágenes según el dispositivo o formato soportado.</p>
+  <div class="ejemplo-visual">
+    <picture>
+      <source srcset="https://via.placeholder.com/120x60.webp?text=WebP" type="image/webp">
+      <img src="https://via.placeholder.com/120x60.jpg?text=JPG" alt="Imagen" style="border-radius:6px;box-shadow:0 2px 8px #0002;">
+    </picture>
+  </div>
+</section>
+
+<section id="source">
+  <h3>Fuente multimedia <code>&lt;source&gt;</code></h3>
+  <pre><code>&lt;source src="audio.mp3" type="audio/mpeg"&gt;</code></pre>
+  <p>Define fuentes alternativas para audio, video o imágenes.</p>
+  <div class="ejemplo-visual">
+    <audio controls>
+      <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio.
+    </audio>
+  </div>
+</section>
+
+<section id="track">
+  <h3>Subtítulos multimedia <code>&lt;track&gt;</code></h3>
+  <pre><code>&lt;track kind="subtitles" src="subtitulos.vtt" srclang="es" label="Español"&gt;</code></pre>
+  <p>Agrega subtítulos o descripciones a videos.</p>
+  <div class="ejemplo-visual">
+    <video width="120" controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      <track kind="subtitles" src="https://www.w3schools.com/html/mov_bbb_subtitles_en.vtt" srclang="en" label="English">
+      Tu navegador no soporta video.
+    </video>
+  </div>
+</section>
+  <p>Permite seleccionar un color.</p>
+  <div class="ejemplo-visual"><input type="color" value="#2563eb"></div>
+</section>
+
+<section id="input-file">
+  <h3>Archivo <code>&lt;input type="file"&gt;</code></h3>
+  <pre><code>&lt;input type="file"&gt;</code></pre>
+  <p>Permite subir archivos desde el dispositivo.</p>
+  <div class="ejemplo-visual"><input type="file"></div>
+</section>
+
+<section id="input-number">
+  <h3>Número <code>&lt;input type="number"&gt;</code></h3>
+  <pre><code>&lt;input type="number" min="1" max="10" value="5"&gt;</code></pre>
+  <p>Permite ingresar números dentro de un rango.</p>
+  <div class="ejemplo-visual"><input type="number" min="1" max="10" value="5"></div>
+</section>
+
+<section id="input-tel">
+  <h3>Teléfono <code>&lt;input type="tel"&gt;</code></h3>
+  <pre><code>&lt;input type="tel" placeholder="123-456-7890"&gt;</code></pre>
+  <p>Campo para ingresar números de teléfono.</p>
+  <div class="ejemplo-visual"><input type="tel" placeholder="123-456-7890"></div>
+</section>
+
+<section id="input-url">
+  <h3>URL <code>&lt;input type="url"&gt;</code></h3>
+  <pre><code>&lt;input type="url" placeholder="https://ejemplo.com"&gt;</code></pre>
+  <p>Campo para ingresar direcciones web.</p>
+  <div class="ejemplo-visual"><input type="url" placeholder="https://ejemplo.com"></div>
+</section>
+
+<section id="cite">
+  <h3>Cita corta <code>&lt;cite&gt;</code></h3>
+  <pre><code>&lt;cite&gt;Autor&lt;/cite&gt;</code></pre>
+  <p>Indica la fuente o autor de una cita.</p>
+  <div class="ejemplo-visual"><cite>Autor</cite></div>
+</section>
+
+<section id="del">
+  <h3>Texto eliminado <code>&lt;del&gt;</code></h3>
+  <pre><code>&lt;del&gt;Texto eliminado&lt;/del&gt;</code></pre>
+  <p>Muestra texto que ha sido eliminado o tachado.</p>
+  <div class="ejemplo-visual"><del>Texto eliminado</del></div>
+</section>
+
+<section id="ins">
+  <h3>Texto insertado <code>&lt;ins&gt;</code></h3>
+  <pre><code>&lt;ins&gt;Texto añadido&lt;/ins&gt;</code></pre>
+  <p>Indica texto que ha sido añadido.</p>
+  <div class="ejemplo-visual"><ins>Texto añadido</ins></div>
+</section>
+
+<section id="dfn">
+  <h3>Definición <code>&lt;dfn&gt;</code></h3>
+  <pre><code>&lt;dfn&gt;Palabra&lt;/dfn&gt;</code></pre>
+  <p>Marca el término que se está definiendo.</p>
+  <div class="ejemplo-visual"><dfn>Palabra</dfn></div>
+</section>
+
+<section id="kbd">
+  <h3>Tecla <code>&lt;kbd&gt;</code></h3>
+  <pre><code>&lt;kbd&gt;Ctrl+C&lt;/kbd&gt;</code></pre>
+  <p>Representa la entrada del teclado.</p>
+  <div class="ejemplo-visual"><kbd>Ctrl+C</kbd></div>
+</section>
+
+<section id="samp">
+  <h3>Salida de programa <code>&lt;samp&gt;</code></h3>
+  <pre><code>&lt;samp&gt;Resultado&lt;/samp&gt;</code></pre>
+  <p>Muestra la salida de un programa o sistema.</p>
+  <div class="ejemplo-visual"><samp>Resultado</samp></div>
+</section>
+
+<section id="var">
+  <h3>Variable <code>&lt;var&gt;</code></h3>
+  <pre><code>&lt;var&gt;x&lt;/var&gt;</code></pre>
+  <p>Representa una variable en fórmulas o código.</p>
+  <div class="ejemplo-visual"><var>x</var></div>
+</section>
+
+<section id="time">
+  <h3>Fecha y hora <code>&lt;time&gt;</code></h3>
+  <pre><code>&lt;time datetime="2025-09-24"&gt;24 de septiembre de 2025&lt;/time&gt;</code></pre>
+  <p>Representa una fecha u hora específica.</p>
+  <div class="ejemplo-visual"><time datetime="2025-09-24">24 de septiembre de 2025</time></div>
+</section>
+
+<section id="progress">
+  <h3>Barra de progreso <code>&lt;progress&gt;</code></h3>
+  <pre><code>&lt;progress value="70" max="100"&gt;70%&lt;/progress&gt;</code></pre>
+  <p>Muestra el progreso de una tarea.</p>
+  <div class="ejemplo-visual"><progress value="70" max="100">70%</progress></div>
+</section>
+
+<section id="meter">
+  <h3>Medidor <code>&lt;meter&gt;</code></h3>
+  <pre><code>&lt;meter value="0.6"&gt;60%&lt;/meter&gt;</code></pre>
+  <p>Representa un valor dentro de un rango conocido.</p>
+  <div class="ejemplo-visual"><meter value="0.6">60%</meter></div>
+</section>
+
+<section id="details">
+  <h3>Detalles <code>&lt;details&gt;</code></h3>
+  <pre><code>&lt;details&gt;&lt;summary&gt;Ver más&lt;/summary&gt;Texto oculto&lt;/details&gt;</code></pre>
+  <p>Muestra información adicional que el usuario puede expandir.</p>
+  <div class="ejemplo-visual"><details><summary>Ver más</summary>Texto oculto</details></div>
+</section>
+
+<section id="summary">
+  <h3>Resumen <code>&lt;summary&gt;</code></h3>
+  <pre><code>&lt;summary&gt;Título del detalle&lt;/summary&gt;</code></pre>
+  <p>Encabezado para el elemento <code>&lt;details&gt;</code>.</p>
+  <div class="ejemplo-visual"><details><summary>Título del detalle</summary>Contenido</details></div>
+</section>
+
+<section id="nav">
+  <h3>Navegación <code>&lt;nav&gt;</code></h3>
+  <pre><code>&lt;nav&gt;...&lt;/nav&gt;</code></pre>
+  <p>Define una sección de navegación en la página.</p>
+  <div class="ejemplo-visual"><nav><a href="#">Inicio</a> | <a href="#">Contacto</a></nav></div>
+</section>
+
+<section id="main">
+  <h3>Contenido principal <code>&lt;main&gt;</code></h3>
+  <pre><code>&lt;main&gt;...&lt;/main&gt;</code></pre>
+  <p>Indica el contenido principal de la página.</p>
+  <div class="ejemplo-visual"><main>Este es el contenido principal.</main></div>
+</section>
+
+<section id="header">
+  <h3>Encabezado <code>&lt;header&gt;</code></h3>
+  <pre><code>&lt;header&gt;...&lt;/header&gt;</code></pre>
+  <p>Define el encabezado de la página o sección.</p>
+  <div class="ejemplo-visual"><header><h2>Encabezado</h2></header></div>
+</section>
+
+<section id="footer">
+  <h3>Pie de página <code>&lt;footer&gt;</code></h3>
+  <pre><code>&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+  <p>Define el pie de página de la página o sección.</p>
+  <div class="ejemplo-visual"><footer>Pie de página</footer></div>
+</section>
+
+<section id="article">
+  <h3>Artículo <code>&lt;article&gt;</code></h3>
+  <pre><code>&lt;article&gt;...&lt;/article&gt;</code></pre>
+  <p>Representa contenido independiente y autocontenido.</p>
+  <div class="ejemplo-visual"><article><h3>Noticia</h3><p>Texto de la noticia.</p></article></div>
+</section>
+
+<section id="section">
+  <h3>Sección <code>&lt;section&gt;</code></h3>
+  <pre><code>&lt;section&gt;...&lt;/section&gt;</code></pre>
+  <p>Define una sección temática dentro de la página.</p>
+  <div class="ejemplo-visual"><section style="background:#f3f4f6;padding:1em;border-radius:8px;">Sección temática</section></div>
+</section>
+
+<section id="h2">
+  <h3>Subtítulo <code>&lt;h2&gt;</code></h3>
+  <pre><code>&lt;h2&gt;Subtítulo&lt;/h2&gt;</code></pre>
+  <p>Para títulos secundarios, usa <code>&lt;h2&gt;</code>. Puedes seguir con <code>&lt;h3&gt;</code> a <code>&lt;h6&gt;</code>.</p>
+  <div class="ejemplo-visual"><h2 style="color:#2563eb;">Subtítulo</h2></div>
+</section>
+
+<section id="ol">
+  <h3>Lista ordenada <code>&lt;ol&gt;</code></h3>
+  <pre><code>&lt;ol&gt;&lt;li&gt;Uno&lt;/li&gt;&lt;li&gt;Dos&lt;/li&gt;&lt;/ol&gt;</code></pre>
+  <p>Las listas ordenadas muestran elementos numerados.</p>
+  <div class="ejemplo-visual"><ol><li>Uno</li><li>Dos</li></ol></div>
+</section>
+
+<section id="b">
+  <h3>Negrita <code>&lt;b&gt;</code></h3>
+  <pre><code>&lt;b&gt;Texto en negrita&lt;/b&gt;</code></pre>
+  <p>Resalta texto en negrita, aunque se recomienda <code>&lt;strong&gt;</code> para importancia semántica.</p>
+  <div class="ejemplo-visual"><b>Texto en negrita</b></div>
+</section>
+
+<section id="strong">
+  <h3>Importancia <code>&lt;strong&gt;</code></h3>
+  <pre><code>&lt;strong&gt;Texto importante&lt;/strong&gt;</code></pre>
+  <p>Indica que el texto es relevante o importante.</p>
+  <div class="ejemplo-visual"><strong>Texto importante</strong></div>
+</section>
+
+<section id="i">
+  <h3>Cursiva <code>&lt;i&gt;</code></h3>
+  <pre><code>&lt;i&gt;Texto en cursiva&lt;/i&gt;</code></pre>
+  <p>Presenta texto en cursiva, aunque se recomienda <code>&lt;em&gt;</code> para énfasis semántico.</p>
+  <div class="ejemplo-visual"><i>Texto en cursiva</i></div>
+</section>
+
+<section id="em">
+  <h3>Énfasis <code>&lt;em&gt;</code></h3>
+  <pre><code>&lt;em&gt;Texto enfatizado&lt;/em&gt;</code></pre>
+  <p>Indica énfasis en el texto, útil para accesibilidad.</p>
+  <div class="ejemplo-visual"><em>Texto enfatizado</em></div>
+</section>
+
+<section id="br">
+  <h3>Salto de línea <code>&lt;br&gt;</code></h3>
+  <pre><code>&lt;br&gt;</code></pre>
+  <p>Inserta un salto de línea en el texto.</p>
+  <div class="ejemplo-visual">Línea 1<br>Línea 2</div>
+</section>
+
+<section id="hr">
+  <h3>Separador <code>&lt;hr&gt;</code></h3>
+  <pre><code>&lt;hr&gt;</code></pre>
+  <p>Dibuja una línea horizontal para separar contenido.</p>
+  <div class="ejemplo-visual"><hr></div>
+</section>
+
+<section id="small">
+  <h3>Texto pequeño <code>&lt;small&gt;</code></h3>
+  <pre><code>&lt;small&gt;Texto pequeño&lt;/small&gt;</code></pre>
+  <p>Reduce el tamaño del texto.</p>
+  <div class="ejemplo-visual"><small>Texto pequeño</small></div>
+</section>
+
+<section id="mark">
+  <h3>Resaltado <code>&lt;mark&gt;</code></h3>
+  <pre><code>&lt;mark&gt;Texto resaltado&lt;/mark&gt;</code></pre>
+  <p>Resalta texto con fondo amarillo.</p>
+  <div class="ejemplo-visual"><mark>Texto resaltado</mark></div>
+</section>
+
+<section id="code">
+  <h3>Código <code>&lt;code&gt;</code></h3>
+  <pre><code>&lt;code&gt;let x = 5;&lt;/code&gt;</code></pre>
+  <p>Muestra texto con formato de código.</p>
+  <div class="ejemplo-visual"><code>let x = 5;</code></div>
+</section>
+
+<section id="pre">
+  <h3>Texto preformateado <code>&lt;pre&gt;</code></h3>
+  <pre><code>&lt;pre&gt;Texto<br>preformateado&lt;/pre&gt;</code></pre>
+  <p>Conserva los saltos de línea y espacios en el texto.</p>
+  <div class="ejemplo-visual"><pre>Texto
+preformateado</pre></div>
+</section>
+
+<section id="blockquote">
+  <h3>Cita <code>&lt;blockquote&gt;</code></h3>
+  <pre><code>&lt;blockquote&gt;Texto citado&lt;/blockquote&gt;</code></pre>
+  <p>Destaca una cita textual de otra fuente.</p>
+  <div class="ejemplo-visual"><blockquote>Texto citado</blockquote></div>
+</section>
+
+<section id="sup">
+  <h3>Superíndice <code>&lt;sup&gt;</code></h3>
+  <pre><code>&lt;sup&gt;2&lt;/sup&gt;</code></pre>
+  <p>Muestra texto como superíndice.</p>
+  <div class="ejemplo-visual">x<sup>2</sup></div>
+</section>
+
+<section id="sub">
+  <h3>Subíndice <code>&lt;sub&gt;</code></h3>
+  <pre><code>&lt;sub&gt;2&lt;/sub&gt;</code></pre>
+  <p>Muestra texto como subíndice.</p>
+  <div class="ejemplo-visual">H<sub>2</sub>O</div>
+</section>
+
+<section id="abbr">
+  <h3>Abreviatura <code>&lt;abbr&gt;</code></h3>
+  <pre><code>&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</code></pre>
+  <p>Define una abreviatura y muestra el significado al pasar el mouse.</p>
+  <div class="ejemplo-visual"><abbr title="HyperText Markup Language">HTML</abbr></div>
+</section>
+
+<section id="span">
+  <h3>Bloques en línea <code>&lt;span&gt;</code></h3>
+  <pre><code>&lt;span&gt;Texto destacado&lt;/span&gt;</code></pre>
+  <p>La etiqueta <code>&lt;span&gt;</code> se usa para aplicar estilos o agrupar texto en línea dentro de un párrafo.</p>
+</section>
+
+<section id="form">
+  <h3>Formularios <code>&lt;form&gt;</code></h3>
+  <pre><code>&lt;form action="/enviar" method="post"&gt;...&lt;/form&gt;</code></pre>
+  <p>Permite crear formularios para enviar datos. Usa los atributos <code>action</code> y <code>method</code> para definir el destino y el tipo de envío.</p>
+</section>
+
+<section id="input">
+  <h3>Campos de texto <code>&lt;input&gt;</code></h3>
+  <pre><code>&lt;input type="text" placeholder="Escribe aquí"&gt;</code></pre>
+  <p>La etiqueta <code>&lt;input&gt;</code> permite crear campos para que el usuario escriba información.</p>
+</section>
+
+<section id="button">
+  <h3>Botones <code>&lt;button&gt;</code></h3>
+  <pre><code>&lt;button&gt;Enviar&lt;/button&gt;</code></pre>
+  <p>Usa <code>&lt;button&gt;</code> para crear botones que el usuario puede pulsar.</p>
+</section>
+
+<section id="table">
+  <h3>Tablas <code>&lt;table&gt;</code></h3>
+  <pre><code>&lt;table&gt;&lt;tr&gt;&lt;td&gt;Celda&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></pre>
+  <p>Las tablas permiten mostrar datos en filas y columnas usando <code>&lt;tr&gt;</code> para filas y <code>&lt;td&gt;</code> para celdas.</p>
+</section>
+
+<section id="label">
+  <h3>Etiquetas de formulario <code>&lt;label&gt;</code></h3>
+  <pre><code>&lt;label for="nombre"&gt;Nombre:&lt;/label&gt; &lt;input id="nombre" type="text"&gt;</code></pre>
+  <p>La etiqueta <code>&lt;label&gt;</code> asocia texto descriptivo a un campo de formulario, mejorando la accesibilidad.</p>
+</section>
+
+<section id="select">
+  <h3>Listas desplegables <code>&lt;select&gt;</code></h3>
+  <pre><code>&lt;select&gt;&lt;option&gt;Opción 1&lt;/option&gt;&lt;option&gt;Opción 2&lt;/option&gt;&lt;/select&gt;</code></pre>
+  <p>Permite al usuario elegir entre varias opciones en un formulario.</p>
+</section>
+
+<section id="iframe">
+  <h3>Contenido externo <code>&lt;iframe&gt;</code></h3>
+  <pre><code>&lt;iframe src="https://ejemplo.com"&gt;&lt;/iframe&gt;</code></pre>
+  <p>Incrusta otra página web o contenido externo dentro de tu sitio.</p>
+</section>
+
+<section id="audio">
+  <h3>Audio <code>&lt;audio&gt;</code></h3>
+  <pre><code>&lt;audio src="cancion.mp3" controls&gt;&lt;/audio&gt;</code></pre>
+  <p>Permite reproducir archivos de audio en la web. El atributo <code>controls</code> muestra los controles de reproducción.</p>
+</section>
+
+<section id="video">
+  <h3>Video <code>&lt;video&gt;</code></h3>
+  <pre><code>&lt;video src="video.mp4" controls&gt;&lt;/video&gt;</code></pre>
+  <p>Permite mostrar y reproducir videos en tu página web.</p>
+</section>
+
+<section id="doctype">
+  <h3>¿Qué es <code>&lt;!DOCTYPE html&gt;</code>?</h3>
+  <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+  <p>Indica al navegador que el documento está escrito en HTML5. Debe ir siempre al inicio de tu archivo.</p>
+  <div class="ejemplo-visual" style="background:#f3f4f6;padding:1em;border-radius:8px;border:1px solid #e5e7eb;">
+    <strong>Visualización:</strong> No se muestra en la página, pero permite que el navegador interprete correctamente el HTML5.
+    <div style="font-family:'Fira Code',monospace;font-size:1rem;line-height:1.5;background:#fff;padding:1em;border-radius:8px;border:1px solid #e5e7eb;">&lt;!DOCTYPE html&gt;<br>&lt;html lang="es"&gt;<br>  &lt;head&gt;<br>    &lt;meta charset="UTF-8"&gt;<br>    &lt;title&gt;Mi primera página&lt;/title&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;h1&gt;¡Hola, mundo!&lt;/h1&gt;<br>    &lt;p&gt;Esta es mi primera página en HTML.&lt;/p&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</div>
+  </div>
+</section>
+
+<section id="html">
+  <h3>La etiqueta <code>&lt;html&gt;</code></h3>
+  <pre><code>&lt;html lang="es"&gt; ... &lt;/html&gt;</code></pre>
+  <p>Define el inicio y el final de tu documento HTML. El atributo <code>lang</code> indica el idioma principal.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong> No se muestra directamente, pero todo el contenido de la web está dentro de esta etiqueta.
+  </div>
+</section>
+
+<section id="head">
+  <h3>La cabecera <code>&lt;head&gt;</code></h3>
+  <pre><code>&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;Título&lt;/title&gt; &lt;/head&gt;</code></pre>
+  <p>Contiene metadatos, el título y enlaces a hojas de estilo o scripts. No se muestra en la página.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong> El título aparece en la pestaña del navegador, los metadatos no se ven pero afectan el funcionamiento.
+  </div>
+</section>
+
+<section id="body">
+  <h3>El cuerpo <code>&lt;body&gt;</code></h3>
+  <pre><code>&lt;body&gt; ...contenido visible... &lt;/body&gt;</code></pre>
+  <p>Todo lo que está dentro de <code>&lt;body&gt;</code> se muestra en la página web.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong> Todo el contenido que ves en la web está dentro de <code>&lt;body&gt;</code>.
+  </div>
+</section>
+
+<section id="h1">
+  <h3>Títulos <code>&lt;h1&gt;...&lt;/h1&gt;</code></h3>
+  <pre><code>&lt;h1&gt;Título principal&lt;/h1&gt;</code></pre>
+  <p>Usa <code>&lt;h1&gt;</code> para el título más importante. Puedes usar <code>&lt;h2&gt;</code> a <code>&lt;h6&gt;</code> para subtítulos.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong>
+    <h1 style="margin:0.5em 0;color:#2563eb;">Título principal</h1>
+  </div>
+</section>
+
+<section id="p">
+  <h3>Párrafos <code>&lt;p&gt;...&lt;/p&gt;</code></h3>
+  <pre><code>&lt;p&gt;Este es un párrafo de texto.&lt;/p&gt;</code></pre>
+  <p>Para escribir bloques de texto utiliza la etiqueta <code>&lt;p&gt;</code>.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong>
+    <p style="margin:0.5em 0;">Este es un párrafo de texto.</p>
+  </div>
+</section>
+
+<section id="a">
+  <h3>Enlaces <code>&lt;a&gt;...&lt;/a&gt;</code></h3>
+  <pre><code>&lt;a href="https://ejemplo.com"&gt;Visita mi web&lt;/a&gt;</code></pre>
+  <p>La etiqueta <code>&lt;a&gt;</code> crea enlaces a otras páginas o recursos. El atributo <code>href</code> indica la dirección.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong>
+    <a href="https://ejemplo.com" style="color:#2563eb;text-decoration:underline;">Visita mi web</a>
+  </div>
+</section>
+
+<section id="img">
+  <h3>Imágenes <code>&lt;img&gt;</code></h3>
+  <pre><code>&lt;img src="foto.jpg" alt="Descripción"&gt;</code></pre>
+  <p>Para mostrar imágenes usa <code>&lt;img&gt;</code>. El atributo <code>alt</code> es importante para accesibilidad.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong>
+    <img src="https://via.placeholder.com/120x60?text=Imagen" alt="Descripción" style="border-radius:6px;box-shadow:0 2px 8px #0002;">
+  </div>
+</section>
+
+<section id="ul">
+  <h3>Listas <code>&lt;ul&gt;</code> y <code>&lt;ol&gt;</code></h3>
+  <pre><code>&lt;ul&gt; &lt;li&gt;Elemento 1&lt;/li&gt; &lt;li&gt;Elemento 2&lt;/li&gt; &lt;/ul&gt;</code></pre>
+  <p>Las listas no ordenadas usan <code>&lt;ul&gt;</code>, las ordenadas <code>&lt;ol&gt;</code>. Cada elemento va en <code>&lt;li&gt;</code>.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong>
+    <ul style="margin:0.5em 0;padding-left:1.2em;">
+      <li>Elemento 1</li>
+      <li>Elemento 2</li>
+    </ul>
+  </div>
+</section>
+
+<section id="div">
+  <h3>Bloques <code>&lt;div&gt;</code></h3>
+  <pre><code>&lt;div&gt;Contenido agrupado&lt;/div&gt;</code></pre>
+  <p>Usa <code>&lt;div&gt;</code> para agrupar contenido y aplicar estilos o scripts.</p>
+  <div class="ejemplo-visual">
+    <strong>Visualización:</strong>
+    <div>Contenido agrupado</div>
+  </div>
+</section>
+
+<style>
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .theme-toggle button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7em 1.5em;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #2563eb22;
+    transition: background 0.2s;
+  }
+  .theme-toggle button:hover {
+    background: #1e293b;
+  }
+  body {
+    background: #f4f6f8;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    color: #333;
+  }
+  body.dark-mode {
+    background: #18181b;
+    color: #e5e7eb;
+  }
+  body.dark-mode section {
+    background: #23272f;
+    color: #e5e7eb;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  }
+  body.dark-mode h2 {
+    color: #60a5fa;
+  }
+  body.dark-mode h3 {
+    color: #e5e7eb;
+    border-left: 4px solid #60a5fa;
+  }
+  body.dark-mode pre {
+    background: #0f172a;
+    color: #e5e7eb;
+  }
+  body.dark-mode pre code {
+    color: #e5e7eb;
+  }
+  section {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+  }
+  h2 {
+    font-size: 2rem;
+    color: #2563eb;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  h3 {
+    margin-top: 2rem;
+    color: #111827;
+    font-size: 1.2rem;
+    border-left: 4px solid #2563eb;
+    padding-left: 0.5rem;
+  }
+  pre {
+    background: #1e293b;
+    border-radius: 12px;
+    margin: 1.2rem 0;
+    padding: 1.5rem;
+    overflow-x: auto;
+    font-size: 1rem;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(30,41,59,0.08);
+  }
+  pre code {
+    color: #f8fafc;
+    font-family: "Fira Code", monospace;
+    font-size: 1rem;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    display: block;
+    white-space: pre;
+  }
+  #como-empezar code {
+    background: #f3f4f6;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-family: "Fira Code", monospace;
+    font-size: 0.95rem;
+    color: #000001;
+  }
+  #como-empezar code {
+    background: #f3f4f6;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-family: "Fira Code", monospace;
+    font-size: 0.95rem;
+  }
+
+  #como-empezar pre {
+    background: #1e293b;
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    overflow-x: auto;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  #como-empezar pre code {
+    background: #1e293b; /* Fondo oscuro tipo editor */
+    color: #f1f1ee;      /* Texto base más legible */
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    overflow-x: auto;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* 🎨 Resaltado de sintaxis */
+  #como-empezar pre code .tag {
+    color: #38bdf8; /* azul brillante */
+  }
+  #como-empezar pre code .attr {
+    color: #fbbf24; /* amarillo */
+  }
+  #como-empezar pre code .value {
+    color: #34d399; /* verde */
+  }
+</style>
+
+<div class="theme-toggle">
+  <button id="toggleTheme">Cambiar tema</button>
+</div>
+
+<script>
+  const btn = document.getElementById('toggleTheme');
+  btn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    btn.textContent = document.body.classList.contains('dark-mode') ? 'Tema claro' : 'Cambiar tema';
+  });
+</script>

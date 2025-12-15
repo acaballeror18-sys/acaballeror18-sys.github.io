@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f5f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #003366;
+        }
+
+        form {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #003366;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[readonly] {
+            background-color: #e9ecef;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #003366;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00509e;
+        }
+
+        #mensajeExito {
+            text-align: center;
+            margin-top: 15px;
+            color: green;
+            font-weight: bold;
+        }
+
+        #mensajeError {
+            text-align: center;
+            margin-top: 15px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Formulario de Registro - Instituto</h2>
+
+    <form id="miFormulario">
+        <fieldset>
+            <legend>Datos del estudiante</legend>
+
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+
+            <label for="fecha">Fecha de nacimiento:</label>
+            <input type="date" id="fecha" name="fecha" required>
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" readonly>
+        </fieldset>
+
+        <fieldset>
+            <legend>Información adicional</legend>
+
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" name="categoria" required>
+                <optgroup label="Grupos">
+                    <option value="op1">Opción 1</option>
+                    <option value="op2">Opción 2</option>
+                </optgroup>
+            </select>
+
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+        </fieldset>
+
+        <button type="submit">Enviar</button>
+        <p id="mensajeExito" style="display:none;">Formulario enviado correctamente </p>
+        <p id="mensajeError" style="display:none;">Error: Por favor completa todos los campos correctamente</p>
+    </form>
+
+    <script>
+        const form = document.getElementById('miFormulario');
+        const mensajeExito = document.getElementById('mensajeExito');
+        const mensajeError = document.getElementById('mensajeError');
+        const fechaInput = document.getElementById('fecha');
+        const edadInput = document.getElementById('edad');
+        const emailInput = document.getElementById('email');
+
+        // Calcular edad automáticamente
+        function calcularEdad(fechaNacimiento) {
+            const hoy = new Date();
+            const nacimiento = new Date(fechaNacimiento);
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            const mes = hoy.getMonth() - nacimiento.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+                edad--;
+            }
+            return edad;
+        }
+
+        fechaInput.addEventListener('change', () => {
+            if (fechaInput.value) {
+                edadInput.value = calcularEdad(fechaInput.value);
+            } else {
+                edadInput.value = '';
+            }
+        });
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Validación simple
+            const nombre = document.getElementById('nombre').value.trim();
+            const email = emailInput.value.trim();
+            const fecha = fechaInput.value;
+            const categoria = document.getElementById('categoria').value;
+            const mensaje = document.getElementById('mensaje').value.trim();
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!nombre || !email || !fecha || !categoria || !mensaje || !emailRegex.test(email)) {
+                mensajeError.style.display = 'block';
+                mensajeExito.style.display = 'none';
+                return;
+            }
+
+            mensajeExito.style.display = 'block';
+            mensajeError.style.display = 'none';
+            form.reset();
+            edadInput.value = '';
+        });
+    </script>
+
+</body>
+</html>

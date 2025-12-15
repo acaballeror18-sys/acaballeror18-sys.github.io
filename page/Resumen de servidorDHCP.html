@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidor DHCP - Aprendizaje y Funcionamiento</title>
+    <meta name="Author" content="Alvaro">
+    <meta name="Description" content="Servidor DHCP - Aprendizaje y Funcionamiento">
+    <meta name="Keyworks" content="¿Qué es el DHCP? , Funciones principales del Servidor DHCP , ¿Cómo funciona el proceso DHCP?">
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            color: #333;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0078d7, #00b4d8);
+            color: white;
+            text-align: center;
+            padding: 2em 1em;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+
+        main {
+            max-width: 950px;
+            margin: 2em auto;
+            background-color: white;
+            padding: 2em 3em;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #0078d7;
+            border-bottom: 2px solid #00b4d8;
+            padding-bottom: 0.3em;
+        }
+
+        ul {
+            line-height: 1.8em;
+            list-style-type: "✔️ ";
+        }
+
+        .proceso {
+            background-color: #f3f9ff;
+            border-left: 5px solid #0078d7;
+            padding: 1em 1.5em;
+            border-radius: 5px;
+            margin: 1.5em 0;
+        }
+
+        .etapa {
+            margin: 0.8em 0;
+        }
+
+        footer {
+            background-color: #0078d7;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            margin-top: 3em;
+        }
+
+        .ejemplo {
+            background-color: #fff8e1;
+            border-left: 5px solid #ffc107;
+            padding: 1em 1.5em;
+            border-radius: 5px;
+        }
+
+        .boton {
+            display: inline-block;
+            background-color: #00b4d8;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 1em;
+        }
+
+        .boton:hover {
+            background-color: #0096c7;
+        }
+
+        @media (max-width: 600px) {
+            main {
+                padding: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Aprendamos sobre el Servidor DHCP</h1>
+        <p>Protocolo de Configuración Dinámica de Host (Dynamic Host Configuration Protocol)</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>¿Qué es el DHCP?</h2>
+            <p>
+                El <strong>DHCP (Dynamic Host Configuration Protocol)</strong> es un protocolo esencial en redes informáticas 
+                que se encarga de <strong>asignar direcciones IP y configuraciones de red automáticamente</strong> a los dispositivos 
+                (como computadoras, teléfonos o impresoras) cuando se conectan a una red.
+            </p>
+            <p>
+                Gracias a DHCP, los administradores no necesitan configurar manualmente cada dispositivo. 
+                Esto <strong>ahorra tiempo</strong> y <strong>evita conflictos de IP</strong> dentro de la red.
+            </p>
+        </section>
+
+        <section>
+            <h2>Funciones principales del Servidor DHCP</h2>
+            <ul>
+                <li>Asigna direcciones IP automáticamente a los clientes.</li>
+                <li>Proporciona información de red como máscara de subred y puerta de enlace.</li>
+                <li>Indica los servidores DNS para la resolución de nombres.</li>
+                <li>Evita conflictos de direcciones IP repetidas.</li>
+                <li>Permite una administración centralizada y dinámica de la red.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>¿Cómo funciona el proceso DHCP?</h2>
+            <p>El proceso se realiza mediante una serie de mensajes entre el cliente y el servidor DHCP:</p>
+
+            <div class="proceso">
+                <div class="etapa"><strong>1️⃣ DHCP Discover:</strong> El cliente busca un servidor DHCP enviando un mensaje de descubrimiento.</div>
+                <div class="etapa"><strong>2️⃣ DHCP Offer:</strong> El servidor responde ofreciendo una dirección IP disponible.</div>
+                <div class="etapa"><strong>3️⃣ DHCP Request:</strong> El cliente solicita formalmente la dirección IP ofrecida.</div>
+                <div class="etapa"><strong>4️⃣ DHCP Acknowledge (ACK):</strong> El servidor confirma y asigna la IP al cliente.</div>
+            </div>
+
+            <p>Este intercambio ocurre en pocos segundos y permite que el dispositivo se conecte a la red sin intervención manual.</p>
+        </section>
+
+        <section>
+            <h2>Ejemplo educativo</h2>
+            <div class="ejemplo">
+                <p>Imagina una escuela con 100 computadoras conectadas a la misma red.</p>
+                <p>Sin DHCP, el técnico tendría que asignar manualmente 100 direcciones IP, 
+                una tarea lenta y propensa a errores. Con DHCP, <strong>el servidor las entrega automáticamente</strong> 
+                y mantiene un registro actualizado de todas las direcciones usadas.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>¿Sabías que...?</h2>
+            <p>
+                DHCP puede trabajar junto con otros protocolos, como <strong>DNS</strong> o <strong>BOOTP</strong>, 
+                y puede configurarse para reservar direcciones IP específicas a ciertos dispositivos mediante sus direcciones MAC.
+            </p>
+            <a href="#" class="boton">Aprender más sobre configuración DHCP</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Aula de Redes | Material educativo sobre DHCP</p>
+    </footer>
+
+</body>
+</html>
