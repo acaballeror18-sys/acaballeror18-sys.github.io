@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="../multimedia/Logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de JavaScript</title>
+    <meta name="Author" content="Alvaro">
+    <meta name="description" content="JavaScript">
+    <meta name="Keywords" content="javascript">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .clase-coleccion {
+            color: red;
+            background-color: pink;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>JavaScript</h1>
+
+    <p id="saludo">Buenos días</p>
+
+    <!-- Cambiar saludo -->
+    <button type="button" onclick="document.getElementById('saludo').innerHTML = 'Hoy vamos a hacer ejercicio de JavaScript';">
+        Cambiar saludo
+    </button>
+
+    <!-- Botones para cambiar la cara -->
+    <button onclick="document.getElementById('myImage').src='imagenes/cara normal.jpg'">
+        Cara neutral
+    </button>
+    <img id="myImage" src="imagenes/cara normal.jpg" style="width: 100px;">
+    <button onclick="document.getElementById('myImage').src='imagenes/cara triste.jpg'">
+        Cara triste
+    </button>
+    <button onclick="document.getElementById('myImage').src='imagenes/cara sonriente.jpg'">
+        Cara sonriente
+    </button>
+
+    <!-- Imagen del árbol -->
+    <img id="arbol" src="imagenes/arbol.jpg" style="display:block; width:200px; margin-top:20px;">
+
+    <!-- Botón para quitar árbol -->
+    <button id="btnQuitar" onclick="
+        document.getElementById('arbol').style.display = 'none';
+        this.style.display = 'none';
+        document.getElementById('btnMostrar').style.display = 'inline-block';
+    ">
+        Quitar árbol
+    </button>
+
+    <!-- Botón para mostrar árbol -->
+    <button id="btnMostrar" style="display:none;" onclick="
+        document.getElementById('arbol').style.display = 'block';
+        this.style.display = 'none';
+        document.getElementById('btnQuitar').style.display = 'inline-block';
+    ">
+        Mostrar árbol
+    </button>
+
+    <p>
+        El DOM (siglas de Document Object Model, o Modelo de Objetos del Documento) es...
+        <!-- Tu contenido largo aquí -->
+    </p>
+
+    <p id="parrafo-a-cambiar">Este es el párrafo cuyo aspecto cambiará.</p>
+
+    <!-- Cambiar estilo de párrafos -->
+    <button onclick="
+        const parrafo0 = document.getElementsByTagName('p')[0];
+        parrafo0.style.color = 'green';
+        parrafo0.style.fontSize = '20px';
+        parrafo0.style.fontWeight = 'bold';
+        parrafo0.style.fontStyle = 'italic';
+        document.getElementsByTagName('p')[1].classList.add('clase-coleccion');
+    ">Cambiar estilo del primer párrafo</button>
+
+    <button onclick="cambiarEstilosGlobales()">Cambia el aspecto de todos los párrafos</button>
+
+    <script>
+        function cambiarEstilosGlobales() {
+            const parrafos = document.querySelectorAll('p');
+            parrafos.forEach(parrafo => {
+                parrafo.style.color = 'blue';
+                parrafo.style.fontSize = '15px';
+                parrafo.style.fontWeight = 'bold';
+                parrafo.style.fontStyle = 'italic';
+            });
+        }
+    </script>
+</body>
+</html>

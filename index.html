@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página web del ciclo SMR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Alvaro">
+    <meta name="description" content="Información de SMR">
+    <meta name="keywords" content="información , ubicación">
+
+
+    <link rel="icon" type="image/png" href="multimedia/Logo.png">
+    
+    <!-- MANIFIESTO PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#26a69a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="SMR Web">
+    <link rel="apple-touch-icon" href="multimedia/Logo.png">
+
+    <!-- FUENTE GOOGLE -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+    <!-- ESTILOS INTERNOS -->
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #e3f2fd, #b2dfdb);
+            font-family: 'Source Code Pro', monospace, Arial, sans-serif;
+            color: #004d40;
+        }
+
+        /* CABECERA */
+        .inicio {
+            background-color: #26a69a;
+            padding: 30px 15px;
+            text-align: center;
+            color: #e0f2f1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .inicio h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .logo-header {
+            width: 100px;
+            max-width: 120px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+        }
+
+        /* TRADUCTOR PEQUEÑO */
+        #google_translate_element {
+            margin-top: 15px;
+            display: inline-block;
+            transform: scale(0.8);
+            transform-origin: top center;
+        }
+
+        /* MAPA */
+        .map-container {
+            width: 75%;
+            max-width: 900px;
+            height: 320px;
+            margin: 35px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 18px rgba(0,0,0,0.25);
+            border: 3px solid #00796b;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* BLOQUE DE ENLACES SUPERIORES */
+        .rectangulor {
+            background-color: #b2dfdb;
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: inset 0 0 15px #004d40;
+        }
+
+        .rectangulor a {
+            display: inline-block;
+            margin: 0 20px;
+            padding: 12px 28px;
+            background-color: #004d40;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #e0f2f1;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,77,64,0.4);
+        }
+
+        .rectangulor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .rectangulor nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .rectangulor a:hover {
+            background-color: #00796b;
+            transform: scale(1.1);
+            box-shadow: 0 6px 14px rgba(0,77,64,0.6);
+        }
+
+        .boton-contenedor {
+            width: 100%;
+            text-align: center;
+        }
+
+        .boton-enlace {
+            display: inline-block;
+            margin: 0;
+            padding: 14px 26px;
+            background-color: #ffca28;
+            color: #004d40;
+            font-weight: 700;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .boton-enlace:hover {
+            background-color: #f9a825;
+            transform: translateY(-2px);
+        }
+
+        /* CONTENEDOR PRINCIPAL DE BOTONES */
+        .contenedor-botones {
+            padding: 50px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            background-color: #e0f2f1;
+        }
+
+        /* Cada caja de categoría */
+        .categoria {
+            background-color: #ffffffdd;
+            width: 280px;
+            padding: 25px 20px;
+            border-radius: 20px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .categoria:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .categoria h2 {
+            text-align: center;
+            color: #004d40;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            letter-spacing: 1.2px;
+        }
+
+        .categoria.practicas {
+            width: 340px;
+        }
+
+        .categoria.practicas .practicas-mes {
+            margin-bottom: 18px;
+        }
+
+        .categoria.practicas .practicas-mes h3 {
+            margin: 0 0 10px;
+            color: #00796b;
+            font-size: 1.2rem;
+            text-align: left;
+        }
+
+        .categoria.practicas a {
+            display: block;
+            background-color: #009688;
+            margin: 8px 0;
+            padding: 10px 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1rem;
+            color: #e0f2f1;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0,150,136,0.35);
+        }
+
+        .categoria.practicas a::before {
+            content: "• ";
+            color: #004d40;
+            font-weight: 900;
+        }
+
+        /* Botones */
+        .categoria a {
+            display: block;
+            background-color: #26a69a;
+            margin: 12px 0;
+            padding: 14px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: #e0f2f1;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(38,166,154,0.5);
+            transition: background-color 0.3s ease, transform 0.25s ease;
+        }
+
+        .categoria a:hover {
+            background-color: #00796b;
+            transform: scale(1.07);
+            box-shadow: 0 6px 14px rgba(0,121,107,0.7);
+        }
+
+        .categoria a::before {
+            content: "➤ ";
+            color: #004d40;
+            font-weight: 900;
+        }
+
+        .categoria a img.logo-enlace {
+            width: 40px;
+            vertical-align: middle;
+            margin-right: 10px;
+            border-radius: 8px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+        }
+
+        .formulario{
+           background-color: #00796b;
+            transform: scale(1.07);
+            box-shadow: 0 6px 14px rgba(0,121,107,0.7);
+        }
+        
+        /* FOOTER */
+        .final {
+            background-color: #00796b;
+            color: #e0f2f1;
+            padding: 30px 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            box-shadow: inset 0 0 20px #004d40;
+        }
+
+        details {
+            background-color: #004d40;
+            color: #e0f2f1;
+            width: 90%;
+            max-width: 700px;
+            margin: 15px auto 0 auto;
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px #00251a;
+        }
+
+        details summary {
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+        }
+
+        details p {
+            margin-top: 12px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .map-container {
+                width: 95%;
+                height: 220px;
+            }
+            .contenedor-botones {
+                gap: 20px;
+                padding: 30px 5px;
+            }
+            .categoria {
+                width: 90%;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            .inicio h1 {
+                font-size: 2.4rem;
+            }
+            .rectangulor a {
+                font-size: 1rem;
+                margin: 0 10px;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="inicio">
+        <img src="multimedia/Logo.png" alt="Logo SMR" class="logo-header">
+        <h1>Página web del ciclo SMR</h1>
+
+        <!-- TRADUCTOR -->
+        <div id="google_translate_element"></div>
+    </header>
+
+    <main>
+        <!-- MAPA -->
+        <section class="map-container" aria-label="Mapa de ubicación del IES Donoso Cortés">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170.885323152381!2d-5.871788724680243!3d38.96192347171569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd145b0335e1715b%3A0x485f02fe56f2d511!2sIES%20Donoso%20Cort%C3%A9s!5e0!3m2!1ses!2ses!4v1731355500000!5m2!1ses!2ses" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Mapa de IES Donoso Cortés">
+            </iframe>
+        </section>
+
+        <!-- ENLACES INSTITUCIONALES -->
+        <section class="rectangulor" aria-label="Enlaces institucionales">
+            <nav>
+                <a href="https://iesdonosocortes.educarex.es/" target="_blank" rel="noopener noreferrer">Instituto</a>
+                <a href="https://www.todofp.es/inicio.html" target="_blank" rel="noopener noreferrer">Todo FP</a>
+            </nav>
+            <div class="boton-contenedor">
+                <a href="page/plandeempresa.html" class="boton-enlace" target="_blank" rel="noopener noreferrer">Ver plan de empresa</a>
+            </div>
+        </section>
+
+        <!-- ENLACES DE TAREAS -->
+        <section class="contenedor-botones" aria-label="Enlaces a tareas y proyectos">
+
+            <div class="categoria">
+                <h2>Tarea 1</h2>
+                <a href="page/etiquetas.html" target="_blank" rel="noopener noreferrer">Ejemplos de estilos</a>
+                <a href="page/mi-primera-web.html" target="_blank" rel="noopener noreferrer">Mi primera web</a>
+                <a href="page/Página _web _del_ciclo_SMR.html" target="_blank" rel="noopener noreferrer">Tarea 1 Proyecto</a>
+                <a href="css/main.css" target="_blank" rel="noopener noreferrer">CSS 1</a>
+            </div>
+
+            <div class="categoria">
+                <h2>Tarea 2</h2>
+                <a href="page/Resumen de servidorDHCP.html" target="_blank" rel="noopener noreferrer">Resumen del servidor DHCP</a>
+            </div>
+
+
+            <div class="categoria">
+                <h2>Tarea 3</h2>
+                <a href="page/paginaweb.html" target="_blank" rel="noopener noreferrer">Página DOCTYPE</a>
+                <a href="page/formato de texto.html" target="_blank" rel="noopener noreferrer">Formato de texto</a>
+                <a href="page/paginaweb.html" target="_blank" rel="noopener noreferrer">Página Web</a>
+            </div>
+
+            <div class="categoria">
+                <h2>Tarea 4</h2>
+                <a href="page/anclas.html" target="_blank" rel="noopener noreferrer">Ejercicio bolitas</a>
+                <a href="page/cuadrados_y_rectangulos.html" target="_blank" rel="noopener noreferrer">Ejercicio de Div</a>
+            </div>
+
+
+            <div class="categoria">
+                <h2>Tarea 5</h2>
+                <a href="page/mapa sensible.html" target="_blank" rel="noopener noreferrer">Mapa sensible</a>
+            </div>
+
+            <div class="categoria">
+                <h2>Tarea 6</h2>
+                <a href="page/etiquetas.html" target="_blank" rel="noopener noreferrer">Etiquetas META y Estilos</a>
+            </div>
+
+
+            <div class="categoria">
+                <h2>JavaScript</h2>
+                <a href="page/javascript.html" target="_blank" rel="noopener noreferrer">JavaScript</a>
+            </div>
+
+            <div class="categoria">
+                <h2>Formulario</h2>
+                <a href="page/formoluario.html" target="_blank" rel="noopener noreferrer">Formulario HTML</a>
+            </div>
+
+            <div class="categoria">
+                <h2>Agenda</h2>
+                <a href="page/agenda.html" target="_blank" rel="noopener noreferrer">Agenda</a>
+            </div>
+
+            <div class="categoria">
+                <h2>Plan de empresa</h2>
+                <a href="page/plandeempresa.html" target="_blank" rel="noopener noreferrer">
+                    <img src="multimedia/Logo.png" alt="Logo de Plan de Empresa" class="logo-enlace">
+                    Plan de empresa
+                </a>
+            </div>
+
+            <div class="categoria practicas">
+                <h2>Prácticas</h2>
+                <div class="practicas-mes">
+                    <h3>Enero</h3>
+                    <a href="praticas/enero/Hoja_de_seguimiento_semanal_FEOE.pdf" target="_blank" rel="noopener noreferrer">Hoja seguimiento semanal</a>
+                    <a href="praticas/enero/Hoja_de_seguimiento_semanal_FEOE (1).pdf" target="_blank" rel="noopener noreferrer">Hoja seguimiento semanal (1)</a>
+                    <a href="praticas/enero/Hoja_de_seguimiento_semanal_FEOE Álvaro Caballero Rodríguez.pdf" target="_blank" rel="noopener noreferrer">Seguimiento Álvaro Caballero</a>
+                </div>
+                <div class="practicas-mes">
+                    <h3>Febrero</h3>
+                    <a href="praticas/febrero/Hoja_de_seguimiento_semanal_FEOE.pdf" target="_blank" rel="noopener noreferrer">Hoja seguimiento semanal</a>
+                    <a href="praticas/febrero/Hoja_de_seguimiento_semanal_FEOE.docx.pdf" target="_blank" rel="noopener noreferrer">Hoja DOCX</a>
+                    <a href="praticas/febrero/Caballero Rodriguez Alvaro_FEOE16-20febrero.docx.pdf" target="_blank" rel="noopener noreferrer">16-20 febrero - Álvaro</a>
+                    <a href="praticas/febrero/_ Caballero Rodriguez Alvaro_FEOE23-26febrero.docx.pdf" target="_blank" rel="noopener noreferrer">23-26 febrero - Álvaro</a>
+                </div>
+                <div class="practicas-mes">
+                    <h3>Marzo</h3>
+                    <a href="praticas/marzo/Hoja_de_seguimiento_semanal_FEOE (1).pdf" target="_blank" rel="noopener noreferrer">Hoja seguimiento semanal</a>
+                    <a href="praticas/marzo/Caballero Rodriguez Alvaro_FEOE2-6marzo.docx.pdf" target="_blank" rel="noopener noreferrer">2-6 marzo</a>
+                    <a href="praticas/marzo/Caballero Rodriguez Alvaro_FEOE16-20marzo.docx.pdf" target="_blank" rel="noopener noreferrer">16-20 marzo - Álvaro</a>
+                    <a href="praticas/marzo/Caballero Rodriguez Alvaro_FEOE23-27marzo.docx.pdf" target="_blank" rel="noopener noreferrer">23-27 marzo - Álvaro</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="final">
+        <h3>Información sobre la FP</h3>
+
+        <details>
+            <summary>Información de la FP</summary>
+            <p>
+                La Formación Profesional (FP) permite adquirir conocimientos prácticos y teóricos
+                en distintos sectores como informática, administración, salud o comercio. 
+                El ciclo SMR (Sistemas Microinformáticos y Redes) forma a los estudiantes
+                para instalar, configurar y mantener equipos, redes y servicios informáticos.
+            </p>
+            <p>
+                Además, los alumnos pueden acceder a prácticas en empresas y continuar con estudios
+                superiores relacionados con la informática y las telecomunicaciones.
+            </p>
+        </details>
+    </footer>
+
+    <!-- TRADUCTOR GOOGLE -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'es', includedLanguages: 'en,fr,de,it,pt,ca,gl,eu'},
+                'google_translate_element'
+            );
+        }
+    </script>
+
+    <script type="text/javascript" 
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</body>
+</html>
