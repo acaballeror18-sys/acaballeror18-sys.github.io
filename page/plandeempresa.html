@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DesmontaPro | Servicio Técnico Informático</title>
-<link rel="icon" href="../multimedia/Logo.png" type="image/png">
+<link rel="icon" href="../multimedia/logo2.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -22,986 +22,491 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    overflow-x: hidden;
-  }
-
-  /* === SCANLINES OVERLAY === */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,229,255,0.015) 2px,
-      rgba(0,229,255,0.015) 4px
-    );
+    background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,229,255,0.015) 2px,rgba(0,229,255,0.015) 4px);
     pointer-events: none;
     z-index: 999;
   }
 
   /* === NAVBAR === */
   nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 1.2rem 4rem;
     background: rgba(10,14,23,0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-
-  .logo {
-    font-family: var(--mono);
-    font-size: 1.1rem;
-    color: var(--accent);
-    letter-spacing: 2px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .logo img {
-    width: 40px;
-    height: auto;
-    display: block;
-    object-fit: contain;
-  }
-
+  .logo { font-family: var(--mono); font-size: 1.1rem; color: var(--accent); letter-spacing: 2px; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+  .logo img { width: 40px; height: auto; display: block; object-fit: contain; }
   .logo-bracket { color: var(--muted); }
   .logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: blink 1.5s infinite; }
-
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    position: relative;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s;
-  }
-
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { width: 100%; }
-
-  .nav-cta {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    padding: 0.6rem 1.4rem;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    background: transparent;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
-
-  .nav-cta:hover {
-    background: var(--accent);
-    color: var(--bg);
-  }
+  .nav-cta { font-family: var(--mono); font-size: 0.75rem; padding: 0.6rem 1.4rem; border: 1px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; text-decoration: none; }
+  .nav-cta:hover { background: var(--accent); color: var(--bg); }
 
   /* === HERO === */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 8rem 4rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--accent3);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .hero-tag::before {
-    content: '';
-    width: 30px;
-    height: 1px;
-    background: var(--accent3);
-  }
-
-  h1 {
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -2px;
-    margin-bottom: 1.5rem;
-  }
-
-  h1 .highlight {
-    color: var(--accent);
-    position: relative;
-    display: inline-block;
-  }
-
-  h1 .highlight::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--accent);
-    opacity: 0.4;
-  }
-
-  .hero-desc {
-    font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
-    font-family: var(--mono);
-    font-size: 0.85rem;
-  }
-
-  .hero-btns {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    padding: 1rem 2rem;
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.2s;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
-  }
-
-  .btn-primary:hover {
-    background: white;
-    transform: translateY(-2px);
-  }
-
-  .btn-outline {
-    padding: 1rem 2rem;
-    background: transparent;
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border: 1px solid var(--border);
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.2s;
-  }
-
-  .btn-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* Hero visual */
-  .hero-visual {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .pc-diagram {
-    width: 100%;
-    max-width: 480px;
-    position: relative;
-  }
-
-  .terminal-window {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    box-shadow: 0 0 60px rgba(0,229,255,0.1), 0 0 120px rgba(0,229,255,0.05);
-  }
-
-  .terminal-bar {
-    background: var(--bg2);
-    padding: 0.6rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 4rem 4rem; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+  .hero-tag { font-family: var(--mono); font-size: 0.7rem; color: var(--accent3); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+  .hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--accent3); }
+  h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 1.5rem; }
+  h1 .highlight { color: var(--accent); position: relative; display: inline-block; }
+  h1 .highlight::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 3px; background: var(--accent); opacity: 0.4; }
+  .hero-desc { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; font-family: var(--mono); font-size: 0.85rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { padding: 1rem 2rem; background: var(--accent); color: var(--bg); font-family: var(--mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%); }
+  .btn-primary:hover { background: white; transform: translateY(-2px); }
+  .btn-outline { padding: 1rem 2rem; background: transparent; color: var(--text); font-family: var(--mono); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; border: 1px solid var(--border); cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+  .terminal-window { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; font-family: var(--mono); font-size: 0.75rem; box-shadow: 0 0 60px rgba(0,229,255,0.1), 0 0 120px rgba(0,229,255,0.05); }
+  .terminal-bar { background: var(--bg2); padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); }
   .t-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .t-red { background: #ff5f57; }
-  .t-yellow { background: #febc2e; }
-  .t-green { background: #28c840; }
-
-  .terminal-title {
-    color: var(--muted);
-    font-size: 0.65rem;
-    margin-left: auto;
-    margin-right: auto;
-    letter-spacing: 1px;
-  }
-
-  .terminal-body {
-    padding: 1.5rem;
-    line-height: 2;
-  }
-
+  .t-red { background: #ff5f57; } .t-yellow { background: #febc2e; } .t-green { background: #28c840; }
+  .terminal-title { color: var(--muted); font-size: 0.65rem; margin-left: auto; margin-right: auto; letter-spacing: 1px; }
+  .terminal-body { padding: 1.5rem; line-height: 2; }
   .t-line { display: flex; gap: 0.5rem; }
-  .t-prompt { color: var(--accent3); }
-  .t-cmd { color: var(--text); }
-  .t-out { color: var(--muted); padding-left: 1rem; }
-  .t-ok { color: var(--accent3); }
-  .t-error { color: #ff6b6b; }
-  .t-info { color: var(--accent); }
-  .t-cursor {
-    display: inline-block;
-    width: 8px;
-    height: 14px;
-    background: var(--accent);
-    vertical-align: middle;
-    animation: blink 0.8s infinite;
-  }
-
-  /* Background effects */
-  .bg-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-  }
-
-  .bg-glow {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
-    top: -100px;
-    right: -100px;
-    pointer-events: none;
-  }
-
-  .bg-glow2 {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,107,53,0.05) 0%, transparent 70%);
-    bottom: 50px;
-    left: -50px;
-    pointer-events: none;
-  }
-
-  /* Hero stats */
-  .hero-stats {
-    display: flex;
-    gap: 2rem;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  }
-
+  .t-prompt { color: var(--accent3); } .t-cmd { color: var(--text); } .t-out { color: var(--muted); padding-left: 1rem; }
+  .t-ok { color: var(--accent3); } .t-error { color: #ff6b6b; } .t-info { color: var(--accent); }
+  .t-cursor { display: inline-block; width: 8px; height: 14px; background: var(--accent); vertical-align: middle; animation: blink 0.8s infinite; }
+  .bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; }
+  .bg-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%); top: -100px; right: -100px; pointer-events: none; }
+  .bg-glow2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,107,53,0.05) 0%, transparent 70%); bottom: 50px; left: -50px; pointer-events: none; }
+  .hero-stats { display: flex; gap: 2rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
   .stat { text-align: center; }
-  .stat-num {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--accent);
-    font-family: var(--mono);
-    display: block;
-  }
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+  .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); font-family: var(--mono); display: block; }
+  .stat-label { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
 
-  /* === SECTIONS GENERAL === */
-  section {
-    padding: 6rem 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .section-label::before {
-    content: '//';
-    color: var(--muted);
-  }
-
-  h2 {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-  }
-
-  .section-sub {
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.8;
-    max-width: 500px;
-    margin-bottom: 3.5rem;
-  }
+  /* === SECTIONS === */
+  section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; position: relative; }
+  .section-label { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-label::before { content: '//'; color: var(--muted); }
+  h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 1rem; }
+  .section-sub { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); line-height: 1.8; max-width: 500px; margin-bottom: 3.5rem; }
 
   /* === SERVICES === */
-  #servicios {
-    background: var(--bg2);
-    max-width: 100%;
-    padding: 6rem 0;
-  }
-
-  .services-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 4rem;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    margin-top: 3rem;
-  }
-
-  .service-card {
-    background: var(--panel);
-    padding: 2.5rem;
-    transition: background 0.3s;
-    position: relative;
-    overflow: hidden;
-    cursor: default;
-  }
-
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 0;
-    background: var(--accent);
-    transition: height 0.4s;
-  }
-
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem; }
+  .service-card { background: var(--panel); padding: 2.5rem; transition: background 0.3s; position: relative; overflow: hidden; cursor: default; }
+  .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--accent); transition: height 0.4s; }
   .service-card:hover::before { height: 100%; }
   .service-card:hover { background: #161d2e; }
-
-  .service-num {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 2px;
-    margin-bottom: 1.5rem;
-  }
-
-  .service-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  .service-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    letter-spacing: -0.5px;
-  }
-
-  .service-desc {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .service-price {
-    margin-top: 1.5rem;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-  }
+  .service-num { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 1.5rem; }
+  .service-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .service-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; letter-spacing: -0.5px; }
+  .service-desc { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); line-height: 1.8; }
+  .service-price { margin-top: 1.5rem; font-family: var(--mono); font-size: 0.75rem; color: var(--accent); }
 
   /* === ABOUT === */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .about-code {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    line-height: 2;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .code-kw { color: #ff79c6; }
-  .code-var { color: var(--accent); }
-  .code-str { color: var(--accent3); }
-  .code-comment { color: var(--muted); }
-  .code-fn { color: #ffb86c; }
-  .code-num { color: var(--accent2); }
-
-  .about-features {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .feature-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.2rem;
-    border: 1px solid var(--border);
-    transition: border-color 0.3s, background 0.3s;
-  }
-
-  .feature-row:hover {
-    border-color: var(--accent);
-    background: rgba(0,229,255,0.03);
-  }
-
-  .feature-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-  }
-
-  .feature-text h4 {
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-bottom: 0.2rem;
-  }
-
-  .feature-text p {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    color: var(--muted);
-  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-code { background: var(--panel); border: 1px solid var(--border); padding: 2rem; font-family: var(--mono); font-size: 0.75rem; line-height: 2; position: relative; overflow: hidden; }
+  .code-kw { color: #ff79c6; } .code-var { color: var(--accent); } .code-str { color: var(--accent3); } .code-comment { color: var(--muted); } .code-fn { color: #ffb86c; } .code-num { color: var(--accent2); }
+  .about-features { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+  .feature-row { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; border: 1px solid var(--border); transition: border-color 0.3s, background 0.3s; }
+  .feature-row:hover { border-color: var(--accent); background: rgba(0,229,255,0.03); }
+  .feature-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .feature-text h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
+  .feature-text p { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
 
   /* === PRECIOS === */
-  #precios {
-    background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
-    max-width: 100%;
-    padding: 6rem 0;
-  }
-
-  .precios-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 4rem;
-  }
-
-  .price-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .price-card {
-    border: 1px solid var(--border);
-    padding: 2.5rem;
-    background: var(--panel);
-    position: relative;
-    transition: transform 0.3s, border-color 0.3s;
-  }
-
-  .price-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
-  }
-
-  .price-card.featured {
-    border-color: var(--accent);
-    background: linear-gradient(135deg, rgba(0,229,255,0.07) 0%, var(--panel) 100%);
-  }
-
-  .price-card.featured::before {
-    content: 'MÁS POPULAR';
-    position: absolute;
-    top: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-    padding: 0.3rem 1rem;
-    font-weight: 700;
-  }
-
-  .price-plan {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .price-amount {
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-
-  .price-unit {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-    margin-bottom: 2rem;
-  }
-
-  .price-features {
-    list-style: none;
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-
-  .price-features li {
-    font-family: var(--mono);
-    font-size: 0.73rem;
-    color: var(--muted);
-    display: flex;
-    gap: 0.7rem;
-    align-items: flex-start;
-  }
-
-  .price-features li::before {
-    content: '→';
-    color: var(--accent);
-    flex-shrink: 0;
-  }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .price-card { border: 1px solid var(--border); padding: 2.5rem; background: var(--panel); position: relative; transition: transform 0.3s, border-color 0.3s; }
+  .price-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+  .price-card.featured { border-color: var(--accent); background: linear-gradient(135deg, rgba(0,229,255,0.07) 0%, var(--panel) 100%); }
+  .price-card.featured::before { content: 'MÁS POPULAR'; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--bg); font-family: var(--mono); font-size: 0.6rem; letter-spacing: 2px; padding: 0.3rem 1rem; font-weight: 700; }
+  .price-plan { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
+  .price-amount { font-size: 3rem; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 0.3rem; }
+  .price-unit { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-bottom: 2rem; }
+  .price-features { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .price-features li { font-family: var(--mono); font-size: 0.73rem; color: var(--muted); display: flex; gap: 0.7rem; align-items: flex-start; }
+  .price-features li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
 
   /* === PROCESO === */
-  .process-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-top: 3rem;
-    position: relative;
-  }
-
-  .process-steps::before {
-    content: '';
-    position: absolute;
-    left: 24px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: var(--border);
-  }
-
-  .step {
-    display: flex;
-    gap: 2rem;
-    padding: 2rem 0 2rem 0;
-    position: relative;
-  }
-
-  .step-num {
-    width: 50px;
-    height: 50px;
-    border: 1px solid var(--border);
-    background: var(--panel);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s;
-  }
-
-  .step:hover .step-num {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
-
-  .step-content h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .step-content p {
-    font-family: var(--mono);
-    font-size: 0.73rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .step-time {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--accent2);
-    margin-top: 0.5rem;
-  }
+  .process-steps { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; position: relative; }
+  .process-steps::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .step { display: flex; gap: 2rem; padding: 2rem 0; position: relative; }
+  .step-num { width: 50px; height: 50px; border: 1px solid var(--border); background: var(--panel); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.75rem; color: var(--accent); flex-shrink: 0; position: relative; z-index: 1; transition: all 0.3s; }
+  .step:hover .step-num { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .step-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .step-content p { font-family: var(--mono); font-size: 0.73rem; color: var(--muted); line-height: 1.8; }
+  .step-time { font-family: var(--mono); font-size: 0.65rem; color: var(--accent2); margin-top: 0.5rem; }
 
   /* === CONTACTO === */
-  #contacto {
-    background: var(--bg2);
-    max-width: 100%;
-    border-top: 1px solid var(--border);
-    padding: 6rem 0;
-  }
-
-  .contacto-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-  }
-
-  .contact-info-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.2rem 0;
-    border-bottom: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: 0.8rem;
-  }
-
-  .contact-info-item .ci-label {
-    color: var(--muted);
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    min-width: 80px;
-  }
-
-  .contact-info-item .ci-value {
-    color: var(--text);
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .form-group label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 0.9rem 1rem;
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
-    appearance: none;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    border-color: var(--accent);
-  }
-
+  .contact-info-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 0.8rem; }
+  .contact-info-item .ci-label { color: var(--muted); font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; min-width: 80px; }
+  .contact-info-item .ci-value { color: var(--text); }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .form-group input, .form-group textarea, .form-group select { background: var(--panel); border: 1px solid var(--border); color: var(--text); padding: 0.9rem 1rem; font-family: var(--mono); font-size: 0.8rem; outline: none; transition: border-color 0.2s; width: 100%; appearance: none; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
   .form-group textarea { resize: vertical; min-height: 100px; }
-
   .form-group select option { background: var(--panel); }
 
   /* === FOOTER === */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--mono);
-    font-size: 0.65rem;
+  footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; align-items: center; justify-content: space-between; font-family: var(--mono); font-size: 0.65rem; color: var(--muted); max-width: 100%; }
+  .footer-credits { display: flex; align-items: center; gap: 0.5rem; }
+  .footer-credits .badge { background: var(--accent); color: var(--bg); padding: 0.2rem 0.5rem; font-size: 0.55rem; letter-spacing: 1px; font-weight: 700; }
+  .footer-links { display: flex; gap: 2rem; align-items: center; }
+  .footer-link { color: var(--muted); text-decoration: none; transition: color 0.2s; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 1px; cursor: pointer; }
+  .footer-link:hover { color: var(--accent); }
+
+  /* === SOCIAL ICONS === */
+  .social-links { display: flex; gap: 0.8rem; align-items: center; }
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
     color: var(--muted);
-    max-width: 100%;
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
   }
+  .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.07); }
+  .social-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
-  .footer-credits {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  /* === LEGAL MODAL === */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(10,14,23,0.92);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
   }
-
-  .footer-credits .badge {
-    background: var(--accent);
-    color: var(--bg);
-    padding: 0.2rem 0.5rem;
-    font-size: 0.55rem;
-    letter-spacing: 1px;
-    font-weight: 700;
+  .modal-overlay.active { opacity: 1; pointer-events: all; }
+  .modal-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    max-width: 760px; width: 100%;
+    max-height: 85vh;
+    display: flex; flex-direction: column;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+    box-shadow: 0 0 80px rgba(0,229,255,0.08);
   }
-
-  /* === ANIMATIONS === */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  .modal-overlay.active .modal-box { transform: translateY(0); }
+  .modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg2);
+    flex-shrink: 0;
   }
-
-  @keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 1px); }
-    40% { transform: translate(2px, -1px); }
-    60% { transform: translate(-1px, 2px); }
-    80% { transform: translate(1px, -2px); }
-    100% { transform: translate(0); }
+  .modal-title { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; }
+  .modal-close {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
   }
+  .modal-close:hover { border-color: var(--accent2); color: var(--accent2); }
+  .modal-body { padding: 2.5rem; overflow-y: auto; flex: 1; }
+  .modal-body::-webkit-scrollbar { width: 4px; }
+  .modal-body::-webkit-scrollbar-track { background: var(--bg); }
+  .modal-body::-webkit-scrollbar-thumb { background: var(--border); }
+  .modal-body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  .legal-section { margin-bottom: 2rem; }
+  .legal-section h3 { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .legal-section p { font-family: var(--mono); font-size: 0.73rem; color: var(--muted); line-height: 1.9; margin-bottom: 0.6rem; }
+  .legal-section ul { list-style: none; padding: 0; }
+  .legal-section ul li { font-family: var(--mono); font-size: 0.73rem; color: var(--muted); line-height: 1.9; padding-left: 1rem; position: relative; }
+  .legal-section ul li::before { content: '→'; color: var(--accent); position: absolute; left: 0; }
 
-  .hero-left > * {
-    animation: fadeUp 0.8s ease both;
-  }
-
+  /* === MISC === */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-left > * { animation: fadeUp 0.8s ease both; }
   .hero-left > :nth-child(1) { animation-delay: 0.1s; }
   .hero-left > :nth-child(2) { animation-delay: 0.2s; }
   .hero-left > :nth-child(3) { animation-delay: 0.35s; }
   .hero-left > :nth-child(4) { animation-delay: 0.5s; }
   .hero-left > :nth-child(5) { animation-delay: 0.65s; }
-
   .terminal-window { animation: fadeUp 0.8s ease 0.4s both; }
-
-  /* BADGE */
-  .tech-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: rgba(127,255,107,0.08);
-    border: 1px solid rgba(127,255,107,0.3);
-    padding: 0.3rem 0.8rem;
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--accent3);
-    letter-spacing: 1px;
-  }
-
-  /* responsive */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    #hero { padding: 7rem 1.5rem 3rem; }
-    .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-    section { padding: 4rem 1.5rem; }
-    .services-inner, .precios-inner, .contacto-inner { padding: 0 1.5rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .price-grid { grid-template-columns: 1fr; }
-    .contacto-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .about-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
-  }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-  /* Typing animation */
-  .typing-text {
-    overflow: hidden;
-    border-right: 2px solid var(--accent);
-    white-space: nowrap;
-    animation: typing 3s steps(40, end) 1s both, blink-caret 0.75s step-end infinite;
-    width: 0;
-    animation-fill-mode: forwards;
-  }
-
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--accent); }
-  }
-
-  /* Status bar */
-  .status-bar {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    padding: 0.8rem 4rem;
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-  }
-
+  .tech-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(127,255,107,0.08); border: 1px solid rgba(127,255,107,0.3); padding: 0.3rem 0.8rem; font-family: var(--mono); font-size: 0.65rem; color: var(--accent3); letter-spacing: 1px; }
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); max-width: 1200px; margin: 0 auto; }
+  .highlight-box { border-left: 3px solid var(--accent); padding: 1rem 1.5rem; background: rgba(0,229,255,0.04); font-family: var(--mono); font-size: 0.8rem; color: var(--text); margin: 2rem 0; line-height: 1.8; }
+  .status-bar { display: flex; gap: 1.5rem; align-items: center; font-family: var(--mono); font-size: 0.65rem; color: var(--muted); padding: 0.8rem 4rem; background: var(--bg2); border-bottom: 1px solid var(--border); overflow: hidden; }
   .status-item { display: flex; align-items: center; gap: 0.4rem; }
   .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent3); animation: blink 2s infinite; }
   .status-dot.orange { background: var(--accent2); animation-delay: 0.5s; }
   .status-dot.blue { background: var(--accent); animation-delay: 1s; }
+  .marquee-text { flex: 1; overflow: hidden; position: relative; mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent); }
+  .marquee-inner { display: inline-flex; gap: 4rem; animation: marquee 25s linear infinite; white-space: nowrap; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  .marquee-text {
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  /* === HAMBURGER === */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 0.4rem;
+    background: none;
+    border: none;
+    z-index: 200;
   }
-
-  .marquee-inner {
-    display: inline-flex;
-    gap: 4rem;
-    animation: marquee 25s linear infinite;
-    white-space: nowrap;
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+    transition: all 0.3s;
+    transform-origin: center;
   }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+  /* Mobile drawer */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,14,23,0.98);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
   }
-
-  /* Section divider */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* Highlight box */
-  .highlight-box {
-    border-left: 3px solid var(--accent);
-    padding: 1rem 1.5rem;
-    background: rgba(0,229,255,0.04);
+  .mobile-menu.open { opacity: 1; pointer-events: all; }
+  .mobile-menu a {
     font-family: var(--mono);
-    font-size: 0.8rem;
-    color: var(--text);
-    margin: 2rem 0;
-    line-height: 1.8;
+    font-size: 1.4rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
   }
+  .mobile-menu a:hover { color: var(--accent); }
+  .mobile-menu .mobile-cta {
+    margin-top: 1rem;
+    padding: 1rem 2.5rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+  .mobile-menu .mobile-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  /* ===================== TABLET (601px – 1024px) ===================== */
+  @media (min-width: 601px) and (max-width: 1024px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.7rem; }
+
+    .status-bar { padding: 0.8rem 2rem; }
+    .status-item:first-child { display: none; }
+
+    #hero { padding: 7rem 2rem 4rem; }
+    .hero-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    h1 { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -1px; }
+
+    .terminal-body { padding: 1rem; font-size: 0.65rem; line-height: 1.8; }
+    .t-cmd { font-size: 0.6rem; }
+
+    section { padding: 4rem 2rem; }
+
+    /* Services: 2 columns on tablet */
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    [style*="max-width:1200px"][style*="padding: 6rem 4rem"] { padding: 4rem 2rem 0 !important; }
+    [style*="max-width:1200px"][style*="padding: 0 4rem 6rem"] { padding: 0 2rem 4rem !important; }
+    [style*="max-width:1200px"][style*="padding:0 4rem"] { padding: 0 2rem !important; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+    /* Proceso: single column on tablet */
+    #proceso [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+    .price-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Contacto: stack on tablet */
+    #contacto > div { grid-template-columns: 1fr !important; gap: 3rem !important; padding: 0 2rem !important; }
+
+    footer { padding: 1.5rem 2rem; flex-wrap: wrap; gap: 1rem; }
+    .footer-credits { font-size: 0.6rem; }
+
+    .modal-box { max-width: 95vw; }
+    .modal-body { padding: 1.5rem; }
+  }
+
+  /* ===================== MOBILE (≤ 600px) ===================== */
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+
+    .status-bar { padding: 0.6rem 1rem; gap: 0.8rem; }
+    .status-item { display: none; }
+    .status-item:last-child { display: flex; }
+
+    #hero { padding: 6rem 1.2rem 3rem; min-height: auto; }
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    h1 { font-size: clamp(2rem, 9vw, 2.8rem); letter-spacing: -1px; }
+    .hero-desc { font-size: 0.78rem; }
+    .hero-btns { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; padding: 0.9rem 1.5rem; width: 100%; }
+    .hero-stats { gap: 1rem; flex-wrap: wrap; justify-content: space-between; }
+    .stat-num { font-size: 1.4rem; }
+
+    /* Terminal: smaller on mobile */
+    .terminal-body { padding: 1rem; line-height: 1.7; font-size: 0.65rem; overflow-x: auto; }
+    .t-cmd { white-space: nowrap; }
+
+    section { padding: 3rem 1.2rem; }
+    h2 { font-size: clamp(1.7rem, 7vw, 2.5rem); letter-spacing: -1px; }
+    .section-sub { font-size: 0.75rem; margin-bottom: 2rem; }
+
+    /* Services: 1 column */
+    [style*="padding: 6rem 4rem 0"] { padding: 3rem 1.2rem 0 !important; }
+    [style*="padding: 0 4rem 6rem"] { padding: 0 1.2rem 3rem !important; }
+    [style*="padding:0 4rem"] { padding: 0 1.2rem !important; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 1.8rem; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-code { font-size: 0.65rem; padding: 1.2rem; overflow-x: auto; }
+    .highlight-box { font-size: 0.75rem; }
+
+    /* Proceso: 1 column */
+    #proceso [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 0 !important; }
+    #proceso > div > div:last-child { display: none; } /* hide log panel on mobile */
+
+    .price-grid { grid-template-columns: 1fr; }
+    .price-card { padding: 2rem 1.5rem; }
+
+    /* Contacto: stack */
+    #contacto > div { grid-template-columns: 1fr !important; gap: 2.5rem !important; padding: 0 1.2rem !important; }
+    #contacto { padding: 3rem 0 !important; }
+
+    .contact-info-item { font-size: 0.72rem; flex-wrap: wrap; gap: 0.5rem; }
+
+    footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 1.2rem; }
+    .footer-credits { flex-wrap: wrap; justify-content: center; font-size: 0.6rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+    .social-links { justify-content: center; }
+
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal-box { max-width: 100%; max-height: 92vh; border-radius: 0; border-bottom: none; }
+    .modal-body { padding: 1.2rem; }
+    .modal-header { padding: 1rem 1.2rem; }
+
+    /* Status bar: only marquee */
+    .marquee-text { flex: 1; }
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 </style>
 </head>
 <body>
 
+<!-- LEGAL MODAL -->
+<div class="modal-overlay" id="legalModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title">// Aviso Legal · DesmontaPro</span>
+      <button class="modal-close" onclick="closeModal('legalModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="legal-section">
+        <h3>01 · Titular del sitio web</h3>
+        <p>En cumplimiento con el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se informa que el titular de este sitio web es:</p>
+        <p><strong style="color:var(--text)">Nombre:</strong> Alvaro Caballero Rodríguez<br>
+        <strong style="color:var(--text)">Actividad:</strong> Servicio Técnico Informático — DesmontaPro<br>
+        <strong style="color:var(--text)">Domicilio:</strong> Villanueva de la Serena, Badajoz, España<br>
+        <strong style="color:var(--text)">Email:</strong> info@desmontapro.es</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>02 · Condiciones de uso</h3>
+        <p>El acceso a este sitio web es gratuito y no exige registro previo. El uso de los contenidos de este sitio web queda sujeto a las siguientes condiciones:</p>
+        <ul>
+          <li>El uso del sitio debe ajustarse a la ley, la moral y el orden público.</li>
+          <li>Queda prohibida la reproducción total o parcial de los contenidos sin autorización expresa.</li>
+          <li>El titular no se responsabiliza de los daños derivados del uso indebido del sitio.</li>
+          <li>El acceso implica la aceptación íntegra de las presentes condiciones.</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h3>03 · Propiedad intelectual</h3>
+        <p>Todos los contenidos de este sitio web (textos, imágenes, diseño gráfico, código fuente, logotipos y marcas) son propiedad exclusiva de DesmontaPro o se utilizan con autorización de sus titulares. Queda prohibida su reproducción, distribución o comunicación pública sin consentimiento previo por escrito.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>04 · Protección de datos (RGPD)</h3>
+        <p>Los datos personales facilitados a través del formulario de contacto serán tratados de conformidad con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).</p>
+        <ul>
+          <li><strong style="color:var(--text)">Responsable:</strong> Alvaro Caballero Rodríguez (DesmontaPro)</li>
+          <li><strong style="color:var(--text)">Finalidad:</strong> Gestión de consultas y presupuestos técnicos</li>
+          <li><strong style="color:var(--text)">Base legal:</strong> Consentimiento del interesado</li>
+          <li><strong style="color:var(--text)">Conservación:</strong> Hasta que se revoque el consentimiento o finalice la relación comercial</li>
+          <li><strong style="color:var(--text)">Cesión:</strong> No se ceden datos a terceros salvo obligación legal</li>
+          <li><strong style="color:var(--text)">Derechos:</strong> Acceso, rectificación, supresión, oposición y portabilidad escribiendo a info@desmontapro.es</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h3>05 · Política de cookies</h3>
+        <p>Este sitio web no utiliza cookies de terceros ni herramientas de seguimiento externas. Únicamente se emplean cookies técnicas estrictamente necesarias para el correcto funcionamiento del sitio, exentas del consentimiento del usuario según la normativa vigente.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>06 · Garantías del servicio</h3>
+        <p>DesmontaPro ofrece garantía de 6 meses en mano de obra sobre las reparaciones realizadas. Las piezas sustituidas están sujetas a la garantía del fabricante. El diagnóstico es gratuito cuando se acepta y realiza la reparación correspondiente.</p>
+        <ul>
+          <li>La garantía cubre exclusivamente el trabajo realizado, no daños derivados de mal uso posterior.</li>
+          <li>No se accede ni se retienen datos personales almacenados en los equipos reparados.</li>
+          <li>Los presupuestos se emiten antes de iniciar cualquier trabajo y requieren aceptación explícita.</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h3>07 · Legislación aplicable</h3>
+        <p>El presente aviso legal se rige por la legislación española. Para cualquier controversia derivada del uso de este sitio web, las partes se someten a la jurisdicción de los Juzgados y Tribunales de Badajoz, con renuncia expresa a cualquier otro fuero que pudiera corresponderles.</p>
+        <p style="margin-top:1rem; font-size:0.65rem;">Última actualización: enero 2025</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- STATUS BAR -->
 <div class="status-bar">
-  <div class="status-item">
-    <span class="status-dot"></span>
-    <span>SISTEMA OPERATIVO</span>
-  </div>
-  <div class="status-item">
-    <span class="status-dot orange"></span>
-    <span>VILLANUEVA DE LA SERENA, BADAJOZ</span>
-  </div>
+  <div class="status-item"><span class="status-dot"></span><span>SISTEMA OPERATIVO</span></div>
+  <div class="status-item"><span class="status-dot orange"></span><span>VILLANUEVA DE LA SERENA, BADAJOZ</span></div>
   <div class="marquee-text">
     <div class="marquee-inner">
       <span>⚡ DIAGNÓSTICO GRATUITO CON REPARACIÓN</span>
@@ -1016,10 +521,7 @@
       <span>🛡️ GARANTÍA 6 MESES EN MANO DE OBRA</span>
     </div>
   </div>
-  <div class="status-item">
-    <span class="status-dot blue"></span>
-    <span>v1.0.0</span>
-  </div>
+  <div class="status-item"><span class="status-dot blue"></span><span>v1.0.0</span></div>
 </div>
 
 <!-- NAV -->
@@ -1037,57 +539,64 @@
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <a href="#contacto" class="nav-cta">Pedir presupuesto</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servicios" class="mobile-nav-link">Servicios</a>
+  <a href="#nosotros" class="mobile-nav-link">Nosotros</a>
+  <a href="#proceso" class="mobile-nav-link">Proceso</a>
+  <a href="#precios" class="mobile-nav-link">Precios</a>
+  <a href="#contacto" class="mobile-nav-link">Contacto</a>
+  <a href="#contacto" class="mobile-nav-link mobile-cta">Pedir presupuesto →</a>
+  <div class="mobile-social">
+    <a href="https://instagram.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://tiktok.com/@desmontapro" target="_blank" rel="noopener" class="social-btn" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+    </a>
+    <a href="https://facebook.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" class="social-btn" title="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
   <div class="bg-grid"></div>
   <div class="bg-glow"></div>
   <div class="bg-glow2"></div>
-
   <div class="hero-grid">
     <div class="hero-left">
       <div class="hero-tag">Servicio técnico informático · Villanueva de la Serena</div>
-
       <h1>Tu equipo<br>merece un<br><span class="highlight">técnico de verdad</span></h1>
-
       <p class="hero-desc">
         // Reparamos, montamos y optimizamos<br>
         // ordenadores con rapidez y transparencia.<br>
         // Sin sorpresas en el presupuesto.
       </p>
-
       <div class="hero-btns">
         <a href="#contacto" class="btn-primary">Solicitar diagnóstico</a>
         <a href="#servicios" class="btn-outline">Ver servicios</a>
       </div>
-
       <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">48h</span>
-          <span class="stat-label">Reparación</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">6m</span>
-          <span class="stat-label">Garantía</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">0€</span>
-          <span class="stat-label">Diagnóstico*</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">24/7</span>
-          <span class="stat-label">WhatsApp</span>
-        </div>
+        <div class="stat"><span class="stat-num">48h</span><span class="stat-label">Reparación</span></div>
+        <div class="stat"><span class="stat-num">6m</span><span class="stat-label">Garantía</span></div>
+        <div class="stat"><span class="stat-num">0€</span><span class="stat-label">Diagnóstico*</span></div>
+        <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">WhatsApp</span></div>
       </div>
     </div>
-
     <div class="hero-visual">
       <div class="terminal-window">
         <div class="terminal-bar">
-          <span class="t-dot t-red"></span>
-          <span class="t-dot t-yellow"></span>
-          <span class="t-dot t-green"></span>
+          <span class="t-dot t-red"></span><span class="t-dot t-yellow"></span><span class="t-dot t-green"></span>
           <span class="terminal-title">desmontapro ~ diagnóstico</span>
         </div>
         <div class="terminal-body">
@@ -1110,7 +619,7 @@
 
 <!-- SERVICIOS -->
 <div id="servicios" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-  <div class="services-inner" style="max-width:1200px; margin:0 auto; padding: 6rem 4rem 0;">
+  <div style="max-width:1200px; margin:0 auto; padding: 6rem 4rem 0;">
     <div class="section-label">Servicios</div>
     <h2>Todo lo que<br>necesita tu equipo</h2>
     <p class="section-sub">// Desde una simple limpieza hasta el montaje completo de un PC gaming. Sin intermediarios, sin talleres externos.</p>
@@ -1170,43 +679,14 @@
       <div class="section-label">Quién soy</div>
       <h2>Un técnico que<br>entiende tu problema</h2>
       <p class="section-sub">// Formación en SMR (Sistemas Microinformáticos y Redes). Prácticas reales en talleres. Aprendizaje constante.</p>
-
-      <div class="highlight-box">
-        "No soy una gran cadena. Soy el técnico que coge el teléfono, te explica qué tiene tu equipo y te dice la verdad antes de cobrar nada."
-      </div>
-
+      <div class="highlight-box">"No soy una gran cadena. Soy el técnico que coge el teléfono, te explica qué tiene tu equipo y te dice la verdad antes de cobrar nada."</div>
       <div class="about-features">
-        <div class="feature-row">
-          <span class="feature-icon">🎓</span>
-          <div class="feature-text">
-            <h4>FP en Informática (SMR)</h4>
-            <p>Formación en hardware, redes, sistemas y atención al cliente</p>
-          </div>
-        </div>
-        <div class="feature-row">
-          <span class="feature-icon">⚡</span>
-          <div class="feature-text">
-            <h4>Diagnóstico honesto</h4>
-            <p>Presupuesto antes de tocar nada. Sin sorpresas al recoger</p>
-          </div>
-        </div>
-        <div class="feature-row">
-          <span class="feature-icon">🔐</span>
-          <div class="feature-text">
-            <h4>Tus datos, seguros</h4>
-            <p>Cumplimiento RGPD. Nunca accedemos a tu información personal</p>
-          </div>
-        </div>
-        <div class="feature-row">
-          <span class="feature-icon">📍</span>
-          <div class="feature-text">
-            <h4>Local y cercano</h4>
-            <p>Villanueva de la Serena · Atención también a domicilio</p>
-          </div>
-        </div>
+        <div class="feature-row"><span class="feature-icon">🎓</span><div class="feature-text"><h4>FP en Informática (SMR)</h4><p>Formación en hardware, redes, sistemas y atención al cliente</p></div></div>
+        <div class="feature-row"><span class="feature-icon">⚡</span><div class="feature-text"><h4>Diagnóstico honesto</h4><p>Presupuesto antes de tocar nada. Sin sorpresas al recoger</p></div></div>
+        <div class="feature-row"><span class="feature-icon">🔐</span><div class="feature-text"><h4>Tus datos, seguros</h4><p>Cumplimiento RGPD. Nunca accedemos a tu información personal</p></div></div>
+        <div class="feature-row"><span class="feature-icon">📍</span><div class="feature-text"><h4>Local y cercano</h4><p>Villanueva de la Serena · Atención también a domicilio</p></div></div>
       </div>
     </div>
-
     <div class="about-code">
       <div style="color:var(--muted);margin-bottom:1rem;font-size:0.65rem;letter-spacing:2px;">DESMONTAPRO · perfil_tecnico.js</div>
 <span class="code-kw">const</span> <span class="code-var">tecnico</span> = {<br>
@@ -1243,98 +723,30 @@
   <div class="section-label">Cómo funciona</div>
   <h2>Del problema<br>a la solución</h2>
   <p class="section-sub">// Proceso claro y transparente. Siempre sabes en qué fase está tu equipo.</p>
-
   <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items:start;">
     <div class="process-steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <h3>Contactas conmigo</h3>
-          <p>Por WhatsApp, email o en tienda. Me cuentas qué le pasa al equipo y acordamos cuándo traerlo.</p>
-          <div class="step-time">⏱ 5 minutos</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-content">
-          <h3>Diagnóstico gratuito</h3>
-          <p>Analizo el equipo en profundidad. Si decides no reparar, no pagas nada. Si reparas, el diagnóstico es gratis.</p>
-          <div class="step-time">⏱ 24-48h</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-content">
-          <h3>Presupuesto sin trampa</h3>
-          <p>Te envío el presupuesto detallado. Piezas + mano de obra. Sin costes ocultos. Tú decides si seguir o no.</p>
-          <div class="step-time">⏱ Sin compromiso</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-content">
-          <h3>Reparación y entrega</h3>
-          <p>Reparo con piezas de calidad. Pruebas finales de estabilidad. Te explico qué se hizo y cómo cuidar el equipo.</p>
-          <div class="step-time">⏱ 24-72h según avería</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">05</div>
-        <div class="step-content">
-          <h3>Garantía y seguimiento</h3>
-          <p>6 meses de garantía en mano de obra. Si algo falla relacionado con la reparación, vuelve sin coste.</p>
-          <div class="step-time">⏱ 6 meses cubierto</div>
-        </div>
-      </div>
+      <div class="step"><div class="step-num">01</div><div class="step-content"><h3>Contactas conmigo</h3><p>Por WhatsApp, email o en tienda. Me cuentas qué le pasa al equipo y acordamos cuándo traerlo.</p><div class="step-time">⏱ 5 minutos</div></div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-content"><h3>Diagnóstico gratuito</h3><p>Analizo el equipo en profundidad. Si decides no reparar, no pagas nada. Si reparas, el diagnóstico es gratis.</p><div class="step-time">⏱ 24-48h</div></div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-content"><h3>Presupuesto sin trampa</h3><p>Te envío el presupuesto detallado. Piezas + mano de obra. Sin costes ocultos. Tú decides si seguir o no.</p><div class="step-time">⏱ Sin compromiso</div></div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-content"><h3>Reparación y entrega</h3><p>Reparo con piezas de calidad. Pruebas finales de estabilidad. Te explico qué se hizo y cómo cuidar el equipo.</p><div class="step-time">⏱ 24-72h según avería</div></div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-content"><h3>Garantía y seguimiento</h3><p>6 meses de garantía en mano de obra. Si algo falla relacionado con la reparación, vuelve sin coste.</p><div class="step-time">⏱ 6 meses cubierto</div></div></div>
     </div>
-
     <div>
       <div style="background:var(--panel); border:1px solid var(--border); padding:2rem; font-family:var(--mono); font-size:0.75rem; line-height:2.2;">
         <div style="color:var(--muted);margin-bottom:1.5rem;font-size:0.65rem;letter-spacing:2px;">TRACKING · estado_reparacion.log</div>
         <div style="display:flex; flex-direction:column; gap:0.5rem;">
-          <div style="display:flex; gap:1rem; align-items:center;">
-            <span style="color:var(--accent3);">✓</span>
-            <span style="color:var(--muted); font-size:0.65rem;">10:23:01</span>
-            <span>Equipo recibido y registrado</span>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:center;">
-            <span style="color:var(--accent3);">✓</span>
-            <span style="color:var(--muted); font-size:0.65rem;">11:45:22</span>
-            <span>Diagnóstico iniciado</span>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:center;">
-            <span style="color:var(--accent3);">✓</span>
-            <span style="color:var(--muted); font-size:0.65rem;">14:02:10</span>
-            <span>Presupuesto enviado al cliente</span>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:center;">
-            <span style="color:var(--accent3);">✓</span>
-            <span style="color:var(--muted); font-size:0.65rem;">14:18:05</span>
-            <span style="color:var(--accent3);">Presupuesto aceptado</span>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:center;">
-            <span style="color:var(--accent);">◉</span>
-            <span style="color:var(--muted); font-size:0.65rem;">15:30:00</span>
-            <span style="color:var(--accent);">Reparación en curso...</span>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:center; opacity:0.4;">
-            <span>○</span>
-            <span style="color:var(--muted); font-size:0.65rem;">--:--:--</span>
-            <span>Pruebas de calidad</span>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:center; opacity:0.4;">
-            <span>○</span>
-            <span style="color:var(--muted); font-size:0.65rem;">--:--:--</span>
-            <span>Listo para recoger</span>
-          </div>
+          <div style="display:flex; gap:1rem; align-items:center;"><span style="color:var(--accent3);">✓</span><span style="color:var(--muted); font-size:0.65rem;">10:23:01</span><span>Equipo recibido y registrado</span></div>
+          <div style="display:flex; gap:1rem; align-items:center;"><span style="color:var(--accent3);">✓</span><span style="color:var(--muted); font-size:0.65rem;">11:45:22</span><span>Diagnóstico iniciado</span></div>
+          <div style="display:flex; gap:1rem; align-items:center;"><span style="color:var(--accent3);">✓</span><span style="color:var(--muted); font-size:0.65rem;">14:02:10</span><span>Presupuesto enviado al cliente</span></div>
+          <div style="display:flex; gap:1rem; align-items:center;"><span style="color:var(--accent3);">✓</span><span style="color:var(--muted); font-size:0.65rem;">14:18:05</span><span style="color:var(--accent3);">Presupuesto aceptado</span></div>
+          <div style="display:flex; gap:1rem; align-items:center;"><span style="color:var(--accent);">◉</span><span style="color:var(--muted); font-size:0.65rem;">15:30:00</span><span style="color:var(--accent);">Reparación en curso...</span></div>
+          <div style="display:flex; gap:1rem; align-items:center; opacity:0.4;"><span>○</span><span style="color:var(--muted); font-size:0.65rem;">--:--:--</span><span>Pruebas de calidad</span></div>
+          <div style="display:flex; gap:1rem; align-items:center; opacity:0.4;"><span>○</span><span style="color:var(--muted); font-size:0.65rem;">--:--:--</span><span>Listo para recoger</span></div>
         </div>
         <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border); color:var(--muted); font-size:0.65rem;">
-          AVERÍA: Disco duro con sectores dañados<br>
-          SOLUCIÓN: Sustitución SSD 512GB + clonado<br>
-          PRESUPUESTO: <span style="color:var(--accent3);">65€</span> · PLAZO EST: <span style="color:var(--accent3);">Mañana</span>
+          AVERÍA: Disco duro con sectores dañados<br>SOLUCIÓN: Sustitución SSD 512GB + clonado<br>PRESUPUESTO: <span style="color:var(--accent3);">65€</span> · PLAZO EST: <span style="color:var(--accent3);">Mañana</span>
         </div>
       </div>
-
       <div style="margin-top:1.5rem; background:rgba(127,255,107,0.06); border:1px solid rgba(127,255,107,0.2); padding:1.5rem; font-family:var(--mono); font-size:0.75rem;">
         <div style="color:var(--accent3); margin-bottom:0.8rem; font-size:0.65rem; letter-spacing:2px;">GARANTÍA ACTIVA</div>
         <p style="color:var(--muted); line-height:1.8;">6 meses en mano de obra. Si el problema vuelve por la misma causa, lo reviso sin coste. Así de simple.</p>
@@ -1349,7 +761,6 @@
     <div class="section-label">Tarifas</div>
     <h2>Precios claros<br>desde el principio</h2>
     <p class="section-sub">// Sin letra pequeña. El presupuesto que ves es el que pagas.</p>
-
     <div class="price-grid">
       <div class="price-card">
         <div class="price-plan">Básico</div>
@@ -1363,7 +774,6 @@
         </ul>
         <a href="#contacto" class="btn-outline" style="display:block; text-align:center; padding:0.9rem;">Solicitar diagnóstico</a>
       </div>
-
       <div class="price-card featured">
         <div class="price-plan">Reparación</div>
         <div class="price-amount">30<span style="font-size:1.5rem">€</span></div>
@@ -1377,7 +787,6 @@
         </ul>
         <a href="#contacto" class="btn-primary" style="display:block; text-align:center; padding:0.9rem;">Pedir presupuesto</a>
       </div>
-
       <div class="price-card">
         <div class="price-plan">Mantenimiento Empresa</div>
         <div class="price-amount">50<span style="font-size:1.5rem">€</span></div>
@@ -1392,10 +801,7 @@
         <a href="#contacto" class="btn-outline" style="display:block; text-align:center; padding:0.9rem;">Contactar</a>
       </div>
     </div>
-
-    <div style="margin-top:2rem; font-family:var(--mono); font-size:0.7rem; color:var(--muted); text-align:center;">
-      * Precios sin IVA. Las piezas de repuesto se presupuestan aparte según el coste real de los componentes.
-    </div>
+    <div style="margin-top:2rem; font-family:var(--mono); font-size:0.7rem; color:var(--muted); text-align:center;">* Precios sin IVA. Las piezas de repuesto se presupuestan aparte según el coste real de los componentes.</div>
   </div>
 </div>
 
@@ -1406,42 +812,42 @@
       <div class="section-label">Contacto</div>
       <h2>¿Tu equipo<br>da problemas?</h2>
       <p class="section-sub">// Cuéntame qué le pasa. Te respondo hoy mismo.</p>
+      <div class="contact-info-item"><span class="ci-label">WhatsApp</span><span class="ci-value">+34 6XX XXX XXX</span></div>
+      <div class="contact-info-item"><span class="ci-label">Email</span><span class="ci-value">info@desmontapro.es</span></div>
+      <div class="contact-info-item"><span class="ci-label">Dirección</span><span class="ci-value">Villanueva de la Serena, Badajoz</span></div>
+      <div class="contact-info-item"><span class="ci-label">Horario</span><span class="ci-value">L-V 10:00-14:00 · 17:00-20:00 · S 10:00-14:00</span></div>
+      <div class="contact-info-item" style="border:none;"><span class="ci-label">Zona</span><span class="ci-value">Badajoz · Don Benito · Comarca</span></div>
 
-      <div class="contact-info-item">
-        <span class="ci-label">WhatsApp</span>
-        <span class="ci-value">+34 6XX XXX XXX</span>
-      </div>
-      <div class="contact-info-item">
-        <span class="ci-label">Email</span>
-        <span class="ci-value">info@desmontapro.es</span>
-      </div>
-      <div class="contact-info-item">
-        <span class="ci-label">Dirección</span>
-        <span class="ci-value">Villanueva de la Serena, Badajoz</span>
-      </div>
-      <div class="contact-info-item">
-        <span class="ci-label">Horario</span>
-        <span class="ci-value">L-V 10:00-14:00 · 17:00-20:00 · S 10:00-14:00</span>
-      </div>
-      <div class="contact-info-item" style="border:none;">
-        <span class="ci-label">Zona</span>
-        <span class="ci-value">Badajoz · Don Benito · Comarca</span>
-      </div>
-
-      <div style="margin-top:2rem;">
+      <!-- SOCIAL LINKS -->
+      <div style="margin-top:2rem; display:flex; flex-direction:column; gap:1rem;">
         <div class="tech-badge">📡 También hacemos soporte remoto</div>
+        <div style="display:flex; align-items:center; gap:1rem; margin-top:0.5rem;">
+          <span style="font-family:var(--mono); font-size:0.65rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Redes</span>
+          <div class="social-links">
+            <!-- Instagram -->
+            <a href="https://instagram.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@desmontapro" target="_blank" rel="noopener" class="social-btn" title="TikTok">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="https://facebook.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" class="social-btn" title="WhatsApp">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="contact-form">
-      <div class="form-group">
-        <label>Nombre</label>
-        <input type="text" placeholder="Tu nombre">
-      </div>
-      <div class="form-group">
-        <label>Teléfono / Email</label>
-        <input type="text" placeholder="Para contactarte">
-      </div>
+      <div class="form-group"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
+      <div class="form-group"><label>Teléfono / Email</label><input type="text" placeholder="Para contactarte"></div>
       <div class="form-group">
         <label>Tipo de servicio</label>
         <select>
@@ -1455,17 +861,9 @@
           <option>Otro</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Describe el problema</label>
-        <textarea placeholder="// Cuéntame qué síntomas tiene el equipo, cuándo empezó, modelo si lo sabes..."></textarea>
-      </div>
-      <button class="btn-primary" style="width:100%; padding:1.1rem; font-size:0.85rem;" onclick="alert('Mensaje enviado ✓ Te contactaré hoy mismo.')">
-        Enviar mensaje →
-      </button>
-      <p style="font-family:var(--mono); font-size:0.65rem; color:var(--muted); text-align:center; line-height:1.8;">
-        // También puedes contactar directamente por WhatsApp<br>
-        // Respondo en menos de 2 horas en horario de tienda
-      </p>
+      <div class="form-group"><label>Describe el problema</label><textarea placeholder="// Cuéntame qué síntomas tiene el equipo, cuándo empezó, modelo si lo sabes..."></textarea></div>
+      <button class="btn-primary" style="width:100%; padding:1.1rem; font-size:0.85rem;" onclick="alert('Mensaje enviado ✓ Te contactaré hoy mismo.')">Enviar mensaje →</button>
+      <p style="font-family:var(--mono); font-size:0.65rem; color:var(--muted); text-align:center; line-height:1.8;">// También puedes contactar directamente por WhatsApp<br>// Respondo en menos de 2 horas en horario de tienda</p>
     </div>
   </div>
 </div>
@@ -1480,32 +878,62 @@
     <span class="badge">SMR · FP INFORMÁTICA</span>
     <span>· Alvaro Caballero Rodríguez</span>
   </div>
-  <div style="display:flex; gap:2rem;">
-    <a href="#" style="color:var(--muted); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Aviso legal</a>
-    <a href="#" style="color:var(--muted); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Privacidad</a>
-    <a href="#" style="color:var(--muted); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+  <div class="footer-links">
+    <span class="footer-link" onclick="openModal('legalModal')">Aviso legal</span>
+    <span class="footer-link" onclick="openModal('legalModal')">Privacidad</span>
+    <!-- Social en footer también -->
+    <div class="social-links">
+      <a href="https://instagram.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://tiktok.com/@desmontapro" target="_blank" rel="noopener" class="social-btn" title="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+      <a href="https://facebook.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" class="social-btn" title="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+    </div>
   </div>
 </footer>
 
 <script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function toggleMenu() {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
+
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
 
   // Nav scroll effect
   window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    nav.style.borderBottomColor = window.scrollY > 50 ? 'var(--accent)' : 'var(--border)';
+    document.querySelector('nav').style.borderBottomColor = window.scrollY > 50 ? 'var(--accent)' : 'var(--border)';
   });
 
-  // Animate elements on scroll
+  // Scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1520,6 +948,31 @@
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
+  });
+
+  // Modal functions
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal(overlay.id);
+    });
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+    }
   });
 </script>
 </body>
