@@ -866,8 +866,8 @@
       <div class="form-group"><label for="nombreInput">Nombre</label><input id="nombreInput" name="nombre" type="text" placeholder="Tu nombre" required></div>
       <div class="form-group"><label for="emailInput">Email</label><input id="emailInput" name="email" type="email" placeholder="Tu correo electrónico" required></div>
       <div class="form-group">
-        <label>Tipo de servicio</label>
-        <select name="servicio">
+        <label for="servicioInput">Tipo de servicio</label>
+        <select id="servicioInput" name="servicio" required>
           <option value="">Selecciona un servicio...</option>
           <option>Reparación de hardware</option>
           <option>Formateo / Software</option>
@@ -994,36 +994,34 @@
     event.preventDefault();
 
     const nombre = document.getElementById('nombreInput').value.trim();
-    const email = document.getElementById('emailInput').value.trim();
+    const contacto = document.getElementById('emailInput').value.trim();
+    const servicio = document.getElementById('servicioInput').value.trim();
     const mensaje = document.getElementById('mensajeInput').value.trim();
 
-    if (!nombre || !email || !mensaje) {
-      contactStatus.textContent = 'Completa todos los campos obligatorios antes de enviar.';
-      contactStatus.style.color = 'var(--accent2)';
+    if (!nombre || !contacto || !servicio || !mensaje) {
+      alert('Completa todos los campos obligatorios antes de enviar.');
       return;
     }
 
     const originalText = btnEnviar.textContent;
     btnEnviar.disabled = true;
-    btnEnviar.textContent = '[ PROCESANDO... ]';
-    contactStatus.textContent = '';
+    btnEnviar.textContent = '[ ENVIANDO... ]';
 
     try {
       await addDoc(collection(db, 'contactos'), {
         nombre,
-        email,
+        contacto,
+        servicio,
         mensaje,
-        fecha: new Date().toISOString(),
-        estado: 'pendiente'
+        estado: 'pendiente',
+        fechaEnvio: new Date()
       });
 
+      alert('Mensaje enviado ✓ Te contactaré hoy mismo.');
       contactForm.reset();
-      contactStatus.textContent = 'Diagnóstico enviado con éxito. Te contactaré lo antes posible.';
-      contactStatus.style.color = 'var(--accent3)';
     } catch (error) {
       console.error('Error enviando el formulario:', error);
-      contactStatus.textContent = 'Error al enviar el diagnóstico. Intenta de nuevo o contacta por WhatsApp.';
-      contactStatus.style.color = 'var(--accent2)';
+      alert('Error al enviar el mensaje. Revisa la consola y vuelve a intentarlo.');
     } finally {
       btnEnviar.disabled = false;
       btnEnviar.textContent = originalText;
