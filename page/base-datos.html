@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="icon" type="image/png" href="../multimedia/Logo.png">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Agenda</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, rgba(255,255,255,.14), transparent 30%), linear-gradient(135deg, #1b2a41, #2d5b8f);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      color:#fff;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background: radial-gradient(circle at top right, rgba(255,255,255,.12), transparent 20%), radial-gradient(circle at bottom left, rgba(255,255,255,.08), transparent 18%);
+      pointer-events:none;
+    }
+
+    .container{
+      width:100%;
+      max-width:760px;
+      background: rgba(255,255,255,0.97);
+      border-radius:32px;
+      padding:38px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.17);
+      border: 1px solid rgba(79,172,254,0.16);
+      backdrop-filter: blur(10px);
+      color:#12233d;
+    }
+
+    h1{
+      text-align:center;
+      margin-bottom:8px;
+      color:#1d3557;
+      font-size:2.4rem;
+      letter-spacing:0.6px;
+    }
+
+    .subtitle{
+      text-align:center;
+      color:#5f6f8a;
+      margin-bottom:32px;
+      font-size:1rem;
+      line-height:1.6;
+    }
+
+    .task-input{
+      display:flex;
+      gap:12px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+
+    .task-input input{
+      flex:1;
+      min-width:220px;
+      padding:16px 18px;
+      border:none;
+      border-radius:18px;
+      background:#f4f7ff;
+      font-size:1rem;
+      color:#12233d;
+      box-shadow: inset 0 1px 4px rgba(18,35,61,0.08);
+      outline:none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .task-input input:focus{
+      transform: translateY(-1px);
+      box-shadow: inset 0 2px 10px rgba(18,35,61,0.14);
+    }
+
+    .task-input button{
+      border:none;
+      background:#4facfe;
+      color:white;
+      padding:16px 24px;
+      border-radius:18px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:1rem;
+      box-shadow: 0 14px 30px rgba(79,172,254,0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .task-input button:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(79,172,254,0.22);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap:16px;
+      margin-bottom:28px;
+    }
+
+    .card{
+      background:#fff;
+      padding:20px 22px;
+      border-radius:20px;
+      text-align:center;
+      border:1px solid rgba(79,172,254,0.15);
+      box-shadow: 0 12px 24px rgba(66,123,224,0.06);
+    }
+
+    .card h2{
+      color:#1d3557;
+      margin-bottom:6px;
+      font-size:1.6rem;
+    }
+
+    .card p{
+      color:#6a7a94;
+      font-size:0.95rem;
+    }
+
+    .task{
+      background:#f8fbff;
+      border-radius:20px;
+      padding:18px 20px;
+      margin-bottom:15px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-left:6px solid #4facfe;
+      box-shadow: 0 12px 24px rgba(42,98,192,0.08);
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .task.completed{
+      border-left-color:#00c853;
+      opacity:0.92;
+    }
+
+    .task h3{
+      font-size:1rem;
+      color:#1b2a41;
+      margin-bottom:4px;
+    }
+
+    .task.completed h3{
+      text-decoration: line-through;
+      color:#7690a8;
+    }
+
+    .status{
+      font-size:0.9rem;
+      color:#55607b;
+      margin-top:3px;
+    }
+
+    .buttons{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .buttons button{
+      border:none;
+      padding:11px 16px;
+      border-radius:14px;
+      color:white;
+      cursor:pointer;
+      font-weight:700;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .buttons button:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .complete-btn{
+      background:#00c853;
+    }
+
+    .delete-btn{
+      background:#ff5252;
+    }
+
+    .empty{
+      text-align:center;
+      margin-top:20px;
+      color:#5f728f;
+    }
+
+    .footer{
+      margin-top:32px;
+      text-align:center;
+      color:#6b7b94;
+      font-size:0.95rem;
+      border-top:1px solid rgba(137,160,202,0.2);
+      padding-top:18px;
+    }
+
+    @media (max-width: 640px) {
+      .container{ padding:28px 20px; }
+      .task-input{ flex-direction:column; }
+      .buttons{ justify-content:flex-start; width:100%; }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Agenda</h1>
+
+    <p class="subtitle">
+      Organiza tus citas, tareas y recordatorios en un solo lugar
+    </p>
+
+    <div class="task-input">
+
+      <input
+        type="text"
+        id="taskInput"
+        placeholder="Escribe una tarea..."
+      >
+
+      <button id="addTaskBtn">
+        Agregar
+      </button>
+
+    </div>
+
+    <div class="stats">
+
+      <div class="card">
+        <h2 id="totalTasks">0</h2>
+        <p>Total</p>
+      </div>
+
+      <div class="card">
+        <h2 id="completedTasks">0</h2>
+        <p>Completadas</p>
+      </div>
+
+      <div class="card">
+        <h2 id="pendingTasks">0</h2>
+        <p>Pendientes</p>
+      </div>
+
+    </div>
+
+    <div id="taskList"></div>
+
+    <p
+      class="empty"
+      id="emptyMessage"
+    >
+       No hay tareas
+    </p>
+
+    <footer class="footer">
+      Álvaro Caballero Rodríguez
+    </footer>
+
+  </div>
+
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDrl5nig0LAEzgOfr_lciGb_McLnJbPTqQ",
+      authDomain: "lista-de-tarea-4807a.firebaseapp.com",
+      projectId: "lista-de-tarea-4807a",
+      storageBucket: "lista-de-tarea-4807a.firebasestorage.app",
+      messagingSenderId: "475042270842",
+      appId: "1:475042270842:web:49fd024a477c8b8a45b5c3",
+      measurementId: "G-CDFL5FTQBT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    
+    void analytics;
+  </script>
+
+  <script src="../javascript/app.js"></script>
+
+</body>
+</html>
