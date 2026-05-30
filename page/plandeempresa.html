@@ -890,9 +890,14 @@
             <label for="equipamientoInput">Selecciona el equipamiento</label>
             <select id="equipamientoInput" name="equipamiento" required>
               <option value="">Selecciona...</option>
-              <option value="Estación de trabajo">Estación de Trabajo</option>
-              <option value="Equipo portátil">Equipo Portátil</option>
-              <option value="Consolas">Consolas</option>
+              <option value="Reparación de Hardware">Reparación de Hardware</option>
+              <option value="Formateo & Sistema">Formateo & Sistema</option>
+              <option value="PC a Medida">PC a Medida</option>
+              <option value="Mantenimiento Preventivo">Mantenimiento Preventivo</option>
+              <option value="Soporte para Empresas">Soporte para Empresas</option>
+              <option value="Redes & Conectividad">Redes & Conectividad</option>
+              <option value="Otro servicio">Otro servicio</option>
+
             </select>
           </div>
         </div>
@@ -911,12 +916,18 @@
         </div>
 
         <div id="step3" class="step-panel" style="display:none;">
+          <div class="form-group" id="otroServicioWrap" style="display:none; margin-top:-0.2rem;">
+            <label for="otroServicioInput">Especifica el servicio</label>
+            <input id="otroServicioInput" name="otroServicio" type="text" placeholder="Especifica el servicio"/>
+          </div>
+
           <div class="section-label" style="margin-bottom:0.7rem;">Paso 3 · Datos de contacto</div>
 
           <div class="form-group">
-            <label for="razonInput">Nombre o Razón Social</label>
-            <input id="razonInput" name="razon" type="text" placeholder="Nombre o Razón Social" required>
+            <label for="razonInput">Nombre</label>
+            <input id="razonInput" name="razon" type="text" placeholder="Nombre" required>
           </div>
+
 
           <div class="form-group">
             <label for="telefonoInput">Teléfono</label>
@@ -1132,6 +1143,9 @@
     const razonInput = document.getElementById('razonInput');
     const telefonoInput = document.getElementById('telefonoInput');
     const rgpdInput = document.getElementById('rgpdInput');
+    const otroServicioWrap = document.getElementById('otroServicioWrap');
+    const otroServicioInput = document.getElementById('otroServicioInput');
+
 
     if (!equipamientoInput || !incidenciaInput || !razonInput || !telefonoInput || !rgpdInput) return;
 
@@ -1192,6 +1206,8 @@
     const rgpdInput = document.getElementById('rgpdInput');
     const utmSourceInput = document.getElementById('utmSource') || document.getElementById('utm_source');
     const utmMediumInput = document.getElementById('utmMedium') || document.getElementById('utm_medium');
+    const otroServicioWrap = document.getElementById('otroServicioWrap');
+    const otroServicioInput = document.getElementById('otroServicioInput');
 
     if (!razonInput || !telefonoInput || !equipamientoInput || !incidenciaInput || !rgpdInput || !utmSourceInput || !utmMediumInput) {
       alert('El formulario no está completo o falta algún campo requerido.');
@@ -1223,12 +1239,28 @@
       btnEnviar.textContent = '[ ENVIANDO... ]';
     }
 
+    const servicio = equipamientoInput.value;
+    const otroServicio = (servicio === 'Otro servicio' ? (otroServicioInput ? otroServicioInput.value.trim() : '') : '');
+
+    if (servicio === 'Otro servicio' && otroServicioInput && !otroServicio) {
+      if (otroServicioInput) {
+        otroServicioInput.focus();
+      }
+      alert('Indica el servicio en “Especifica el servicio”.');
+      if (btnEnviar) {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = originalText;
+      }
+      return;
+    }
+
     try {
       const datosEnvioCRM = {
-        dispositivo: razon,
-        telefono,
-        equipo,
-        averia,
+        nombre: razon,
+        contacto: telefono,
+        servicio,
+        otroServicio,
+        mensaje: (document.getElementById('mensajeInput') ? document.getElementById('mensajeInput').value.trim() : ''),
         utm_source,
         utm_medium,
         timestampSLA
