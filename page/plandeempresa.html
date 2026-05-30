@@ -869,7 +869,7 @@
 </div>
 
 <!-- CONTACTO -->
-<div id="contacto" style="border-top:1px solid var(--border); padding:6rem 0;">
+  <div id="contacto" style="border-top:1px solid var(--border); padding:6rem 0;">
   <div style="max-width:1200px; margin:0 auto; padding:0 4rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem;">
     <div>
       <div class="section-label">Pre-Diagnóstico Técnico</div>
@@ -938,6 +938,8 @@
             <textarea id="mensajeInput" name="mensaje" placeholder="// Indica síntomas, desde cuándo ocurre y cualquier detalle relevante..."></textarea>
           </div>
 
+          <input type="hidden" id="utmSource" name="utmSource" value="Google_Ads">
+          <input type="hidden" id="utmMedium" name="utmMedium" value="Campaña_B2B_2026">
           <input type="hidden" id="utm_source" name="utm_source" value="">
           <input type="hidden" id="utm_medium" name="utm_medium" value="">
           <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
@@ -959,6 +961,7 @@
           Hemos registrado tu pre-diagnóstico. Un asesor técnico se pondrá en contacto contigo en menos de 15 minutos (SLA estimado),
           revisando la incidencia indicada y proponiéndote el siguiente paso.
         </p>
+
 
           <div class="channels" aria-label="Canales de Asistencia y Comunicación Oficial">
           <div class="channels-title">Canales de Asistencia y Comunicación Oficial</div>
@@ -1007,8 +1010,9 @@
 </footer>
 
 <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js';
-  import { getFirestore, collection, addDoc, query, where, getDocs, limit } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js';
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js';
+  import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const firebaseConfig = {
     apiKey: "AIzaSyCNKr_86BoAINJyc1LhZpmvqWrC3_OQuYY",
@@ -1021,6 +1025,7 @@
   };
 
   const app = initializeApp(firebaseConfig);
+  getAnalytics(app);
   const db = getFirestore(app);
 
   const hamburger = document.getElementById('hamburgerBtn');
