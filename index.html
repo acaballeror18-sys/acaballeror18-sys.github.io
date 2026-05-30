@@ -238,20 +238,6 @@
             color: #004d40;
             font-weight: 900;
         }
-        /* Sección de tracking público (terminal estilo) */
-        #tracking-section {
-            max-width: 880px;
-            margin: 36px auto;
-            background: #06121f;
-            color: #e8f5ff;
-            border-radius: 16px;
-            padding: 18px;
-            border: 2px solid rgba(0,229,255,0.14);
-            font-family: 'Source Code Pro', monospace;
-        }
-        #tracking-section h2 { margin: 0 0 8px; color: #4dd2ff; }
-        #tracking-section input { width: 100%; max-width: 560px; margin-right: 12px; }
-        #tracking-output { margin-top: 12px; background:#081822; padding:12px; border-radius:12px; color:var(--muted); }
 
         .categoria a img.logo-enlace {
             width: 40px;
@@ -348,90 +334,6 @@
                 title="Mapa de IES Donoso Cortés">
             </iframe>
         </section>
-
-        <!-- Sección pública: Tracking por ticketId (index.html#tracking) -->
-        <section id="tracking-section">
-            <h2>Tracking público de reparación</h2>
-            <p>Introduce tu token (ID del ticket) y pulsa <strong>VER ESTADO</strong>. También puedes abrir la URL con <code>#tracking=TU_ID</code>.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-                <input id="trackingIdInput" type="text" placeholder="Pega aquí tu ID de ticket" />
-                <button id="btnCheckTracking" class="boton-enlace">VER ESTADO</button>
-            </div>
-            <div id="tracking-output">Esperando ID...</div>
-        </section>
-
-        <script type="module">
-            // Módulo público de tracking: consulta un documento por su ID en la colección `tickets`.
-            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
-            import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
-
-            const firebaseConfig = {
-                apiKey: 'AIzaSyCNKr_86BoAINJyc1LhZpmvqWrC3_OQuYY',
-                authDomain: 'plan-de-empresa-12307.firebaseapp.com',
-                projectId: 'plan-de-empresa-12307',
-                storageBucket: 'plan-de-empresa-12307.firebasestorage.app',
-                messagingSenderId: '111498902920',
-                appId: '1:111498902920:web:bd84208f5b05e3e12b8e3d',
-                measurementId: 'G-RLFN38HP1K'
-            };
-
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app);
-
-            const input = document.getElementById('trackingIdInput');
-            const output = document.getElementById('tracking-output');
-            const btn = document.getElementById('btnCheckTracking');
-
-            // Renderiza el contenido del ticket en la zona pública (campos seguros visibles).
-            function renderPublicTicket(docSnap) {
-                if (!docSnap || !docSnap.exists) return output.innerHTML = '<strong>No se encontró el ticket.</strong>';
-                const data = docSnap.data();
-                const estado = data.estado || 'Desconocido';
-                const cliente = data.clienteNombre || 'N/D';
-                const fecha = data.fechaCreacion && data.fechaCreacion.toDate ? data.fechaCreacion.toDate().toLocaleString() : 'N/D';
-                const nota = data.notaInterna ? 'Nota interna no visible públicamente' : 'Sin anotaciones públicas';
-                const tieneFirma = data.firmaRecepcion ? true : false;
-                output.innerHTML = `
-                    <div><strong>Cliente:</strong> ${sanitize(cliente)}</div>
-                    <div><strong>Estado:</strong> ${sanitize(estado)}</div>
-                    <div><strong>Creado:</strong> ${sanitize(fecha)}</div>
-                    <div><strong>Firma recepción:</strong> ${tieneFirma ? 'Sí' : 'No'}</div>
-                    <div style="margin-top:8px;color:#9bd9ff;font-size:0.9rem;">Para más detalles contacte con el taller indicando este ID.</div>
-                `;
-            }
-
-            // Sanitización ligera en el cliente para evitar inyección en la vista pública.
-            function sanitize(value) {
-                if (value === null || value === undefined) return '';
-                return String(value).replaceAll('<','&lt;').replaceAll('>','&gt;');
-            }
-
-            async function fetchTicketById(id) {
-                if (!id) return output.innerHTML = '<strong>ID vacío.</strong>';
-                output.textContent = 'Consultando...';
-                try {
-                    const ref = doc(db, 'tickets', id);
-                    const snap = await getDoc(ref);
-                    renderPublicTicket(snap);
-                } catch (error) {
-                    console.error('Error fetching ticket', error);
-                    output.innerHTML = '<strong>Error consultando el ticket. Intenta más tarde.</strong>';
-                }
-            }
-
-            // Soporta URL con hash: #tracking=ID
-            function readHash() {
-                const h = location.hash || '';
-                if (!h) return null;
-                const m = h.match(/tracking=(.+)/);
-                return m ? decodeURIComponent(m[1]) : null;
-            }
-
-            btn.addEventListener('click', () => fetchTicketById(input.value.trim()));
-            // On load: si la URL contiene #tracking=ID, auto-consulta
-            const initial = readHash();
-            if (initial) { input.value = initial; fetchTicketById(initial); }
-        </script>
 
         <!-- ENLACES INSTITUCIONALES -->
         <section class="rectangulor" aria-label="Enlaces institucionales">
