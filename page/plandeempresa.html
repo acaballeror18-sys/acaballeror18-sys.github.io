@@ -430,6 +430,52 @@
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  .channels {
+    margin-top: 1.25rem;
+    border: 1px solid #1e293b;
+    background: rgba(2,6,23,0.55);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .channels-title {
+    color: #e2e8f0;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .channels-row {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .channel-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid #1e293b;
+    border-radius: 999px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.3px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+  .channel-link:hover {
+    border-color: #06b6d4;
+    color: #06b6d4;
+    background: rgba(6,182,212,0.08);
+  }
+
+  @media (max-width: 600px) {
+    .channels-row { flex-direction: column; align-items: stretch; }
+    .channel-link { width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -826,9 +872,9 @@
 <div id="contacto" style="border-top:1px solid var(--border); padding:6rem 0;">
   <div style="max-width:1200px; margin:0 auto; padding:0 4rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem;">
     <div>
-      <div class="section-label">Contacto</div>
-      <h2>¿Tu equipo<br>da problemas?</h2>
-      <p class="section-sub">// Cuéntame qué le pasa. Te respondo hoy mismo.</p>
+      <div class="section-label">Pre-Diagnóstico Técnico</div>
+      <h2>Inicia un flujo<br>de asistencia guiada</h2>
+      <p class="section-sub">// Completa 3 pasos y recibe respuesta en menos de 15 minutos (SLA estimado).</p>
       <div class="contact-info-item"><span class="ci-label">WhatsApp</span><span class="ci-value">+34 6XX XXX XXX</span></div>
       <div class="contact-info-item"><span class="ci-label">Email</span><span class="ci-value">info@desmontapro.es</span></div>
       <div class="contact-info-item"><span class="ci-label">Dirección</span><span class="ci-value">Villanueva de la Serena, Badajoz</span></div>
@@ -836,27 +882,111 @@
       <div class="contact-info-item" style="border:none;"><span class="ci-label">Zona</span><span class="ci-value">Badajoz · Don Benito · Comarca</span></div>
     </div>
 
-    <form id="contactForm" class="contact-form">
-      <div class="form-group"><label for="nombreInput">Nombre</label><input id="nombreInput" name="nombre" type="text" placeholder="Tu nombre" required></div>
-      <div class="form-group"><label for="emailInput">Email</label><input id="emailInput" name="email" type="email" placeholder="Tu correo electrónico" required></div>
-      <div class="form-group">
-        <label for="servicioInput">Tipo de servicio</label>
-        <select id="servicioInput" name="servicio" required>
-          <option value="">Selecciona un servicio...</option>
-          <option>Reparación de hardware</option>
-          <option>Formateo / Software</option>
-          <option>Montaje de PC</option>
-          <option>Mantenimiento</option>
-          <option>Soporte para empresa</option>
-          <option>Redes y conectividad</option>
-          <option>Otro</option>
-        </select>
+    <div class="contact-form" style="gap:0;">
+      <form id="contactForm" style="display:contents;" novalidate>
+        <div id="step1" class="step-panel">
+          <div class="section-label" style="margin-bottom:0.7rem;">Paso 1 · Equipamiento</div>
+          <div class="form-group">
+            <label for="equipamientoInput">Selecciona el equipamiento</label>
+            <select id="equipamientoInput" name="equipamiento" required>
+              <option value="">Selecciona...</option>
+              <option value="Estación de trabajo">Estación de Trabajo</option>
+              <option value="Equipo portátil">Equipo Portátil</option>
+              <option value="Consolas">Consolas</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="step2" class="step-panel" style="display:none;">
+          <div class="section-label" style="margin-bottom:0.7rem;">Paso 2 · Incidencia</div>
+          <div class="form-group">
+            <label for="incidenciaInput">Selecciona la incidencia</label>
+            <select id="incidenciaInput" name="incidencia" required>
+              <option value="">Selecciona...</option>
+              <option value="Fallo de hardware">Fallo de hardware</option>
+              <option value="Rendimiento y software">Rendimiento y software</option>
+              <option value="Mantenimiento preventivo">Mantenimiento preventivo</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="step3" class="step-panel" style="display:none;">
+          <div class="section-label" style="margin-bottom:0.7rem;">Paso 3 · Datos de contacto</div>
+
+          <div class="form-group">
+            <label for="razonInput">Nombre o Razón Social</label>
+            <input id="razonInput" name="razon" type="text" placeholder="Nombre o Razón Social" required>
+          </div>
+
+          <div class="form-group">
+            <label for="telefonoInput">Teléfono</label>
+            <input id="telefonoInput" name="telefono" type="tel" placeholder="Número de teléfono" required inputmode="tel">
+          </div>
+
+          <div class="form-group" style="margin-top:0.5rem;">
+            <label class="rgpd-label" style="display:flex; align-items:flex-start; gap:0.6rem; cursor:pointer;">
+              <input id="rgpdInput" name="rgpd" type="checkbox" required style="margin-top:0.2rem;">
+              <span style="color:var(--muted); font-size:0.75rem; line-height:1.6;">
+                Acepto el tratamiento de mis datos conforme al RGPD para la gestión del pre-diagnóstico y la comunicación de seguimiento.
+                Declaro que la información facilitada es veraz.
+              </span>
+            </label>
+          </div>
+
+          <div class="form-group" style="margin-top:1rem;">
+            <label for="mensajeInput">Descripción breve (opcional)</label>
+            <textarea id="mensajeInput" name="mensaje" placeholder="// Indica síntomas, desde cuándo ocurre y cualquier detalle relevante..."></textarea>
+          </div>
+
+          <input type="hidden" id="utm_source" name="utm_source" value="">
+          <input type="hidden" id="utm_medium" name="utm_medium" value="">
+          <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+        </div>
+
+        <div id="stepActions" class="step-actions">
+          <button type="button" id="btnBack" class="btn-outline" style="display:none; padding:1rem; width:100%;">← Atrás</button>
+          <button type="button" id="btnNext" class="btn-primary" style="padding:1.1rem; font-size:0.85rem; width:100%; margin-top:0.8rem;">Continuar →</button>
+          <button type="submit" id="btnEnviar" class="btn-primary" style="display:none; padding:1.1rem; font-size:0.85rem; width:100%; margin-top:0.8rem;">Enviar pre-diagnóstico →</button>
+        </div>
+
+        <div id="contactStatus" style="font-family:var(--mono); font-size:0.75rem; color:var(--accent3); margin-top:1rem; min-height:1.2rem;"></div>
+      </form>
+
+      <div id="successScreen" style="display:none;">
+        <div class="section-label" style="margin-bottom:0.8rem;">Registro confirmado</div>
+        <h2 style="margin-bottom:1rem;">Solicitud recibida ✓</h2>
+        <p class="section-sub" style="margin-bottom:1.5rem; max-width:none;">
+          Hemos registrado tu pre-diagnóstico. Un asesor técnico se pondrá en contacto contigo en menos de 15 minutos (SLA estimado),
+          revisando la incidencia indicada y proponiéndote el siguiente paso.
+        </p>
+
+          <div class="channels" aria-label="Canales de Asistencia y Comunicación Oficial">
+          <div class="channels-title">Canales de Asistencia y Comunicación Oficial</div>
+          <div class="channels-row">
+            <a class="channel-link" href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp - Soporte técnico directo">WhatsApp</a>
+            <a class="channel-link" href="https://www.linkedin.com/company/desmontapro" target="_blank" rel="noopener" aria-label="LinkedIn - Conexión corporativa">LinkedIn</a>
+            <a class="channel-link" href="https://www.instagram.com/desmontapro" target="_blank" rel="noopener" aria-label="Instagram - Casos de éxito">Instagram</a>
+          </div>
+        </div>
+
+        <div id="contactStatus" style="font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-top:1.1rem; min-height:1.2rem;">
+          Muchas gracias por confiar en DesmontaPro.
+        </div>
       </div>
-      <div class="form-group"><label for="mensajeInput">Describe el problema</label><textarea id="mensajeInput" name="mensaje" placeholder="// Cuéntame qué síntomas tiene el equipo, cuándo empezó, modelo si lo sabes..." required></textarea></div>
-      <button type="submit" id="btnEnviar" class="btn-primary" style="width:100%; padding:1.1rem; font-size:0.85rem;">ENVIAR MENSAJE →</button>
-      <div id="contactStatus" style="font-family:var(--mono); font-size:0.75rem; color:var(--accent3); margin-top:1rem; min-height:1.2rem;"></div>
-      <p style="font-family:var(--mono); font-size:0.65rem; color:var(--muted); text-align:center; line-height:1.8;">// También puedes contactar directamente por WhatsApp<br>// Respondo en menos de 2 horas en horario de tienda</p>
-    </form>
+
+      <div class="channels" aria-label="Canales de Asistencia y Comunicación Oficial">
+        <div class="channels-title">Canales de Asistencia y Comunicación Oficial</div>
+        <div class="channels-row">
+          <a class="channel-link" href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp - Soporte técnico directo">WhatsApp</a>
+          <a class="channel-link" href="https://www.linkedin.com/company/desmontapro" target="_blank" rel="noopener" aria-label="LinkedIn - Conexión corporativa">LinkedIn</a>
+          <a class="channel-link" href="https://www.instagram.com/desmontapro" target="_blank" rel="noopener" aria-label="Instagram - Casos de éxito">Instagram</a>
+        </div>
+      </div>
+
+      <p style="font-family:var(--mono); font-size:0.65rem; color:var(--muted); text-align:center; line-height:1.8; margin-top:1rem;">
+        Respuesta objetivo: menos de 15 minutos (SLA estimado).
+      </p>
+    </div>
   </div>
 </div>
 
@@ -964,55 +1094,169 @@
     }
   });
 
+  const step1El = document.getElementById('step1');
+  const step2El = document.getElementById('step2');
+  const step3El = document.getElementById('step3');
+  const successScreenEl = document.getElementById('successScreen');
+  const btnBackEl = document.getElementById('btnBack');
+  const btnNextEl = document.getElementById('btnNext');
+
+  function setStep(step) {
+    if (!step1El || !step2El || !step3El) return;
+    const show1 = step === 1;
+    const show2 = step === 2;
+    const show3 = step === 3;
+
+    step1El.style.display = show1 ? 'block' : 'none';
+    step2El.style.display = show2 ? 'block' : 'none';
+    step3El.style.display = show3 ? 'block' : 'none';
+
+    if (btnBackEl) btnBackEl.style.display = step > 1 ? 'block' : 'none';
+    if (btnNextEl) btnNextEl.style.display = step < 3 ? 'block' : 'none';
+    if (btnEnviar) btnEnviar.style.display = step === 3 ? 'block' : 'none';
+
+    const contactStatusEl = document.getElementById('contactStatus');
+    if (contactStatusEl) contactStatusEl.textContent = '';
+
+    if (successScreenEl) successScreenEl.style.display = 'none';
+  }
+
+  function setupStepper() {
+    const equipamientoInput = document.getElementById('equipamientoInput');
+    const incidenciaInput = document.getElementById('incidenciaInput');
+    const razonInput = document.getElementById('razonInput');
+    const telefonoInput = document.getElementById('telefonoInput');
+    const rgpdInput = document.getElementById('rgpdInput');
+
+    if (!equipamientoInput || !incidenciaInput || !razonInput || !telefonoInput || !rgpdInput) return;
+
+    let currentStep = 1;
+    setStep(1);
+
+    if (btnNextEl) {
+      btnNextEl.addEventListener('click', () => {
+        const contactStatusEl = document.getElementById('contactStatus');
+
+        if (currentStep === 1) {
+          if (!equipamientoInput.value) {
+            if (contactStatusEl) contactStatusEl.textContent = 'Selecciona el equipamiento para continuar.';
+            return;
+          }
+          currentStep = 2;
+          setStep(2);
+          return;
+        }
+
+        if (currentStep === 2) {
+          if (!incidenciaInput.value) {
+            if (contactStatusEl) contactStatusEl.textContent = 'Selecciona la incidencia para continuar.';
+            return;
+          }
+          currentStep = 3;
+          setStep(3);
+          return;
+        }
+      });
+    }
+
+    if (btnBackEl) {
+      btnBackEl.addEventListener('click', () => {
+        if (currentStep === 2) {
+          currentStep = 1;
+          setStep(1);
+          return;
+        }
+        if (currentStep === 3) {
+          currentStep = 2;
+          setStep(2);
+          return;
+        }
+      });
+    }
+  }
+
+  setupStepper();
+
   contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const nombre = document.getElementById('nombreInput').value.trim();
-    const contacto = document.getElementById('emailInput').value.trim();
-    const servicio = document.getElementById('servicioInput').value.trim();
-    const mensaje = document.getElementById('mensajeInput').value.trim();
+    const razonInput = document.getElementById('razonInput');
+    const telefonoInput = document.getElementById('telefonoInput');
+    const equipamientoInput = document.getElementById('equipamientoInput');
+    const incidenciaInput = document.getElementById('incidenciaInput');
+    const rgpdInput = document.getElementById('rgpdInput');
+    const utmSourceInput = document.getElementById('utmSource') || document.getElementById('utm_source');
+    const utmMediumInput = document.getElementById('utmMedium') || document.getElementById('utm_medium');
 
-    if (!nombre || !contacto || !servicio || !mensaje) {
+    if (!razonInput || !telefonoInput || !equipamientoInput || !incidenciaInput || !rgpdInput || !utmSourceInput || !utmMediumInput) {
+      alert('El formulario no está completo o falta algún campo requerido.');
+      return;
+    }
+
+    const razon = razonInput.value.trim();
+    const telefono = telefonoInput.value.trim();
+    const equipo = equipamientoInput.value;
+    const averia = incidenciaInput.value;
+    const utm_source = utmSourceInput.value || '';
+    const utm_medium = utmMediumInput.value || '';
+    const timestampSLA = new Date().toISOString();
+
+    if (!equipo || !averia || !razon || !telefono) {
       alert('Completa todos los campos obligatorios antes de enviar.');
       return;
     }
 
-    const originalText = btnEnviar.textContent;
-    btnEnviar.disabled = true;
-    btnEnviar.textContent = '[ ENVIANDO... ]';
+    if (!rgpdInput.checked) {
+      rgpdInput.focus();
+      alert('Debes aceptar el RGPD para enviar tu solicitud.');
+      return;
+    }
+
+    const originalText = btnEnviar ? btnEnviar.textContent : '';
+    if (btnEnviar) {
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = '[ ENVIANDO... ]';
+    }
 
     try {
-      const contactosRef = collection(db, 'contactos');
-      const duplicateQuery = query(
-        contactosRef,
-        where('contacto', '==', contacto),
-        where('mensaje', '==', mensaje),
-        limit(1)
-      );
-      const duplicateSnapshot = await getDocs(duplicateQuery);
+      const datosEnvioCRM = {
+        dispositivo: razon,
+        telefono,
+        equipo,
+        averia,
+        utm_source,
+        utm_medium,
+        timestampSLA
+      };
 
-      if (!duplicateSnapshot.empty) {
-        alert('Ya tengo tu mensaje registrado. Te contactaré pronto.');
-        return;
-      }
-
-      await addDoc(contactosRef, {
-        nombre,
-        contacto,
-        servicio,
-        mensaje,
+      const payload = {
+        datosEnvioCRM,
         estado: 'pendiente',
-        fechaEnvio: new Date()
-      });
+        fechaEnvio: new Date(),
+        tipoLead: 'pre_diagnostico_tecnico'
+      };
 
-      alert('Mensaje enviado ✓ Te contactaré hoy mismo.');
+      const leadsRef = collection(db, 'contactos');
+      await addDoc(leadsRef, payload);
+
+      step3El && (step3El.style.display = 'none');
+      if (step1El) step1El.style.display = 'none';
+      if (step2El) step2El.style.display = 'none';
+      if (successScreenEl) successScreenEl.style.display = 'block';
+
+      const contactStatusEl = document.getElementById('contactStatus');
+      if (contactStatusEl) contactStatusEl.textContent = '';
+
       contactForm.reset();
+      setStep(1);
     } catch (error) {
-      console.error('Error enviando el formulario:', error);
-      alert('Error al enviar el mensaje. Revisa la consola y vuelve a intentarlo.');
+      console.error('Error enviando el pre-diagnóstico:', error);
+      alert('Error al enviar la solicitud. Revisa la consola y vuelve a intentarlo.');
     } finally {
-      btnEnviar.disabled = false;
-      btnEnviar.textContent = originalText;
+      if (btnEnviar) {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = originalText;
+      }
     }
   });
 
