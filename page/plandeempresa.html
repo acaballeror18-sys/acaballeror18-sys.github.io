@@ -53,6 +53,7 @@
   .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { width: 100%; }
+  .nav-actions { display: flex; align-items: center; gap: 1rem; }
   .nav-cta { font-family: var(--mono); font-size: 0.75rem; padding: 0.6rem 1.4rem; border: 1px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; text-decoration: none; }
   .nav-cta:hover { background: var(--accent); color: var(--bg); }
 
@@ -429,6 +430,52 @@
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  .channels {
+    margin-top: 1.25rem;
+    border: 1px solid #1e293b;
+    background: rgba(2,6,23,0.55);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .channels-title {
+    color: #e2e8f0;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .channels-row {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .channel-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid #1e293b;
+    border-radius: 999px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.3px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+  .channel-link:hover {
+    border-color: #06b6d4;
+    color: #06b6d4;
+    background: rgba(6,182,212,0.08);
+  }
+
+  @media (max-width: 600px) {
+    .channels-row { flex-direction: column; align-items: stretch; }
+    .channel-link { width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -538,7 +585,23 @@
     <li><a href="#precios">Precios</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a href="#contacto" class="nav-cta">Pedir presupuesto</a>
+  <div class="nav-actions">
+    <div class="social-links">
+      <a href="https://instagram.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://tiktok.com/@desmontapro" target="_blank" rel="noopener" class="social-btn" title="TikTok">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+      <a href="https://facebook.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" class="social-btn" title="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+    </div>
+    <a href="#contacto" class="nav-cta">Pedir presupuesto</a>
+  </div>
   <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
     <span></span><span></span><span></span>
   </button>
@@ -806,64 +869,137 @@
 </div>
 
 <!-- CONTACTO -->
-<div id="contacto" style="border-top:1px solid var(--border); padding:6rem 0;">
+  <div id="contacto" style="border-top:1px solid var(--border); padding:6rem 0;">
   <div style="max-width:1200px; margin:0 auto; padding:0 4rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem;">
     <div>
-      <div class="section-label">Contacto</div>
-      <h2>¿Tu equipo<br>da problemas?</h2>
-      <p class="section-sub">// Cuéntame qué le pasa. Te respondo hoy mismo.</p>
+      <div class="section-label">Pre-Diagnóstico Técnico</div>
+      <h2>Inicia un flujo<br>de asistencia guiada</h2>
+      <p class="section-sub">// Completa 3 pasos y recibe respuesta en menos de 15 minutos (SLA estimado).</p>
       <div class="contact-info-item"><span class="ci-label">WhatsApp</span><span class="ci-value">+34 6XX XXX XXX</span></div>
       <div class="contact-info-item"><span class="ci-label">Email</span><span class="ci-value">info@desmontapro.es</span></div>
       <div class="contact-info-item"><span class="ci-label">Dirección</span><span class="ci-value">Villanueva de la Serena, Badajoz</span></div>
       <div class="contact-info-item"><span class="ci-label">Horario</span><span class="ci-value">L-V 10:00-14:00 · 17:00-20:00 · S 10:00-14:00</span></div>
       <div class="contact-info-item" style="border:none;"><span class="ci-label">Zona</span><span class="ci-value">Badajoz · Don Benito · Comarca</span></div>
-
-      <!-- SOCIAL LINKS -->
-      <div style="margin-top:2rem; display:flex; flex-direction:column; gap:1rem;">
-        <div class="tech-badge">📡 También hacemos soporte remoto</div>
-        <div style="display:flex; align-items:center; gap:1rem; margin-top:0.5rem;">
-          <span style="font-family:var(--mono); font-size:0.65rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Redes</span>
-          <div class="social-links">
-            <!-- Instagram -->
-            <a href="https://instagram.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Instagram">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <!-- TikTok -->
-            <a href="https://tiktok.com/@desmontapro" target="_blank" rel="noopener" class="social-btn" title="TikTok">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-            </a>
-            <!-- Facebook -->
-            <a href="https://facebook.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Facebook">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <!-- WhatsApp -->
-            <a href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" class="social-btn" title="WhatsApp">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <div class="contact-form">
-      <div class="form-group"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
-      <div class="form-group"><label>Teléfono / Email</label><input type="text" placeholder="Para contactarte"></div>
-      <div class="form-group">
-        <label>Tipo de servicio</label>
-        <select>
-          <option value="">Selecciona un servicio...</option>
-          <option>Reparación de hardware</option>
-          <option>Formateo / Software</option>
-          <option>Montaje de PC</option>
-          <option>Mantenimiento</option>
-          <option>Soporte para empresa</option>
-          <option>Redes y conectividad</option>
-          <option>Otro</option>
-        </select>
+    <div class="contact-form" style="gap:0;">
+      <form id="contactForm" style="display:contents;" novalidate>
+        <div id="step1" class="step-panel">
+          <div class="section-label" style="margin-bottom:0.7rem;">Paso 1 · Equipamiento</div>
+          <div class="form-group">
+            <label for="equipamientoInput">Selecciona el equipamiento</label>
+            <select id="equipamientoInput" name="equipamiento" required>
+              <option value="">Selecciona...</option>
+              <option value="Reparación de Hardware">Reparación de Hardware</option>
+              <option value="Formateo & Sistema">Formateo & Sistema</option>
+              <option value="PC a Medida">PC a Medida</option>
+              <option value="Mantenimiento Preventivo">Mantenimiento Preventivo</option>
+              <option value="Soporte para Empresas">Soporte para Empresas</option>
+              <option value="Redes & Conectividad">Redes & Conectividad</option>
+              <option value="Otro servicio">Otro servicio</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div id="step2" class="step-panel" style="display:none;">
+          <div class="section-label" style="margin-bottom:0.7rem;">Paso 2 · Incidencia</div>
+          <div class="form-group">
+            <label for="incidenciaInput">Selecciona la incidencia</label>
+            <select id="incidenciaInput" name="incidencia" required>
+              <option value="">Selecciona...</option>
+              <option value="Fallo de hardware">Fallo de hardware</option>
+              <option value="Rendimiento y software">Rendimiento y software</option>
+              <option value="Mantenimiento preventivo">Mantenimiento preventivo</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="step3" class="step-panel" style="display:none;">
+          <div class="form-group" id="otroServicioWrap" style="display:none; margin-top:-0.2rem;">
+            <label for="otroServicioInput">Especifica el servicio</label>
+            <input id="otroServicioInput" name="otroServicio" type="text" placeholder="Especifica el servicio"/>
+          </div>
+
+          <div class="section-label" style="margin-bottom:0.7rem;">Paso 3 · Datos de contacto</div>
+
+          <div class="form-group">
+            <label for="razonInput">Nombre</label>
+            <input id="razonInput" name="razon" type="text" placeholder="Nombre" required>
+          </div>
+
+
+          <div class="form-group">
+            <label for="telefonoInput">Teléfono</label>
+            <input id="telefonoInput" name="telefono" type="tel" placeholder="Número de teléfono" required inputmode="tel">
+          </div>
+
+          <div class="form-group" style="margin-top:0.5rem;">
+            <label class="rgpd-label" style="display:flex; align-items:flex-start; gap:0.6rem; cursor:pointer;">
+              <input id="rgpdInput" name="rgpd" type="checkbox" required style="margin-top:0.2rem;">
+              <span style="color:var(--muted); font-size:0.75rem; line-height:1.6;">
+                Acepto el tratamiento de mis datos conforme al RGPD para la gestión del pre-diagnóstico y la comunicación de seguimiento.
+                Declaro que la información facilitada es veraz.
+              </span>
+            </label>
+          </div>
+
+          <div class="form-group" style="margin-top:1rem;">
+            <label for="mensajeInput">Descripción breve (opcional)</label>
+            <textarea id="mensajeInput" name="mensaje" placeholder="// Indica síntomas, desde cuándo ocurre y cualquier detalle relevante..."></textarea>
+          </div>
+
+          <input type="hidden" id="utmSource" name="utmSource" value="Google_Ads">
+          <input type="hidden" id="utmMedium" name="utmMedium" value="Campaña_B2B_2026">
+          <input type="hidden" id="utm_source" name="utm_source" value="">
+          <input type="hidden" id="utm_medium" name="utm_medium" value="">
+          <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+        </div>
+
+        <div id="stepActions" class="step-actions">
+          <button type="button" id="btnBack" class="btn-outline" style="display:none; padding:1rem; width:100%;">← Atrás</button>
+          <button type="button" id="btnNext" class="btn-primary" style="padding:1.1rem; font-size:0.85rem; width:100%; margin-top:0.8rem;">Continuar →</button>
+          <button type="submit" id="btnEnviar" class="btn-primary" style="display:none; padding:1.1rem; font-size:0.85rem; width:100%; margin-top:0.8rem;">Enviar pre-diagnóstico →</button>
+        </div>
+
+        <div id="contactStatus" style="font-family:var(--mono); font-size:0.75rem; color:var(--accent3); margin-top:1rem; min-height:1.2rem;"></div>
+      </form>
+
+      <div id="successScreen" style="display:none;">
+        <div class="section-label" style="margin-bottom:0.8rem;">Registro confirmado</div>
+        <h2 style="margin-bottom:1rem;">Solicitud recibida ✓</h2>
+        <p class="section-sub" style="margin-bottom:1.5rem; max-width:none;">
+          Hemos registrado tu pre-diagnóstico. Un asesor técnico se pondrá en contacto contigo en menos de 15 minutos (SLA estimado),
+          revisando la incidencia indicada y proponiéndote el siguiente paso.
+        </p>
+
+
+          <div class="channels" aria-label="Canales de Asistencia y Comunicación Oficial">
+          <div class="channels-title">Canales de Asistencia y Comunicación Oficial</div>
+          <div class="channels-row">
+            <a class="channel-link" href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp - Soporte técnico directo">WhatsApp</a>
+            <a class="channel-link" href="https://www.linkedin.com/company/desmontapro" target="_blank" rel="noopener" aria-label="LinkedIn - Conexión corporativa">LinkedIn</a>
+            <a class="channel-link" href="https://www.instagram.com/desmontapro" target="_blank" rel="noopener" aria-label="Instagram - Casos de éxito">Instagram</a>
+          </div>
+        </div>
+
+        <div id="contactStatus" style="font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-top:1.1rem; min-height:1.2rem;">
+          Muchas gracias por confiar en DesmontaPro.
+        </div>
       </div>
-      <div class="form-group"><label>Describe el problema</label><textarea placeholder="// Cuéntame qué síntomas tiene el equipo, cuándo empezó, modelo si lo sabes..."></textarea></div>
-      <button class="btn-primary" style="width:100%; padding:1.1rem; font-size:0.85rem;" onclick="alert('Mensaje enviado ✓ Te contactaré hoy mismo.')">Enviar mensaje →</button>
-      <p style="font-family:var(--mono); font-size:0.65rem; color:var(--muted); text-align:center; line-height:1.8;">// También puedes contactar directamente por WhatsApp<br>// Respondo en menos de 2 horas en horario de tienda</p>
+
+      <div class="channels" aria-label="Canales de Asistencia y Comunicación Oficial">
+        <div class="channels-title">Canales de Asistencia y Comunicación Oficial</div>
+        <div class="channels-row">
+          <a class="channel-link" href="https://wa.me/346XXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp - Soporte técnico directo">WhatsApp</a>
+          <a class="channel-link" href="https://www.linkedin.com/company/desmontapro" target="_blank" rel="noopener" aria-label="LinkedIn - Conexión corporativa">LinkedIn</a>
+          <a class="channel-link" href="https://www.instagram.com/desmontapro" target="_blank" rel="noopener" aria-label="Instagram - Casos de éxito">Instagram</a>
+        </div>
+      </div>
+
+      <p style="font-family:var(--mono); font-size:0.65rem; color:var(--muted); text-align:center; line-height:1.8; margin-top:1rem;">
+        Respuesta objetivo: menos de 15 minutos (SLA estimado).
+      </p>
     </div>
   </div>
 </div>
@@ -881,6 +1017,7 @@
   <div class="footer-links">
     <span class="footer-link" onclick="openModal('legalModal')">Aviso legal</span>
     <span class="footer-link" onclick="openModal('legalModal')">Privacidad</span>
+<<<<<<< HEAD
     <!-- Social en footer también -->
     <div class="social-links">
       <a href="https://instagram.com/desmontapro" target="_blank" rel="noopener" class="social-btn" title="Instagram">
@@ -896,13 +1033,35 @@
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </a>
     </div>
+=======
+>>>>>>> 0e2b3b60e4711c0c9ad56c7f56e8e0ed2c842602
   </div>
 </footer>
 
-<script>
-  // Hamburger menu
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js';
+  import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCNKr_86BoAINJyc1LhZpmvqWrC3_OQuYY",
+    authDomain: "plan-de-empresa-12307.firebaseapp.com",
+    projectId: "plan-de-empresa-12307",
+    storageBucket: "plan-de-empresa-12307.firebasestorage.app",
+    messagingSenderId: "111498902920",
+    appId: "1:111498902920:web:bd84208f5b05e3e12b8e3d",
+    measurementId: "G-RLFN38HP1K"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  getAnalytics(app);
+  const db = getFirestore(app);
+
   const hamburger = document.getElementById('hamburgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
+  const contactForm = document.getElementById('contactForm');
+  const btnEnviar = document.getElementById('btnEnviar');
+  const contactStatus = document.getElementById('contactStatus');
 
   function toggleMenu() {
     const isOpen = mobileMenu.classList.toggle('open');
@@ -920,7 +1079,6 @@
     });
   });
 
-  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
@@ -928,12 +1086,10 @@
     });
   });
 
-  // Nav scroll effect
   window.addEventListener('scroll', () => {
     document.querySelector('nav').style.borderBottomColor = window.scrollY > 50 ? 'var(--accent)' : 'var(--border)';
   });
 
-  // Scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -950,7 +1106,6 @@
     observer.observe(el);
   });
 
-  // Modal functions
   function openModal(id) {
     document.getElementById(id).classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -961,19 +1116,207 @@
     document.body.style.overflow = '';
   }
 
-  // Close modal on overlay click
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeModal(overlay.id);
     });
   });
 
-  // Close on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
     }
   });
+
+  const step1El = document.getElementById('step1');
+  const step2El = document.getElementById('step2');
+  const step3El = document.getElementById('step3');
+  const successScreenEl = document.getElementById('successScreen');
+  const btnBackEl = document.getElementById('btnBack');
+  const btnNextEl = document.getElementById('btnNext');
+
+  function setStep(step) {
+    if (!step1El || !step2El || !step3El) return;
+    const show1 = step === 1;
+    const show2 = step === 2;
+    const show3 = step === 3;
+
+    step1El.style.display = show1 ? 'block' : 'none';
+    step2El.style.display = show2 ? 'block' : 'none';
+    step3El.style.display = show3 ? 'block' : 'none';
+
+    if (btnBackEl) btnBackEl.style.display = step > 1 ? 'block' : 'none';
+    if (btnNextEl) btnNextEl.style.display = step < 3 ? 'block' : 'none';
+    if (btnEnviar) btnEnviar.style.display = step === 3 ? 'block' : 'none';
+
+    const contactStatusEl = document.getElementById('contactStatus');
+    if (contactStatusEl) contactStatusEl.textContent = '';
+
+    if (successScreenEl) successScreenEl.style.display = 'none';
+  }
+
+  function setupStepper() {
+    const equipamientoInput = document.getElementById('equipamientoInput');
+    const incidenciaInput = document.getElementById('incidenciaInput');
+    const razonInput = document.getElementById('razonInput');
+    const telefonoInput = document.getElementById('telefonoInput');
+    const rgpdInput = document.getElementById('rgpdInput');
+    const otroServicioWrap = document.getElementById('otroServicioWrap');
+    const otroServicioInput = document.getElementById('otroServicioInput');
+
+
+    if (!equipamientoInput || !incidenciaInput || !razonInput || !telefonoInput || !rgpdInput) return;
+
+    let currentStep = 1;
+    setStep(1);
+
+    if (btnNextEl) {
+      btnNextEl.addEventListener('click', () => {
+        const contactStatusEl = document.getElementById('contactStatus');
+
+        if (currentStep === 1) {
+          if (!equipamientoInput.value) {
+            if (contactStatusEl) contactStatusEl.textContent = 'Selecciona el equipamiento para continuar.';
+            return;
+          }
+          currentStep = 2;
+          setStep(2);
+          return;
+        }
+
+        if (currentStep === 2) {
+          if (!incidenciaInput.value) {
+            if (contactStatusEl) contactStatusEl.textContent = 'Selecciona la incidencia para continuar.';
+            return;
+          }
+          currentStep = 3;
+          setStep(3);
+          return;
+        }
+      });
+    }
+
+    if (btnBackEl) {
+      btnBackEl.addEventListener('click', () => {
+        if (currentStep === 2) {
+          currentStep = 1;
+          setStep(1);
+          return;
+        }
+        if (currentStep === 3) {
+          currentStep = 2;
+          setStep(2);
+          return;
+        }
+      });
+    }
+  }
+
+  setupStepper();
+
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const razonInput = document.getElementById('razonInput');
+    const telefonoInput = document.getElementById('telefonoInput');
+    const equipamientoInput = document.getElementById('equipamientoInput');
+    const incidenciaInput = document.getElementById('incidenciaInput');
+    const rgpdInput = document.getElementById('rgpdInput');
+    const utmSourceInput = document.getElementById('utmSource') || document.getElementById('utm_source');
+    const utmMediumInput = document.getElementById('utmMedium') || document.getElementById('utm_medium');
+    const otroServicioWrap = document.getElementById('otroServicioWrap');
+    const otroServicioInput = document.getElementById('otroServicioInput');
+
+    if (!razonInput || !telefonoInput || !equipamientoInput || !incidenciaInput || !rgpdInput || !utmSourceInput || !utmMediumInput) {
+      alert('El formulario no está completo o falta algún campo requerido.');
+      return;
+    }
+
+    const razon = razonInput.value.trim();
+    const telefono = telefonoInput.value.trim();
+    const equipo = equipamientoInput.value;
+    const averia = incidenciaInput.value;
+    const utm_source = utmSourceInput.value || '';
+    const utm_medium = utmMediumInput.value || '';
+    const timestampSLA = new Date().toISOString();
+
+    if (!equipo || !averia || !razon || !telefono) {
+      alert('Completa todos los campos obligatorios antes de enviar.');
+      return;
+    }
+
+    if (!rgpdInput.checked) {
+      rgpdInput.focus();
+      alert('Debes aceptar el RGPD para enviar tu solicitud.');
+      return;
+    }
+
+    const originalText = btnEnviar ? btnEnviar.textContent : '';
+    if (btnEnviar) {
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = '[ ENVIANDO... ]';
+    }
+
+    const servicio = equipamientoInput.value;
+    const otroServicio = (servicio === 'Otro servicio' ? (otroServicioInput ? otroServicioInput.value.trim() : '') : '');
+
+    if (servicio === 'Otro servicio' && otroServicioInput && !otroServicio) {
+      if (otroServicioInput) {
+        otroServicioInput.focus();
+      }
+      alert('Indica el servicio en “Especifica el servicio”.');
+      if (btnEnviar) {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = originalText;
+      }
+      return;
+    }
+
+    try {
+      const datosEnvioCRM = {
+        nombre: razon,
+        contacto: telefono,
+        servicio,
+        otroServicio,
+        mensaje: (document.getElementById('mensajeInput') ? document.getElementById('mensajeInput').value.trim() : ''),
+        utm_source,
+        utm_medium,
+        timestampSLA
+      };
+
+      const payload = {
+        datosEnvioCRM,
+        estado: 'pendiente',
+        fechaEnvio: new Date(),
+        tipoLead: 'pre_diagnostico_tecnico'
+      };
+
+      const leadsRef = collection(db, 'contactos');
+      await addDoc(leadsRef, payload);
+
+      step3El && (step3El.style.display = 'none');
+      if (step1El) step1El.style.display = 'none';
+      if (step2El) step2El.style.display = 'none';
+      if (successScreenEl) successScreenEl.style.display = 'block';
+
+      const contactStatusEl = document.getElementById('contactStatus');
+      if (contactStatusEl) contactStatusEl.textContent = '';
+
+      contactForm.reset();
+      setStep(1);
+    } catch (error) {
+      console.error('Error enviando el pre-diagnóstico:', error);
+      alert('Error al enviar la solicitud. Revisa la consola y vuelve a intentarlo.');
+    } finally {
+      if (btnEnviar) {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = originalText;
+      }
+    }
+  });
+
+  window.openModal = openModal;
+  window.closeModal = closeModal;
 </script>
 </body>
 </html>

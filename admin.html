@@ -1,0 +1,763 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DesmontaPro Admin Panel</title>
+  <style>
+    :root {
+      --bg: #071021;
+      --panel: #0f1724;
+      --border: rgba(0,229,255,0.18);
+      --accent: #00e5ff;
+      --accent2: #4dd2ff;
+      --muted: #7a8ca6;
+      --text: #e8f5ff;
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --danger: #fb7185;
+      --danger-strong: #ff4d6a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Space Mono', monospace, ui-monospace, monospace;
+      background: linear-gradient(180deg, #050b18 0%, #071021 100%);
+      color: var(--text);
+    }
+    .hidden { display: none !important; }
+    .page { max-width: 1180px; margin: 24px auto; padding: 16px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(0,229,255,0.12);
+      border-radius: 20px;
+      box-shadow: 0 22px 50px rgba(0,0,0,0.35);
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+    .header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-start; }
+    .header h1 { margin: 0; font-size: 1.6rem; letter-spacing: 0.08em; }
+    .header p { margin: 8px 0 0; color: var(--muted); max-width: 720px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .badge.auth.connected { background: rgba(74,222,128,0.12); border-color: rgba(74,222,128,0.35); color: #befbc8; animation: pulse 1.8s ease-in-out infinite; }
+    .badge.auth.disconnected { background: rgba(251,113,133,0.12); border-color: rgba(251,113,133,0.35); color: #ffb3c1; }
+    .badge.role.admin { background: rgba(251,113,133,0.12); border-color: rgba(251,113,133,0.35); color: #ffbcc9; }
+    .badge.role.tech { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.35); color: #ffe6a4; }
+    .badge.stock { background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.35); color: #ffe6a4; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.7;} }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+    .field { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 16px; }
+    label { min-width: 120px; color: var(--muted); font-size: 0.86rem; }
+    input, select, textarea { width: 100%; max-width: 100%; border: 1px solid rgba(0,229,255,0.12); border-radius: 12px; background: #081222; color: var(--text); padding: 12px 14px; font-family: inherit; font-size: 0.95rem; }
+    textarea { resize: vertical; min-height: 96px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(0,229,255,0.12);
+      color: var(--accent);
+      padding: 11px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease;
+      white-space: nowrap;
+    }
+    .button:hover { transform: translateY(-1px); background: rgba(0,229,255,0.18); }
+    .button:disabled, .button.disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+    .section-title { margin: 0 0 10px; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; margin-top: 18px; }
+    .metric { padding: 18px; border-radius: 18px; background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12); }
+    .metric h2 { margin: 0; font-size: 1.8rem; color: var(--text); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+    .metric.alert { border-color: rgba(251,191,36,0.22); background: rgba(251,191,36,0.08); }
+    .metric.alert h2 { color: var(--warning); animation: blink 1.5s infinite; }
+    .panel-header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .panel-header .controls { display: flex; flex-wrap: wrap; gap: 10px; }
+    .table-wrapper { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-family: inherit; }
+    th, td { padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; vertical-align: top; }
+    th { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.08em; }
+    td code { font-size: 0.78rem; color: var(--muted); background: rgba(255,255,255,0.04); padding: 2px 6px; border-radius: 6px; }
+    tr.sla-alert { background: rgba(251,191,36,0.12); }
+    .row-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .notice { margin-top: 16px; padding: 16px; border-radius: 16px; background: rgba(0,229,255,0.05); border: 1px solid rgba(0,229,255,0.12); color: var(--muted); }
+    pre.json { background: #081222; border: 1px solid rgba(0,229,255,0.08); border-radius: 16px; padding: 16px; overflow-x: auto; color: var(--muted); }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+    .modal-terminal {
+      width: min(100%, 760px);
+      background: #06121f;
+      border: 2px solid rgba(0,229,255,0.32);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+      border-radius: 18px;
+      padding: 22px;
+      color: var(--text);
+    }
+    .terminal-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .terminal-header h2 { margin: 0; font-size: 1.1rem; letter-spacing: 0.08em; }
+    .canvas-wrapper { background: #081822; border: 1px solid rgba(0,229,255,0.18); border-radius: 16px; padding: 16px; }
+    #signatureCanvas { width: 100%; height: 220px; border-radius: 12px; background: #05101b; touch-action: none; cursor: crosshair; }
+    .signature-hint { margin: 10px 0 0; color: var(--muted); font-size: 0.85rem; }
+    .signature-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+    @media (max-width: 980px) { .metrics { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 720px) { .header, .panel-header { flex-direction: column; } .metrics { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <div class="header card">
+      <div>
+        <h1>DesmontaPro · Panel Admin</h1>
+        <p>Infraestructura web serverless + Firebase para control de tickets, inventario y firmas de recepción.</p>
+      </div>
+      <div class="badges">
+        <span id="authBadge" class="badge auth disconnected hidden">AUTH_DISCONNECTED</span>
+        <span id="roleBadge" class="badge role tech hidden">ROL_DESCONOCIDO</span>
+        <span id="inventoryHeaderBadge" class="badge stock hidden">[ ALERTA_STOCK: Reposición de Insumos Requerida ]</span>
+        <span id="userEmailBadge" class="badge hidden" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);">usuario@ejemplo</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="section-title">Acceso administrativo</p>
+      <div class="field"><label for="adminEmail">Email</label><input id="adminEmail" type="text" placeholder="admin@desmontapro.es"></div>
+      <div class="field" style="align-items:center;"><label for="adminPassword">Contraseña</label><input id="adminPassword" type="password" placeholder="******"><button id="toggleEye" class="button" style="flex:0 0 auto;">[ Ver ]</button></div>
+      <div class="field" style="justify-content:flex-start;flex-wrap:wrap;gap:12px;"><button id="loginBtn" class="button">Login</button><button id="logoutBtn" class="button hidden">Logout</button><span id="loginStatus" style="color:var(--muted);"></span></div>
+    </div>
+
+    <div class="card hidden" id="dashboardCard">
+      <p class="section-title">Resumen</p>
+      <div class="metrics">
+        <div class="metric"><h2 id="totalTickets">0</h2><span>Tickets totales</span></div>
+        <div class="metric"><h2 id="pendingTickets">0</h2><span>Tickets pendientes</span></div>
+        <div class="metric"><h2 id="candidateCount">0</h2><span>Purga RGPD candidatos</span></div>
+        <div class="metric hidden" id="inventoryAlert"><h2>[ ALERTA_STOCK ]</h2><span>Reposición crítica de insumos</span></div>
+      </div>
+    </div>
+
+    <div class="card hidden" id="ticketsCard">
+      <p class="section-title">Gestión de tickets</p>
+      <div class="panel-header">
+        <div class="controls"><input id="ticketSearch" type="text" placeholder="Buscar cliente o correo..." style="min-width:280px;"><button id="btnRefresh" class="button">REFRESH_DB</button></div>
+        <div class="controls"><button class="button" data-filter="Todos">Todos</button><button class="button" data-filter="Pendiente">Pendientes</button><button class="button" data-filter="En Taller">En Taller</button><button class="button" data-filter="Completados">Completados</button></div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Correo</th>
+              <th>Estado</th>
+              <th>Creado</th>
+              <th>Nota interna</th>
+              <th>SLA</th>
+              <th>ID / Tracking</th>
+            </tr>
+          </thead>
+          <tbody id="ticketsBody"><tr><td colspan="7" style="padding:18px;color:var(--muted);">No hay tickets cargados.</td></tr></tbody>
+        </table>
+      </div>
+      <div class="notice">Los cambios se guardan en Firestore y se registran en <strong>logs_security</strong>.</div>
+    </div>
+
+    <div class="card hidden" id="purgeCard">
+      <p class="section-title">Purga RGPD</p>
+      <div class="field" style="flex-wrap:wrap; justify-content:flex-start; gap:14px;"><span>Tickets completados + 30 días:</span><span id="candidateCountBadge" style="font-family:var(--mono); color:var(--accent);">0</span><button id="btnCheckPurge" class="button">Comprobar</button><button id="btnPurge" class="button">Eliminar</button></div>
+      <div class="list" id="purgeList"></div>
+      <div class="notice" id="purgeNote">Administradores pueden purgar sólo después de confirmar con PURGE.</div>
+    </div>
+
+    <div class="card hidden" id="logsCard">
+      <p class="section-title">Últimos logs</p>
+      <pre id="logsPreview" class="json">Cargando…</pre>
+    </div>
+  </section>
+
+  <div id="signatureModal" class="modal-overlay hidden">
+    <div class="modal-terminal">
+      <div class="terminal-header">
+        <h2>FIRMA DE RECEPCIÓN</h2>
+        <button id="closeSignature" class="button">[ CERRAR ]</button>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas id="signatureCanvas"></canvas>
+        <p class="signature-hint">Dibuja con ratón o pantalla táctil, luego guarda para adjuntar al ticket.</p>
+      </div>
+      <div class="signature-actions">
+        <button id="clearSignature" class="button">[ LIMPIAR ]</button>
+        <button id="saveSignature" class="button">[ GUARDAR ]</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+    import { getFirestore, collection, addDoc, query, where, getDocs, deleteDoc, doc, orderBy, limit, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
+    /*
+      Admin panel (DesmontaPro) - Código cliente
+      ------------------------------------------------
+      - Autenticación: Firebase Auth (email/password)
+      - Persistencia: Firestore (colecciones: tickets, inventario, logs_security)
+      - Funcionalidades críticas: RBAC, notas internas, SLA, purga RGPD,
+        firma digital (canvas) y simulación JIT de inventario.
+      - Observaciones: las operaciones críticas (purga, descuentos de stock)
+        deberían reforzarse con reglas de seguridad de Firestore y Cloud
+        Functions para evitar condiciones de carrera en producción.
+    */
+    const firebaseConfig = {
+      apiKey: 'AIzaSyCNKr_86BoAINJyc1LhZpmvqWrC3_OQuYY',
+      authDomain: 'plan-de-empresa-12307.firebaseapp.com',
+      projectId: 'plan-de-empresa-12307',
+      storageBucket: 'plan-de-empresa-12307.firebasestorage.app',
+      messagingSenderId: '111498902920',
+      appId: '1:111498902920:web:bd84208f5b05e3e12b8e3d',
+      measurementId: 'G-RLFN38HP1K'
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const ADMIN_EMAIL = 'admin@desmontapro.es';
+    const TECH_EMAILS = ['tecnico@desmontapro.es', 'soporte@desmontapro.es'];
+    // Firestore collection names used by the admin panel.
+    // - `tickets`: principales órdenes de trabajo
+    // - `logs_security`: registro de auditoría y seguridad (unificado en inglés para integraciones externas)
+    const TICKET_COLLECTION = 'tickets';
+    const LOG_COLLECTION = 'logs_security';
+    const STOCK_COLLECTION = 'inventario';
+    const STOCK_ITEM = 'pasta_termica';
+    const LOW_STOCK_THRESHOLD = 5;
+
+    let ticketsCache = [];
+    let currentFilter = 'Todos';
+    let currentSearch = '';
+    let currentRole = 'TÉCNICO';
+    let currentSignatureTicket = null;
+    let canvasContext = null;
+    let drawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    const authBadge = document.getElementById('authBadge');
+    const roleBadge = document.getElementById('roleBadge');
+    const ticketsCard = document.getElementById('ticketsCard');
+    const purgeCard = document.getElementById('purgeCard');
+    const logsCard = document.getElementById('logsCard');
+    const dashboardCard = document.getElementById('dashboardCard');
+    const candidateCountBadge = document.getElementById('candidateCountBadge');
+    const ticketSearch = document.getElementById('ticketSearch');
+    const ticketsBody = document.getElementById('ticketsBody');
+    const purgeList = document.getElementById('purgeList');
+    const loginStatus = document.getElementById('loginStatus');
+    const inventoryAlert = document.getElementById('inventoryAlert');
+    const signatureModal = document.getElementById('signatureModal');
+    const signatureCanvas = document.getElementById('signatureCanvas');
+    const clearSignatureButton = document.getElementById('clearSignature');
+    const saveSignatureButton = document.getElementById('saveSignature');
+    const closeSignatureButton = document.getElementById('closeSignature');
+
+    // Inicialización del contexto 2D del canvas para la firma.
+    // Se realiza de forma inmediata porque el <canvas> está definido antes del script.
+    // `canvasContext` se usa para dibujar y para verificar si la firma está vacía.
+    canvasContext = signatureCanvas.getContext('2d');
+
+    /**
+     * Comprueba si el canvas está vacío (sin trazos).
+     * Utilizamos la data de píxeles para detectar cualquier alfa > 0.
+     */
+    function isCanvasBlank() {
+      try {
+        const ratio = window.devicePixelRatio || 1;
+        const w = signatureCanvas.width;
+        const h = signatureCanvas.height;
+        const data = canvasContext.getImageData(0, 0, w, h).data;
+        for (let i = 3; i < data.length; i += 4) {
+          if (data[i] !== 0) return false; // canal alpha distinto de 0 → hay dibujo
+        }
+        return true;
+      } catch (e) {
+        // Si por alguna razón no podemos leer los píxeles, asumimos que no está en blanco.
+        return false;
+      }
+    }
+    // Force touch behaviour and initial sizing for high-DPI displays.
+    signatureCanvas.style.touchAction = 'none';
+    // Ajuste inicial del tamaño del canvas para que el contexto esté listo.
+    resizeCanvas();
+
+    function sanitize(value) {
+      if (value === null || value === undefined) return '';
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#x27;')
+        .replaceAll('/', '&#x2F;');
+    }
+
+    function formatDate(value) {
+      if (!value) return '--';
+      const millis = typeof value.toMillis === 'function' ? value.toMillis() : (typeof value === 'number' ? value : null);
+      if (!millis) return '--';
+      const date = new Date(millis);
+      return `${date.toISOString().slice(0,16).replace('T',' ')}`;
+    }
+
+    function determineRole(email) {
+      if (!email) return 'TÉCNICO';
+      if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return 'ADMIN_TOTAL';
+      return TECH_EMAILS.includes(email.toLowerCase()) ? 'TÉCNICO' : 'TÉCNICO';
+    }
+
+    function updateBadges(user) {
+      const connected = !!user;
+      authBadge.classList.remove('hidden', 'connected', 'disconnected');
+      authBadge.classList.add(connected ? 'connected' : 'disconnected');
+      authBadge.textContent = connected ? 'AUTH_CONNECTED' : 'AUTH_DISCONNECTED';
+      if (connected) {
+        currentRole = determineRole(user.email);
+        roleBadge.classList.remove('hidden', 'admin', 'tech');
+        roleBadge.classList.add(currentRole === 'ADMIN_TOTAL' ? 'admin' : 'tech');
+        roleBadge.textContent = currentRole;
+        const emailBadge = document.getElementById('userEmailBadge');
+        if (emailBadge) { emailBadge.textContent = user.email; emailBadge.classList.remove('hidden'); }
+      } else {
+        roleBadge.classList.add('hidden');
+        document.getElementById('userEmailBadge')?.classList.add('hidden');
+      }
+    }
+
+    function setAuthenticatedUI(user) {
+      const authenticated = !!user;
+      ticketsCard.classList.toggle('hidden', !authenticated);
+      purgeCard.classList.toggle('hidden', !authenticated);
+      logsCard.classList.toggle('hidden', !authenticated);
+      dashboardCard.classList.toggle('hidden', !authenticated);
+      document.getElementById('loginBtn').disabled = authenticated;
+      document.getElementById('logoutBtn').classList.toggle('hidden', !authenticated);
+      loginStatus.textContent = authenticated ? `Conectado como ${user.email}` : 'Sesión cerrada';
+      if (!authenticated) {
+        ticketsBody.innerHTML = '<tr><td colspan="7" style="padding:18px;color:var(--muted);">Inicia sesión para cargar tickets.</td></tr>';
+      }
+    }
+
+    function getSlaLabel(ticket) {
+      const estado = String(ticket.estado || '').toLowerCase();
+      if (!['pendiente', 'en taller'].includes(estado)) return '<span style="color:var(--muted);">OK</span>';
+      if (!ticket.fechaCreacion) return '<span style="color:var(--muted);">OK</span>';
+      const millis = typeof ticket.fechaCreacion.toMillis === 'function' ? ticket.fechaCreacion.toMillis() : ticket.fechaCreacion;
+      if (typeof millis !== 'number') return '<span style="color:var(--muted);">OK</span>';
+      const hours = (Date.now() - millis) / 36e5;
+      return hours > 48 ? '<strong style="color:var(--warning);">[SLA_VENCIDO]</strong>' : '<span style="color:var(--muted);">OK</span>';
+    }
+
+    // Renderiza la tabla de tickets en el DOM a partir de `ticketsCache`.
+    // Aplica búsqueda en tiempo real (`currentSearch`) y filtros (`currentFilter`).
+    // Cada fila incluye: select de estado, nota interna editable, botón de firma y botón para copiar el ID.
+    function renderTickets() {
+      const filtered = ticketsCache.filter(ticket => {
+        const q = currentSearch.trim().toLowerCase();
+        const content = `${ticket.clienteNombre || ''} ${ticket.clienteEmail || ''}`.toLowerCase();
+        const matchesSearch = q === '' || content.includes(q) || String(ticket.id || '').toLowerCase().includes(q);
+        const estado = String(ticket.estado || '').toLowerCase();
+        const matchesFilter = currentFilter === 'Todos' || estado === currentFilter.toLowerCase();
+        return matchesSearch && matchesFilter;
+      });
+
+      if (!filtered.length) {
+        ticketsBody.innerHTML = '<tr><td colspan="7" style="padding:18px;color:var(--muted);">No se encontraron tickets.</td></tr>';
+        return;
+      }
+
+      ticketsBody.innerHTML = filtered.map(ticket => {
+        const sla = getSlaLabel(ticket);
+        const currentStatus = String(ticket.estado || 'Pendiente');
+        const selectedPendiente = currentStatus === 'Pendiente' ? 'selected' : '';
+        const selectedEnTaller = currentStatus === 'En Taller' ? 'selected' : '';
+        const selectedCompletados = currentStatus === 'Completados' ? 'selected' : '';
+        return `
+          <tr class="${sla.includes('SLA_VENCIDO') ? 'sla-alert' : ''}">
+            <td>${sanitize(ticket.clienteNombre || '--')}</td>
+            <td>${sanitize(ticket.clienteEmail || '--')}</td>
+            <td>
+              <select id="status-${ticket.id}" style="width:100%;background:#081222;border:1px solid rgba(0,229,255,0.12);border-radius:12px;color:var(--text);padding:10px;font-family:inherit;">
+                <option value="Pendiente" ${selectedPendiente}>Pendiente</option>
+                <option value="En Taller" ${selectedEnTaller}>En Taller</option>
+                <option value="Completados" ${selectedCompletados}>Completados</option>
+              </select>
+              <button class="button" style="margin-top:10px;" onclick="window.updateTicketState('${ticket.id}')">Guardar estado</button>
+            </td>
+            <td>${formatDate(ticket.fechaCreacion)}</td>
+            <td>
+              <textarea id="note-${ticket.id}" rows="3" style="width:100%;background:#081222;border:1px solid rgba(0,229,255,0.12);border-radius:12px;color:var(--text);padding:10px;font-family:inherit;">${sanitize(ticket.notaInterna || '')}</textarea>
+              <div class="row-actions"><button class="button" onclick="window.saveTicketNote('${ticket.id}')">Guardar nota</button></div>
+            </td>
+            <td>${sla}</td>
+            <td>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                <code>${sanitize(ticket.id)}</code>
+                <button class="button" style="padding:8px 10px;" onclick="window.copyTicketId('${ticket.id}')">[ COPIAR_ID ]</button>
+              </div>
+              <div class="row-actions"><button class="button" onclick="window.openSignatureModal('${ticket.id}')">[ FIRMAR_RECEPCIÓN ]</button></div>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    // Copia el identificador único del ticket al portapapeles.
+    // Este ID es el token público que puede usar el cliente en la vista `index.html#tracking`.
+    window.copyTicketId = function(ticketId) {
+      navigator.clipboard.writeText(ticketId).then(() => {
+        alert('ID copiado al portapapeles: ' + ticketId);
+      }).catch(() => {
+        alert('No se pudo copiar el ID. Usa Ctrl+C manualmente.');
+      });
+    };
+
+    // Guarda la nota interna del taller en Firestore y registra el evento en logs.
+    window.saveTicketNote = async function(ticketId) {
+      const textarea = document.getElementById(`note-${ticketId}`);
+      if (!textarea) return;
+      const note = sanitize(textarea.value);
+      try {
+        await updateDoc(doc(db, TICKET_COLLECTION, ticketId), { notaInterna: note });
+        await logEvent(auth.currentUser?.email || 'anonimo', 'nota_interna', 'OK', `ticket:${ticketId}`);
+        textarea.style.borderColor = '#4ade80';
+        setTimeout(() => textarea.style.borderColor = 'rgba(0,229,255,0.12)', 1200);
+      } catch (error) {
+        console.error('Error guardando nota', error);
+        await logEvent(auth.currentUser?.email || 'anonimo', 'nota_interna', 'ERROR', `${ticketId} | ${error.message || error}`);
+      }
+    };
+
+    async function decrementStock() {
+      // Simula un trigger de backend para descontar insumo JIT cuando un ticket se completa.
+      // En un sistema productivo, esta lógica debería existir en Cloud Functions
+      // con control transaccional y bloqueo optimista/negociado.
+      try {
+        const stockQuery = query(collection(db, STOCK_COLLECTION), where('codigo', '==', STOCK_ITEM), limit(1));
+        const snap = await getDocs(stockQuery);
+        if (snap.empty) return null;
+        const itemDoc = snap.docs[0];
+        const currentStock = Number(itemDoc.data().stock || 0);
+        const nextStock = Math.max(0, currentStock - 1);
+        await updateDoc(doc(db, STOCK_COLLECTION, itemDoc.id), { stock: nextStock });
+        await logEvent(auth.currentUser?.email || 'anonimo', 'inventario_descuento', 'OK', `${STOCK_ITEM}:${nextStock}`);
+        return nextStock;
+      } catch (error) {
+        console.error('Error actualizando inventario', error);
+        await logEvent(auth.currentUser?.email || 'anonimo', 'inventario_descuento', 'ERROR', error.message || error);
+        return null;
+      }
+    }
+
+    async function checkInventoryAlerts() {
+      try {
+        const stockQuery = query(collection(db, STOCK_COLLECTION), where('codigo', '==', STOCK_ITEM), limit(1));
+        const snap = await getDocs(stockQuery);
+        if (snap.empty) {
+          inventoryAlert.classList.add('hidden');
+          document.getElementById('inventoryHeaderBadge')?.classList.add('hidden');
+          return;
+        }
+        const stockValue = Number(snap.docs[0].data().stock || 0);
+        if (stockValue < LOW_STOCK_THRESHOLD) {
+          inventoryAlert.classList.remove('hidden');
+          inventoryAlert.querySelector('h2').textContent = `[ ALERTA_STOCK ]`;
+          document.getElementById('inventoryHeaderBadge')?.classList.remove('hidden');
+        } else {
+          inventoryAlert.classList.add('hidden');
+          document.getElementById('inventoryHeaderBadge')?.classList.add('hidden');
+        }
+      } catch (error) {
+        console.error('Error comprobando inventario', error);
+      }
+    }
+
+    window.updateTicketState = async function(ticketId) {
+      // Actualiza el estado del ticket (UI -> Firestore).
+      // Si se marca como "Completados" se invoca la lógica de inventario JIT.
+      const select = document.getElementById(`status-${ticketId}`);
+      if (!select) return;
+      const estado = select.value;
+      const ticket = ticketsCache.find(item => item.id === ticketId) || {};
+      const previousState = String(ticket.estado || '').toLowerCase();
+      try {
+        await updateDoc(doc(db, TICKET_COLLECTION, ticketId), { estado });
+        await logEvent(auth.currentUser?.email || 'anonimo', 'estado_ticket', 'OK', `ticket:${ticketId} estado:${estado}`);
+        if (estado === 'Completados' && previousState !== 'completados') {
+          const stockAfter = await decrementStock();
+          if (stockAfter !== null && stockAfter < LOW_STOCK_THRESHOLD) {
+            inventoryAlert.classList.remove('hidden');
+          }
+        }
+        await fetchTickets();
+        await checkInventoryAlerts();
+      } catch (error) {
+        console.error('Error actualizando estado', error);
+        await logEvent(auth.currentUser?.email || 'anonimo', 'estado_ticket', 'ERROR', `${ticketId} | ${error.message || error}`);
+      }
+    };
+
+    // Recupera los tickets desde Firestore ordenados por fecha de creación (desc).
+    // Al finalizar, actualiza la UI y métricas.
+    async function fetchTickets() {
+      try {
+        const snap = await getDocs(query(collection(db, TICKET_COLLECTION), orderBy('fechaCreacion', 'desc')));
+        ticketsCache = snap.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+        renderTickets();
+        updateMetrics();
+      } catch (error) {
+        console.error('Error cargando tickets', error);
+      }
+    }
+
+    // Recupera los últimos logs de auditoría para previsualización rápida.
+    async function fetchLogs() {
+      const preview = document.getElementById('logsPreview');
+      preview.textContent = 'Cargando…';
+      try {
+        const snap = await getDocs(query(collection(db, LOG_COLLECTION), orderBy('fecha_hora', 'desc'), limit(10)));
+        preview.textContent = JSON.stringify(snap.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() })), null, 2);
+      } catch (error) {
+        console.error('Error cargando logs', error);
+        preview.textContent = 'Error cargando logs.';
+      }
+    }
+
+    // Inserta un documento de log en la colección `LOG_COLLECTION` (logs_security).
+    // Campos: id_log, usuario, evento, detalle, fecha_hora, resultado.
+    async function logEvent(usuario, evento, resultado = 'OK', detalle = '') {
+      try {
+        await addDoc(collection(db, LOG_COLLECTION), {
+          id_log: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+          usuario: sanitize(usuario || 'anonimo'),
+          evento: sanitize(evento),
+          detalle: sanitize(detalle),
+          fecha_hora: serverTimestamp(),
+          resultado: sanitize(resultado)
+        });
+      } catch (error) {
+        console.error('Error registrando log', error);
+      }
+    }
+
+    // Actualiza las métricas mostradas en el dashboard: totales, pendientes y candidatos a purga.
+    function updateMetrics() {
+      document.getElementById('totalTickets').textContent = String(ticketsCache.length);
+      document.getElementById('pendingTickets').textContent = String(ticketsCache.filter(t => String(t.estado || '').toLowerCase() === 'pendiente').length);
+      const candidates = ticketsCache.filter(ticket => {
+        const estado = String(ticket.estado || '').toLowerCase();
+        if (estado !== 'completados') return false;
+        if (!ticket.fechaCreacion) return false;
+        const millis = typeof ticket.fechaCreacion.toMillis === 'function' ? ticket.fechaCreacion.toMillis() : ticket.fechaCreacion;
+        return typeof millis === 'number' && millis < Date.now() - 30 * 24 * 60 * 60 * 1000;
+      });
+      candidateCountBadge.textContent = String(candidates.length);
+      document.getElementById('candidateCount').textContent = String(candidates.length);
+      purgeList.innerHTML = candidates.length ? candidates.map(ticket => `<div class="item" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);"><span>${sanitize(ticket.clienteNombre || ticket.clienteEmail || 'Sin datos')}</span><span>${formatDate(ticket.fechaCreacion)}</span></div>`).join('') : '<div class="item">No hay candidatos a purga.</div>';
+    }
+
+    // Purga RGPD: elimina tickets completados con antigüedad > 30 días.
+    // Solo `ADMIN_TOTAL` puede ejecutar la purga y requiere confirmación escribiendo `PURGE`.
+    async function purgeTickets() {
+      if (currentRole !== 'ADMIN_TOTAL') { alert('Solo ADMIN_TOTAL puede purgar.'); return; }
+      const candidates = ticketsCache.filter(ticket => {
+        const estado = String(ticket.estado || '').toLowerCase();
+        if (estado !== 'completados') return false;
+        const millis = typeof ticket.fechaCreacion.toMillis === 'function' ? ticket.fechaCreacion.toMillis() : ticket.fechaCreacion;
+        return typeof millis === 'number' && millis < Date.now() - 30 * 24 * 60 * 60 * 1000;
+      });
+      if (!candidates.length) { alert('No hay candidatos a purga.'); return; }
+      const confirmation = prompt(`Eliminar ${candidates.length} tickets completados? Escribe PURGE para confirmar:`);
+      if (confirmation !== 'PURGE') return;
+      let deleted = 0;
+      for (const ticket of candidates) {
+        try {
+          await deleteDoc(doc(db, TICKET_COLLECTION, ticket.id));
+          await logEvent(auth.currentUser?.email || 'anonimo', 'purga_ticket', 'OK', `ticket:${ticket.id}`);
+          deleted += 1;
+        } catch (error) {
+          console.error('Error purgando ticket', ticket.id, error);
+          await logEvent(auth.currentUser?.email || 'anonimo', 'purga_ticket', 'ERROR', `${ticket.id} | ${error.message || error}`);
+        }
+      }
+      await fetchTickets();
+      alert(`${deleted} tickets purgados.`);
+    }
+
+    // Ajuste del tamaño del canvas para pantallas con DPR > 1.
+    // Mantiene las proporciones y configura el estilo de trazo.
+    function resizeCanvas() {
+      const ratio = window.devicePixelRatio || 1;
+      const width = signatureCanvas.clientWidth;
+      const height = 220;
+      signatureCanvas.width = width * ratio;
+      signatureCanvas.height = height * ratio;
+      signatureCanvas.style.height = `${height}px`;
+      canvasContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+      canvasContext.strokeStyle = '#4ade80';
+      canvasContext.lineWidth = 3;
+      canvasContext.lineCap = 'round';
+      canvasContext.lineJoin = 'round';
+      canvasContext.clearRect(0, 0, width, height);
+    }
+
+    function clearSignatureCanvas() {
+      const width = signatureCanvas.width / (window.devicePixelRatio || 1);
+      const height = signatureCanvas.height / (window.devicePixelRatio || 1);
+      canvasContext.clearRect(0, 0, width, height);
+    }
+
+    // Eventos de dibujo: startDrawing, draw y stopDrawing utilizan Pointer Events
+    // para soportar ratón y pantallas táctiles de forma unificada.
+    function startDrawing(event) {
+      drawing = true;
+      const rect = signatureCanvas.getBoundingClientRect();
+      lastX = event.clientX - rect.left;
+      lastY = event.clientY - rect.top;
+      signatureCanvas.setPointerCapture(event.pointerId);
+    }
+
+    function draw(event) {
+      if (!drawing) return;
+      const rect = signatureCanvas.getBoundingClientRect();
+      const currentX = event.clientX - rect.left;
+      const currentY = event.clientY - rect.top;
+      canvasContext.beginPath();
+      canvasContext.moveTo(lastX, lastY);
+      canvasContext.lineTo(currentX, currentY);
+      canvasContext.stroke();
+      lastX = currentX;
+      lastY = currentY;
+    }
+
+    function stopDrawing(event) {
+      drawing = false;
+      signatureCanvas.releasePointerCapture(event.pointerId);
+    }
+
+    function openSignatureModal(ticketId) {
+      currentSignatureTicket = ticketId;
+      signatureModal.classList.remove('hidden');
+      clearSignatureCanvas();
+    }
+
+    function closeSignatureModal() {
+      currentSignatureTicket = null;
+      signatureModal.classList.add('hidden');
+    }
+
+    async function saveSignature() {
+      // Guardado de la firma: verificamos ticket y que el canvas no esté vacío.
+      if (!currentSignatureTicket) return;
+      if (isCanvasBlank()) {
+        alert('La firma está vacía. Por favor dibuja tu firma antes de guardar.');
+        return;
+      }
+      // Obtener la imagen en Base64 (PNG) para almacenar en Firestore.
+      const dataUrl = signatureCanvas.toDataURL('image/png');
+      try {
+        // Actualizamos el documento del ticket con la firma en Base64 y la fecha de registro.
+        await updateDoc(doc(db, TICKET_COLLECTION, currentSignatureTicket), {
+          firmaRecepcion: dataUrl,
+          firmaRecepcionFecha: serverTimestamp()
+        });
+        // Registro de auditoría en la colección de logs.
+        await logEvent(auth.currentUser?.email || 'anonimo', 'firma_recepcion', 'OK', `ticket:${currentSignatureTicket}`);
+        closeSignatureModal();
+        await fetchTickets();
+        alert('Firma registrada correctamente.');
+      } catch (error) {
+        console.error('Error guardando firma', error);
+        await logEvent(auth.currentUser?.email || 'anonimo', 'firma_recepcion', 'ERROR', `${currentSignatureTicket} | ${error.message || error}`);
+        alert('Error al guardar la firma. Revisa la consola.');
+      }
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      loginStatus.textContent = 'Autenticando...';
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        await logEvent(email, 'login', 'OK', 'Firebase Auth');
+      } catch (error) {
+        console.error('Login error', error);
+        loginStatus.textContent = 'Error de login';
+        await logEvent(email || 'anonimo', 'login', 'ERROR', error.code || error.message || 'auth_error');
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      try {
+        await signOut(auth);
+        loginStatus.textContent = 'Sesión cerrada';
+        await logEvent(document.getElementById('adminEmail').value || 'anonimo', 'logout', 'OK', 'Firebase Auth');
+      } catch (error) {
+        console.error('Logout error', error);
+        loginStatus.textContent = 'Error en logout';
+        await logEvent(document.getElementById('adminEmail').value || 'anonimo', 'logout', 'ERROR', error.code || error.message || 'auth_error');
+      }
+    });
+
+    document.getElementById('toggleEye').addEventListener('click', () => {
+      const password = document.getElementById('adminPassword');
+      password.type = password.type === 'password' ? 'text' : 'password';
+      document.getElementById('toggleEye').textContent = password.type === 'password' ? '[ Ver ]' : '[ Ocultar ]';
+    });
+
+    document.getElementById('btnRefresh').addEventListener('click', fetchTickets);
+    ticketSearch.addEventListener('input', (event) => { currentSearch = event.target.value; renderTickets(); });
+    document.querySelectorAll('[data-filter]').forEach(button => { button.addEventListener('click', () => { currentFilter = button.dataset.filter; renderTickets(); }); });
+    document.getElementById('btnCheckPurge').addEventListener('click', updateMetrics);
+    document.getElementById('btnPurge').addEventListener('click', purgeTickets);
+    clearSignatureButton.addEventListener('click', clearSignatureCanvas);
+    saveSignatureButton.addEventListener('click', saveSignature);
+    closeSignatureButton.addEventListener('click', closeSignatureModal);
+    signatureCanvas.addEventListener('pointerdown', startDrawing);
+    signatureCanvas.addEventListener('pointermove', draw);
+    signatureCanvas.addEventListener('pointerup', stopDrawing);
+    signatureCanvas.addEventListener('pointercancel', stopDrawing);
+    window.addEventListener('resize', resizeCanvas);
+
+    onAuthStateChanged(auth, async (user) => {
+      updateBadges(user);
+      setAuthenticatedUI(user);
+      if (user) {
+        await fetchTickets();
+        await fetchLogs();
+        await checkInventoryAlerts();
+        resizeCanvas();
+      }
+    });
+  </script>
+</body>
+</html>
